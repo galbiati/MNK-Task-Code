@@ -6,13 +6,12 @@ eventually, these conditions should be able to be called with arguments for valu
 or finite trial, specific lists of positions or opponents, and so on. I'd also like to create a super-general template
 condition.
 
-eventually, we will have a second version replacing our current data saves by ajax with the appropriate psiturk functions.
+want to change ALL conditions to switch between time duration or ntrials easily
 
 Instructions:
 
 AI:
-- fix durations (Bas' program)
-- pass random seed from browser to Bas' program (do entirely in php to skip ajax? will this be variable?)
+- change AI step function
 
 AFC:
 
@@ -28,7 +27,7 @@ Other:
 - implement final/debriefing block?
 
 */
-
+var table = "debug"; // options: debug, raw_data
 var current_block = 0;
 var blocks = [new Condition_AI(), new Condition_AFC(), new Condition_Evaluation(), new End_Message()]
 
@@ -111,13 +110,14 @@ function Condition_AI() {
 	this.current_opponent = _.sample(this.opponents[Math.floor(this.opponents.length/2)]);
 
 	this.change_opponent = function(p) {
-		var lvl_adjust = 1.2*(p.score - p.opponent_score)/(p.score + p.opponent_score)
-		var opp_index = Math.floor(.5*that.opponents.length*(1 - lvl_adjust))
-		var new_opp = that.opponents[opp_index]
-		if (opp_index > that.opponents.length - 1) {
-			new_opp = that.opponents[that.opponents.length - 1]
-		} else if (opp_index < 0) {
-			new_opp = that.opponents[0]
+		var first_opp = Math.floor(that.opponents.length/2);
+		var lvl = p.opponent_score - p.score + first_opp
+		if (lvl > that.opponents.length - 1) {
+			var new_opp = that.opponents[that.opponents.length - 1]
+		} else if (lvl < 0) {
+			var new_opp = that.opponents[0]
+		} else {
+			var new_opp = that.opponents[lvl]
 		}
 		return _.sample(new_opp)
 	}

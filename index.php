@@ -21,7 +21,6 @@
 		<script src="libs/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="libs/bootstrap.min.js"></script>
 		<script src="libs/buzz.min.js"></script>
-		<script src="scripts/stateList.js"></script>
 		<!-- Custom CSS -->
 		<link href = "static/bootstrap.min.css" rel = "stylesheet">
 		<link href = "static/stylesheet.css" rel="stylesheet">

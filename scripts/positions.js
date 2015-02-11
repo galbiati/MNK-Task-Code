@@ -9,7 +9,7 @@ function Choices(choiceA,choiceB) {
 }
 
 function State(black_pos, white_pos, choiceA, choiceB, color) {
-	this.boards = new Boards(black_pos, white_pos);
+	this.boards = new Positions(black_pos, white_pos);
 	this.choices = new Choices(choiceA, choiceB);
 	this.color = color == "BLACK" ? 0 : 1;
     /* tempB = this.boards.black_position.split("");

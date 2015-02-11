@@ -45,7 +45,6 @@ function restore_array(dataString) {
 /* i/o functions */
 
 function ajax_submit_response(b, p) {
-	// console.log(b.black_position);
 	data = {"initials":String(p.initials),
 			"color":String(p.color),
 			"game_index":String(p.game_index),
@@ -59,15 +58,16 @@ function ajax_submit_response(b, p) {
 			"mouse_t":String(p.mouse_t.join(",")),
 			"mouse_x":String(p.mouse_x.join(";")),
 			"opponent_color":String(p.opponent_color),
-			"opponent_strength":String(blocks[current_block].current_opponent)};
-
+			"opponent_strength":String(blocks[current_block].current_opponent),
+			"table":String(table)};
 			p.mouse_x = [];
 			p.mouse_t = [];
-	return $.ajax({type:"POST", url:"./scripts/ajax_submit_response.php", dataType:"JSON", data:data})
+	return $.ajax({type:"POST", url:"./scripts/submit.php", dataType:"JSON", data:data})
 }
 
 function ajax_retrieve_response() {
-	return $.ajax({type:"GET", url:"./scripts/ajax_retrieve_response.php", dataType:"JSON"})
+	data = {"table":String(table)}
+	return $.ajax({type:"GET", url:"./scripts/retrieve.php", dataType:"JSON", data:data})
 }
 
 function unpack_tiles(dataString) {
