@@ -102,7 +102,7 @@ function End_Message() {
 function Condition_AI() {
 	var that = this;
 	this.ntrials = 5;
-	this.duration = 30; // in minutes
+	this.duration = 25; // in minutes
 	this.start_time = Date.now()
 	this.end_time = this.start_time + 60000 * this.duration
 	this.instructions = "String of instructions...";
@@ -112,13 +112,14 @@ function Condition_AI() {
 
 	this.change_opponent = function(p) {
 		var lvl_adjust = 1.2*(p.score - p.opponent_score)/(p.score + p.opponent_score)
-		var new_opp = Math.floor(.5*that.opponents.length*(1 - lvl_adjust))
-		if (new_opp > that.opponents.length - 1) {
-			new_opp = _.sample(that.opponents[that.opponents.length - 1])
-		} else if (new_opp < 0) {
-			new_opp = _.sample(that.opponents[0])
+		var opp_index = Math.floor(.5*that.opponents.length*(1 - lvl_adjust))
+		var new_opp = that.opponents[opp_index]
+		if (opp_index > that.opponents.length - 1) {
+			new_opp = that.opponents[that.opponents.length - 1]
+		} else if (opp_index < 0) {
+			new_opp = that.opponents[0]
 		}
-		return _.sample(that.opponents[new_opp])
+		return _.sample(new_opp)
 	}
 	
 	this.action = function(b, p) {
