@@ -11,8 +11,14 @@ want to change ALL conditions to switch between time duration or ntrials easily
 Instructions:
 
 AI:
-- change AI step function
+- I think there's an error that when time runs out, if you are still on the end game prompt with the "Play" button,
+  it breaks and won't continue
 
+  this can probably be overridden from console with "blocks[current_block].run_block()"" in the meantime, but should be fixed
+
+- BIG CHANGE: save board state for each move BEFORE adding move to board state
+  This should make data analysis much easier.
+  
 AFC:
 
 EVAL:
@@ -29,7 +35,7 @@ Other:
 */
 var table = "debug"; // options: debug, raw_data
 var current_block = 0;
-var blocks = [new Condition_AI(), new Condition_AFC(), new Condition_Evaluation(), new End_Message()]
+var blocks = [new Condition_AI(2), new Condition_AFC(), new Condition_Evaluation(), new End_Message()]
 
 /* condition functions */
 
@@ -98,10 +104,10 @@ function End_Message() {
 	}
 }
 
-function Condition_AI() {
+function Condition_AI(dur) {
 	var that = this;
 	this.ntrials = 5;
-	this.duration = 25; // in minutes
+	this.duration = dur; // in minutes
 	this.start_time = Date.now()
 	this.end_time = this.start_time + 60000 * this.duration
 	this.instructions = "String of instructions...";
