@@ -43,22 +43,10 @@ img {
 	white-space: nowrap;
 }
 
-.tile {
+.usedTile, .tile {
 	display:inline-block;
-	height:7.1vw;
-	width:7.1vw;
-	background-color: #999999;
-	margin:.14vw;
-	z-index:5;
-	cursor:pointer;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-.usedTile {
-	display:inline-block;
-	height:7.1vw;
-	width:7.1vw;
+	height:10.20vw; /* 8.95 for 30-column, 10.20 for 24-col, 7.1 for 24-col*/
+	width: 10.20vw; /* 7.1 for 26 (?) col */
 	background-color: #999999;
 	margin:.14vw;
 	z-index:5;
@@ -66,88 +54,61 @@ img {
 	white-space: nowrap;
 }
 
-.blackPiece {
+.tile {	cursor:pointer; }
+
+.blackPiece, .whitePiece {
 	vertical-align:middle;
 	position: relative;
 	margin: 12.5% auto 0% auto;
 	border-radius:100%;
-	background-color: black;
 	height:75%;
 	width:75%;
 	z-index:7;
 }
 
-.whitePiece {
-	vertical-align:middle;
-	position: relative;
-	margin:auto;
-	margin-top:12.5%;
-	border-radius:100%;
-	background-color: white;
-	height:75%;
-	width:75%;
-	z-index:7;
-}
+.blackPiece { background-color:black; }
 
-.blackShadow {
+.whitePiece { background-color: white; }
+
+.blackShadow, .whiteShadow {
 	vertical-align:middle;
 	position: relative;
 	margin-right:auto;
 	margin-left:auto;
 	margin-top:-75%;
 	border-radius:100%;
-	background-color: white;
 	height:75%;
 	width:75%;
 	z-index:6;
+}
+
+.blackShadow {
+	background-color: white;
 	box-shadow: 0px 0px 3vw .7vw white;
 }
 
 .whiteShadow {
-	vertical-align:middle;
-	position: relative;
-	margin-right:auto;
-	margin-left:auto;
-	margin-top:-75%;
-	border-radius:100%;
 	background-color: white;
-	height:75%;
-	width:75%;
-	z-index:6;
 	box-shadow: 0px 0px 3vw .7vw #333333;
 }
 
-.blackChoice {
+.blackChoice, .whiteChoice {
 	vertical-align:middle;
 	text-align: center;
 	position: relative;
 	margin: 12.5% auto auto auto;
 	border-radius:100%;
-	border-color:black;
 	border-style:dotted;
 	border-width:6px;
-	/* background: repeating-linear-gradient(45deg, black, black 12px, #777777 12px, #777777 24px); */
 	opacity:1.0;
 	height:75%;
 	width:75%;
 	z-index:7;
 }
 
-.whiteChoice {
-	vertical-align:middle;
-	text-align: center;
-	position: relative;
-	margin: 12.5% auto auto auto;
-	border-radius:100%;
-	border-color:white;
-	border-style:dotted;
-	border-width:6px;
-	/* background: repeating-linear-gradient(45deg, white, white 12px, #AAAAAA 12px, #AAAAAA 24px); */
-	opacity:1.0;
-	height:75%;
-	width:75%;
-	z-index:7;
-}
+.blackChoice { border-color:black; }
+
+.whiteChoice { border-color:white; }
 
 /* ~ MODAL DIALOGS ~ */
 
@@ -214,7 +175,7 @@ img {
 	position:absolute;
 	width: 25%;
 	height: 30%;
-	top:25%;
+	top:33%;
 	left:37.5%;
 	min-height: 225px;
 }
@@ -239,27 +200,10 @@ img {
 	min-height: 75px;
 }
 
-
-/* ~ SCOREBOXES ~ */
-/* .scorebox {
-	height:4vw;
-	margin-top:11.25vw;
-	border-radius:1%;
-	border-color:#AAAAAA;
-	border-style:solid;
-	text-align:center;
-	cursor:none;
-}
-
-.scorebox h2 { 
-	font-size:1.7vw;
-}
-*/
 /* ~ RADIO BUTTONS ~ */
-#scale-label {
+/* #scale-label {
 	font-size:3vh;
 	text-align: center;
-/*	font-family:"Courier", monospace;*/
 	cursor:none;
 }
 
@@ -275,7 +219,7 @@ input[type=radio] {
 
 .radio-bar {
 	min-height:5vh;
-}
+} */
 
 /* ~ ANIMATED LOADER ~ */
 
@@ -283,7 +227,7 @@ input[type=radio] {
   width: 60px;
   height: 80px;
   margin: 80px auto;
-  margin-top: 50px; /*calc(100vh / 2 - 50px);*/
+  margin-top: 50px;
 }
 
 .wait-block {

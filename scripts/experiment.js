@@ -33,9 +33,9 @@ Other:
 - implement final/debriefing block?
 
 */
-var table = "debug"; // options: debug, raw_data
+var table = "eyelink_pilot"; // options: debug, raw_data
 var current_block = 0;
-var blocks = [new Condition_AI(200), new Condition_nAFC(), new Condition_Evaluation(), new End_Message()]
+var blocks = [new Condition_AI(20), new Condition_2AFC(), new Condition_nAFC(), new End_Message()]
 
 /* condition functions */
 
