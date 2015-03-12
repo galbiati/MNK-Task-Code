@@ -26,20 +26,18 @@ $mouse_x = mysql_real_escape_string($_POST['mouse_x']);
 $opponent_color = mysql_real_escape_string($_POST['opponent_color']);
 $opponent_strength = mysql_real_escape_string($_POST['opponent_strength']);
 
-$sql = "insert into $table 
+$sql = "insert into $table
 		(initials, color, game_index, move_index, game_status,
 			black_position, white_position, response, duration,
-			timestamp, mouse_t, mouse_x) 
-		values 
+			timestamp, mouse_t, mouse_x)
+		values
 		('$initials', '$color', '$game_index', '$move_index',
 			'$game_status', '$black_position', '$white_position',
 			'$response', '$duration', '$timestamp', '$mouse_t', '$mouse_x')";
 
 $result = mysql_query($sql);
 
-# pass to AI
-
-if ($game_status != "AFC" && $game_status != "EVAL" && $game_status != "null") {
+if ($game_status == "playing" || $game_status == "ready") {
 	$initials = $opponent_strength;
 	if ($opponent_color == 0) {
 		$input_color = "BLACK";
@@ -59,10 +57,10 @@ if ($game_status != "AFC" && $game_status != "EVAL" && $game_status != "null") {
 			$game_status = $program_output[3];
 			$timestamp = $program_output[4];
 		}
-		$sql = "insert into $table 
+		$sql = "insert into $table
 			(initials, color, game_index, move_index, game_status,
-				black_position, white_position, response, timestamp) 
-			values 
+				black_position, white_position, response, timestamp)
+			values
 			('$initials', '$opponent_color', '$game_index', '$move_index',
 				'$game_status', '$black_position', '$white_position',
 				'$response', '$timestamp')";
@@ -78,10 +76,10 @@ if ($game_status != "AFC" && $game_status != "EVAL" && $game_status != "null") {
 		$game_status = $program_output[3];
 		$timestamp = $program_output[4];
 
-		$sql = "insert into $table 
+		$sql = "insert into $table
 			(initials, color, game_index, move_index, game_status,
-				black_position, white_position, response, timestamp) 
-			values 
+				black_position, white_position, response, timestamp)
+			values
 			('$initials', '$opponent_color', '$game_index', '$move_index',
 				'$game_status', '$black_position', '$white_position',
 				'$response', '$timestamp')";
