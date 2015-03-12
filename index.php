@@ -7,10 +7,16 @@
 		<meta name="description" content="">
 		<meta name="author" content="Ma Lab">
 
-		<title>M N K</title>
+		<title>M N K - Play!</title>
 
 		<!-- Libraries - may remove some later -->
-		<script src="libs/jquery-1.11.1.min.js"></script>
+
+		<!-- <script src="libs/jquery-1.11.1.min.js"></script>--><!-- Jquery offline -->
+		<!-- <script src="libs/d3.v3.min.js"></script>--><!-- d3js offline-->
+
+		<script src="libs/jquery-1.11.1.min.js"></script><!-- Jquery -->
+		<!-- <script src="https://d3js.org/d3.v3.min.js"></script>
+		<link href="libs/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet"> -->
 		<script src="libs/underscore-min.js"></script>
 		<script src="libs/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="libs/bootstrap.min.js"></script>
@@ -41,6 +47,9 @@
 				<div class="modal-content">
 					<div class="modal-body">
 					</div>
+					<!-- <div class="modal-footer">
+						<button class="btn btn-warning">Start!</button>
+					</div> -->
 				</div>
 			 </div>
 		</div>
@@ -63,14 +72,25 @@
 		</div>
 		<div class="container-fluid">
 			<div class="row">
+				<!-- <div class="page-header col-xs-24 col-sm-offset-6">
+					<h1 id="page-title">MoNK</h1>
+				</div> -->
 				<div class="indicator col-xs-24 col-sm-offset-6">
-					<h1></h1>
+					<h1>PLACEHOLDER TEXT</h1>
 				</div>
 			</div>
 			<div class="row">
+				 <!-- <div class="container col-xs-4 col-xs-offset-1" id="leftScorebox">
+					<h2>Player 1</h2>
+					<p>0</p>
+				</div> -->
 				<div class="container-fluid col-xs-34 col-xs-offset-1 canvas-container"> <!--col-xs-offset-1-->
 					<div class="canvas"></div>
 				</div>
+				<!-- <div class="container col-xs-4 col-xs-offset-1" id="rightScorebox">
+					<h2>Player 2</h2>
+						<p>0</p>
+				</div> -->
             </div>
             <!-- <div class="row">
                 <div class="col-xs-4 col-xs-offset-16 _blank_"></div>
@@ -88,19 +108,14 @@
         		<div class="col-xs-4 col-xs-offset-4 scale-label-left"><p>Losing</p></div>
         		<div class="col-xs-4 col-xs-offset-8 scale-label-center"><p>Equal</p></div>
         		<div class="col-xs-4 col-xs-offset-8 scale-label-right"><p>Winning</p></div>
-			</div> -->
-		</div>
+			</div> -->		
+		</div>		
 
 	</body>
 
+	<script src="scripts/positions.js"></script>
 	<script src="scripts/util.js"></script>
 	<script src="scripts/game.js"></script>
-	<script src="scripts/conditions/AI.js"></script>
-	<script src="scripts/conditions/AFC2.js"></script>
-	<script src="scripts/conditions/AFCn.js"></script>
-	<script src="scripts/conditions/evaluation.js"></script>
-	<script src="scripts/conditions/instructions.js"></script>
-	<script src="scripts/conditions/debrief.js"></script>
 	<script src="scripts/experiment.js"></script>
-
+	
 </html>

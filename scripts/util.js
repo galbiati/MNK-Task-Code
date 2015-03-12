@@ -1,3 +1,18 @@
+// you'll be a happier person if you turn on text wrap for this file.
+
+/* functional variables */
+
+var M = 9,
+	N = 4,
+	K = 4,
+	game_index = 0,
+	response = 99,
+	timestamp = Date.now(),
+	ajax_data = {},
+	ajax_freq = 1000;
+
+/* aesthetic variables */
+
 var win_color = "#22ddaa",
 	MoveSound = new buzz.sound("./static/sounds/stone3.ogg"),
 	square_bkgcolor = "#999999",
@@ -5,6 +20,9 @@ var win_color = "#22ddaa",
 
 /* instruction and consent html strings */
 
+consent_html = "<div class='consent-text'><p><b>Welcome!</b><br><br><br>Today you will be performing tasks related to a simple, two-player board game.<br><br><br>To play the game, you and your opponent take turns placing pieces on a 4x9 board. To win the game, you must place four of your own pieces in a row horizontally, vertically, or diagonally. You can place pieces on any unoccupied square (unlike Connect-4, where the pieces drop to the bottom row.)<br><br><br>You may take a break anytime during the experiment. If you have questions at any point, please ask the experimenter.<br><br><br>When you are ready, please press the <b>Next</b> button below.</p></div>"
+
+initials_field_html ="<form id='name-input' role='form'><div class='form-group'><label for='name-input-field'>Please enter a nickname and press enter.</label><br><input id='name-input-field' type='text' placeholder='Your Name' maxlength='16'></div></form>"
 
 instAI = "<p class='instructions-text'>You will now play the game against a computer opponent.<br><br>In the picture below, there is a blank game board. Above the board there is a message that shows you when it is your turn and when your opponent is thinking. When it is your turn, you can make a move by clicking the square where you would like to place your piece. You and your opponent will take turns going first. After every game, the computer will change its settings.</p><img src='./static/AI_demo.png'></img>"
 instAFC = "<p class='instructions-text'>You will now be shown a board and asked to choose one of two moves. The <b>only</b> possible choices are indicated by a dotted outline of a piece. The color of the dotted outlines, as well as a message above the board, will indicate what color you are currently playing.<br><br>The picture below shows an example. As it says above the board, you are playing Black. To make a choice, click on one of the squares with the dotted outline.</p><img src='./static/AFC_demo.png'></img>";
@@ -21,7 +39,7 @@ function restore_array(dataString) {
 	for (i = 0; i < dataString.length; i += 1) {
 		dataString[i] = parseInt(dataString[i]);
 	};
-	return dataString;
+	return dataString; 
 }
 
 /* i/o functions */
@@ -106,20 +124,9 @@ function every_n(list, n) {
 	return new_list
 }
 
-function Positions(black_pos,white_pos) {
-	this.black_position = black_pos
-	this.white_position = white_pos;
-}
+//temp_opp_list = temp_opp_list.slice(1441, 2431)
 
-function Choices(choiceA,choiceB) {
-	this.A = choiceA;
-	this.B = choiceB;
-}
+/*temp_opp_list = every_n(temp_opp_list, 80)*/
+temp_opp_list=[[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24],[25,26,27,28,29]]
 
-function State(black_pos, white_pos, choiceA, choiceB, color) {
-	this.boards = new Positions(black_pos, white_pos);
-	this.choices = new Choices(choiceA, choiceB);
-	this.color = color == "BLACK" ? 0 : 1;
-}
-
-var waiting_html = '<div class="wait-container"> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> </div>'
+waiting_html = '<div class="wait-container"> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> <div class="wait-block"></div> </div>'

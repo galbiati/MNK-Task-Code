@@ -1,7 +1,7 @@
 function Board() {
 	this.canvas = $(".canvas");
 	this.tile_ids = _.range(M*N);
-	this.tiles = _.map(this.tile_ids, function(el){ return $("#" + String(el))});
+	this.tiles = [];
 	this.black_piece = "<div class='blackPiece'></div>";
 	this.white_piece = "<div class='whitePiece'></div>";
 	this.black_position = restore_array("000000000000000000000000000000000000");
@@ -10,7 +10,7 @@ function Board() {
 	this.move_index = 0;
 	this.last_move = 99;
 	var that = this;
-
+	
 	this.canvas.empty();
 
 	this.create_tiles = function() {
@@ -21,6 +21,7 @@ function Board() {
 			}
 			that.canvas.append("<br>");
 		}
+		that.tiles = _.map(that.tile_ids, function(el){ return $("#" + String(el))});
 	}
 
 	this.highlight_tiles = function() {
@@ -181,4 +182,4 @@ function Player() {
 	this.duration = 0
 	this.mouse_t = [];
 	this.mouse_x = [];
-}
+} 
