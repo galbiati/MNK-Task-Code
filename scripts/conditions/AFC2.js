@@ -62,7 +62,7 @@ function Condition_AFC2() {
 		if(that.current_trial < that.ntrials) {
 			board = new Board();
 			board.create_tiles();
-			board.game_status = "AFC";
+			board.game_status = "AFC2";
 			that.load_game(board, that.states);
 			that.action(board, player);
 		} else {

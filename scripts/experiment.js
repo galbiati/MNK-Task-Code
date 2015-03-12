@@ -28,9 +28,9 @@ var M = 9,
 	ajax_freq = 1000;
 
 
-var table = "debug"; // options: debug, raw_data
+var table = "debug"; // options: debug, raw_data, eyelink_pilot
 var current_block = 0;
-var blocks = [new Condition_AI(20), new Condition_AFC2(), new Condition_AFCn(), new End_Message()]
+var blocks = [new Eye_Calibration, new Condition_AI(20), new Condition_AFC2(), new Condition_AFCn(), new End_Message()]
 
 $(document).ready(function() {
 	current_block = 0;

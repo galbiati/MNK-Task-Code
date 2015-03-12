@@ -99,6 +99,7 @@
 	<script src="scripts/conditions/AFC2.js"></script>
 	<script src="scripts/conditions/AFCn.js"></script>
 	<script src="scripts/conditions/evaluation.js"></script>
+	<script src="scripts/conditions/eye_calibration.js"></script>
 	<script src="scripts/conditions/instructions.js"></script>
 	<script src="scripts/conditions/debrief.js"></script>
 	<script src="scripts/experiment.js"></script>
