@@ -9,6 +9,7 @@ var win_color = "#22ddaa",
 instAI = "<p class='instructions-text'>You will now play the game against a computer opponent.<br><br>In the picture below, there is a blank game board. Above the board there is a message that shows you when it is your turn and when your opponent is thinking. When it is your turn, you can make a move by clicking the square where you would like to place your piece. You and your opponent will take turns going first. After every game, the computer will change its settings.</p><img src='./static/AI_demo.png'></img>"
 instAFC = "<p class='instructions-text'>You will now be shown a board and asked to choose one of two moves. The <b>only</b> possible choices are indicated by a dotted outline of a piece. The color of the dotted outlines, as well as a message above the board, will indicate what color you are currently playing.<br><br>The picture below shows an example. As it says above the board, you are playing Black. To make a choice, click on one of the squares with the dotted outline.</p><img src='./static/AFC_demo.png'></img>";
 instEVAL = '<p class="instructions-text">You will now be shown a board and asked to judge your chances of winning. It is <b>always your turn</b>, and the message above the board will tell you what color you are playing.<br><br>The picture below shows an example. As it says above the board, you are playing White. Below the board is a row of buttons, labeled <b>Losing</b> on the left, <b>Winning</b> on the right, and <b>Equal</b> in the middle. Please click on the button that best describes your chances of winning the game.</p><img src="./static/EVAL_demo.png"></img>';
+instCal = '<p class="instructions-text">In this calibration, you will be shown a game board on which playing pieces will appear one at a time. When a game piece appears, you should <b>look at the crosshairs</b> on the piece and press the <b>space bar</b>.</p>';
 
 /* utility funcs */
 
@@ -27,6 +28,8 @@ function restore_array(dataString) {
 /* i/o functions */
 
 function ajax_submit_response(b, p) {
+	console.log(b.black_position.join(""));
+	console.log(b.white_position.join(""));
 	data = {"initials":String(p.initials),
 			"color":String(p.color),
 			"game_index":String(p.game_index),
@@ -80,6 +83,8 @@ function ajax_poll(b, p, promise, callback) {
 		if(p.initials != p.last_initials) {
 			callback();
 		} else {
+			console.log(b.black_position.join(""));
+			console.log(b.white_position.join(""));
 			setTimeout(function() {
 				get_promise = ajax_retrieve_response();
 				ajax_poll(b, p, get_promise, callback);

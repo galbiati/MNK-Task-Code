@@ -1,12 +1,10 @@
 function Eye_Calibration() {
 	var that = this;
 	this.ntrials = calibration_positions.length;
-	this.duration = 20;
 	this.start_time = Date.now();
-	this.end_time = this.start_time + 60000 * this.duration;
 	this.states = calibration_positions
 	this.current_trial = 0;
-	this.current_position = {}
+	this.current_position = {};
 
 	this.load_game = function(b, position_list) {
 		b.loaded_game = position_list[that.current_trial]
@@ -15,17 +13,17 @@ function Eye_Calibration() {
 		for(i=0; i<M*N; i++){
 			if(b.black_position[i] == 1) {
 				b.add_piece(i, 0)
+				$('.blackPiece').append('<p class="fixcross">+</div>')
 			} else if(b.white_position[i] == 1) {
 				b.add_piece(i, 1)
+				$('.whitePiece').append('<p class="fixcross">+</div>')
 			}
 		}
 	}
 
 	this.action = function(b,p) {
 		p.move_start = Date.now()
-		var choices = [b.loaded_game.choices.A, b.loaded_game.choices.B];
-		var choice_selector = $("#" + choices[0] + ",#" + choices[1])
-		$('.canvas, .canvas div').css('cursor', 'default');
+		$('.canvas, .canvas div').css('cursor', 'none');
 		$(document).on("keydown", function(e) {
 			if(e.keyCode==32){
 				$(document).off('keydown');
@@ -38,7 +36,7 @@ function Eye_Calibration() {
 				send_promise.done(function() {
 					that.current_trial ++;
 					setTimeout(that.do_trial, 1000)
-				}); // keycode should be space bar
+				});
 			}
 		})
 	}
@@ -52,17 +50,37 @@ function Eye_Calibration() {
 			that.action(board, player);
 		} else {
 			current_block ++;
-			player.game_index ++;
+			player.game_index = 0;
 			blocks[current_block].run_block();
 		}
 	}
 
-	this.countdown = function(i) {
-		if(i>0) {
-			$('#block-modal button').text(i);
-			setTimeout(function(){that.countdown(i-1)}, 1000);
+	this.prompts = function(tha, is_first) {
+		if(player.game_index != 0) {
+			$('#block-modal .modal-body').html("<b>You're done with the previous task.</b><br><br>Please ask the experimenter to continue.");
+			$('#block-modal').modal('show');
+			$(document).on('keydown', function(e) {
+				if (e.keyCode==192){
+					$('#block-modal .modal-body').html(instCal);
+					$(document).off('keydown').on('keydown', function(e){
+						if (e.keyCode==192){
+							$(document).off('keydown');
+							$('#block-modal').modal('hide');
+							tha.do_trial();
+						}
+					});
+				}
+			});
 		} else {
-			$('#block-modal .modal-body').html(instAFC);
+			$('#block-modal .modal-body').html(instCal);
+			$('#block-modal').modal('show');
+			$(document).off('keydown').on('keydown', function(e){
+				if (e.keyCode==192){
+					$(document).off('keydown');
+					$('#block-modal').modal('hide');
+					tha.do_trial();
+				}
+			});
 		}
 	}
 
@@ -72,24 +90,45 @@ function Eye_Calibration() {
 		$(".indicator").html("<h1></h1>").css("color","#FFFFFF");
 		board = new Board();
 		board.create_tiles();
-		board.highlight_tiles();
-		$('#block-modal .modal-body').html("<b>You're done with this part of the task.</b><br><br>Please take a break and find the experimenter when you are ready to continue.");
-		$('#block-modal').modal('show');
-		$(document).on('keydown', function(e) {
-			if (e.keyCode==192){
-				$('#block-modal .modal-body').html(instAFC);
-				$(document).off('keydown').on('keydown', function(e){
-					if (e.keyCode==192){
-						$(document).off('keydown');
-						$('#block-modal').modal('hide');
-						that.do_trial();
-					}
-				});
-			}
-		});
+		that.prompts(that);
 	}
 }
 
 var calibration_positions = [
-	new State('000000000000000000000000000000000000', '100000000000000000000000000000000000', 23, 28, 'BLACK')
+	new State('000000000000000000000000000000000000', '100000000000000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '010000000000000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '001000000000000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000100000000000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000010000000000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000001000000000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000100000000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000010000000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000001000000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000100000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000010000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000001000000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000100000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000010000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000001000000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000100000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000010000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000001000000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000100000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000010000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000001000000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000100000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000010000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000001000000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000100000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000010000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000001000000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000000100000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000000010000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000000001000000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000000000100000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000000000010000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000000000001000', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000000000000100', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000000000000010', 0, 1, 'WHITE'),
+	new State('000000000000000000000000000000000000', '000000000000000000000000000000000001', 0, 1, 'WHITE')
 	];

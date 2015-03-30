@@ -31,8 +31,6 @@ function Board() {
 	}
 
 	this.add_piece = function(loc, col) {
-		console.log(loc);
-		console.log(col);
 		if(col == 0) {
 			that.tiles[loc].append(that.black_piece).removeClass("tile").addClass("usedTile").off('mouseenter').off('mouseleave').css("backgroundColor", square_bkgcolor);
 			that.black_position[loc] = 1;

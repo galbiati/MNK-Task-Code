@@ -103,6 +103,7 @@ function Condition_AI(dur) {
 		board.create_tiles();
 		board.highlight_tiles();
 		player.color = 0;
+		player.opponent_color = 1;
 		$('#block-modal .modal-body').empty().append(instAI);
 		$('#block-modal').modal('show');
 		$(document).on('keydown', function(e) {
