@@ -11,11 +11,9 @@ want to change ALL conditions to switch between time duration or ntrials easily
 Instructions:
 
 AI:
-- BIG CHANGE: save board state for each move BEFORE adding move to board state
-  This should make data analysis much easier.
 AFC:
 EVAL:
-- Waiting on new position selections
+- Implement new selections
 */
 
 var M = 9,
@@ -31,11 +29,9 @@ var M = 9,
 var table = "eyelink_pilot";
 var current_block = 0;
 var blocks = [new Eye_Calibration(), 
-				new Condition_AI(5),
+				new Condition_AI(20),
 				new Eye_Calibration(), 
 				new Condition_AFC2(), 
-				new Eye_Calibration(), 
-				new Condition_AFCn(),
 				new End_Message()]
 
 $(document).ready(function() {
