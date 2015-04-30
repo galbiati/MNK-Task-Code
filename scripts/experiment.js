@@ -26,13 +26,17 @@ var M = 9,
 	ajax_freq = 1000;
 
 
-var table = "eyelink_pilot";
+var table = "raw_data";
 var current_block = 0;
-var blocks = [new Eye_Calibration(), 
+
+var eye_tracking = [new Eye_Calibration(), 
 				new Condition_AI(20),
 				new Eye_Calibration(), 
 				new Condition_AFC2(), 
 				new End_Message()]
+var generalization = [ new Condition_AI(30), new Condition_AFC2(), new Condition_Evaluation(), new End_Message()]
+
+var blocks = generalization
 
 $(document).ready(function() {
 	current_block = 0;

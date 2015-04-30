@@ -45,8 +45,8 @@ img {
 
 .usedTile, .tile {
 	display:inline-block;
-	height:10.20vw; /* 8.95 for 30-column, 10.20 for 24-col, 7.1 for 24-col*/
-	width: 10.20vw; /* 7.1 for 26 (?) col */
+	height:7.1vw; /* 8.95 for 30-column, 10.20 for 24-col, 7.1 for 24-col*/
+	width:7.1vw; /* 7.1 for 26 (?) col */
 	background-color: #999999;
 	margin:.14vw;
 	z-index:5;
@@ -211,7 +211,7 @@ img {
 }
 
 /* ~ RADIO BUTTONS ~ */
-/* #scale-label {
+ #scale-label {
 	font-size:3vh;
 	text-align: center;
 	cursor:none;
@@ -229,7 +229,7 @@ input[type=radio] {
 
 .radio-bar {
 	min-height:5vh;
-} */
+} 
 
 /* ~ ANIMATED LOADER ~ */
 

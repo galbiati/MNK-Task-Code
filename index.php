@@ -68,11 +68,11 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="container-fluid col-xs-34 col-xs-offset-1 canvas-container"> <!--col-xs-offset-1-->
+				<div class="container-fluid col-xs-24 col-xs-offset-6 canvas-container"> <!--col-xs-offset-1-->
 					<div class="canvas"></div>
 				</div>
             </div>
-            <!-- <div class="row">
+            <div class="row">
                 <div class="col-xs-4 col-xs-offset-16 _blank_"></div>
             </div>
             <div class="row text-center eval-element radio-bar">
@@ -88,7 +88,7 @@
         		<div class="col-xs-4 col-xs-offset-4 scale-label-left"><p>Losing</p></div>
         		<div class="col-xs-4 col-xs-offset-8 scale-label-center"><p>Equal</p></div>
         		<div class="col-xs-4 col-xs-offset-8 scale-label-right"><p>Winning</p></div>
-			</div> -->
+			</div>
 		</div>
 
 	</body>
