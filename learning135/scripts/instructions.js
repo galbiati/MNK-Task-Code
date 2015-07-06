@@ -1,0 +1,9 @@
+inst0 = "<p class='welcome-text'><b>Welcome to the experiment!</b><br><br>Before the experiment begins, you will see three pages of instructions, then be given a consent form.<br><br>During the experiment, you will be playing and answering questions about an experimental game called Monk. Monk takes place on a 4 x 9 board, where players take turns placing pieces. A player wins when they have placed four pieces in a row in a horizontal, vertical, or diagonal line.<br><br>In the first set of trials, you will be asked to play several games against a computer opponent. [IMAGE]</p>"
+
+inst1 = "<p class='welcome-text'>In the next set of trials, you will be shown a game that is already in progress. You will be asked to choose which of two possible moves you would make if you were the current player, as indicated by dotted circles on the board. [IMAGE]"
+
+inst2 = "<p class='welcome-text'>In the third set of trials, you will be shown a game that is already in progress. You will be asked to judge how good the position of the indicated player is on a scale of 1 to 7. In further sets of trials, you will repeat one of these three tasks. There will be a total of 5-7 sets of trials, and the entire experiment should take you about 60 to 90 minutes.[IMAGE]</p>"
+
+consent_html = "<p class='welcome-text'>Lorum Ipsem Etcetra Consent Form</p>"
+
+initials_field_html ="<form id='name-input' role='form'><div class='form-group'><label for='name-input-field'>Please type your initials and press enter.</label><br><input id='name-input-field' type='text' placeholder='Your Initials' maxlength='2'></div></form>"

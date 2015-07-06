@@ -1,0 +1,1 @@
+var AFC2_positions = []

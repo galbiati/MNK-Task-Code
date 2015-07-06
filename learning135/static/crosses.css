@@ -1,0 +1,39 @@
+html {
+	-moz-user-select: none;
+  	-webkit-user-select: none;
+  	-ms-user-select: none;
+  	cursor:none;
+}
+
+div {
+	position:absolute;
+	transform: translate(-50%, -50%);
+}
+
+div p {
+	font-size: 3em;
+}
+
+.top {
+	top:15%;
+}
+
+.mid {
+	top:50%;
+} 
+
+.bot {
+	top: 85%;
+}
+
+.left {
+	left: 10%;
+}
+
+.center {
+	left: 50%;
+}
+
+.right{
+	left:90%;
+}
