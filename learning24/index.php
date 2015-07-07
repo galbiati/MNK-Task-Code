@@ -7,18 +7,17 @@
 		<meta name="description" content="">
 		<meta name="author" content="Ma Lab">
 
-		<title>M N K</title>
+		<title>generalization</title>
 
 		<!-- Libraries - may remove some later -->
-		<script src="libs/jquery-1.11.1.min.js"></script>
-		<script src="libs/underscore-min.js"></script>
-		<script src="libs/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
-		<script src="libs/bootstrap.min.js"></script>
-		<script src="libs/buzz.min.js"></script>
+		<script src="../_shared/libs/jquery-1.11.1.min.js"></script>
+		<script src="../_shared/libs/underscore-min.js"></script>
+		<script src="../_shared/libs/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+		<script src="../_shared/libs/bootstrap.min.js"></script>
+		<script src="../_shared/libs/buzz.min.js"></script>
 		<!-- Custom CSS -->
-		<link href = "static/bootstrap.min.css" rel = "stylesheet">
-		<link href = "static/stylesheet.css" rel="stylesheet">
-
+		<link href = "../_shared/styles/bootstrap.min.css" rel = "stylesheet">
+		<link href = "../_shared/styles/stylesheet.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -93,15 +92,17 @@
 
 	</body>
 
-	<script src="scripts/util.js"></script>
-	<script src="scripts/game.js"></script>
-	<script src="scripts/conditions/AI.js"></script>
-	<script src="scripts/conditions/AFC2.js"></script>
-	<script src="scripts/conditions/AFCn.js"></script>
-	<script src="scripts/conditions/evaluation.js"></script>
-	<script src="scripts/conditions/eye_calibration.js"></script>
-	<script src="scripts/conditions/instructions.js"></script>
-	<script src="scripts/conditions/debrief.js"></script>
-	<script src="scripts/experiment.js"></script>
+	<script src="../_shared/scripts/util.js"></script>
+	<script src="./params.js"></script>
+	<script src="../_shared/scripts/game.js"></script>
+	<script src="../_shared/conditions/AI.js"></script>
+	<script src="../_shared/conditions/AFC2.js"></script>
+	<script src="../_shared/conditions/AFCn.js"></script>
+	<script src="../_shared/conditions/evaluation.js"></script>
+	<script src="../_shared/conditions/eye_calibration.js"></script>
+	<script src="../_shared/conditions/instructions.js"></script>
+	<script src="../_shared/conditions/debrief.js"></script>
+	<script src="../_shared/experiments.js"></script>
+	<script src="./experiment.js"></script>
 
 </html>
