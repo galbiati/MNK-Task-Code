@@ -1,7 +1,7 @@
-var table = "generalization";
-var blocks = generalization;
+var table = "learningA";
+var blocks = learning.odd;
 var current_block = 0;
-
+var MoveSound = new buzz.sound("../../_shared/sounds/stone3.ogg");
 // Launch!
 
 $(document).ready(function() {

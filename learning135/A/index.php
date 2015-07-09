@@ -7,17 +7,17 @@
 		<meta name="description" content="">
 		<meta name="author" content="Ma Lab">
 
-		<title>generalization</title>
+		<title>A</title>
 
 		<!-- Libraries - may remove some later -->
-		<script src="../_shared/libs/jquery-1.11.1.min.js"></script>
-		<script src="../_shared/libs/underscore-min.js"></script>
-		<script src="../_shared/libs/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
-		<script src="../_shared/libs/bootstrap.min.js"></script>
-		<script src="../_shared/libs/buzz.min.js"></script>
+		<script src="../../_shared/libs/jquery-1.11.1.min.js"></script>
+		<script src="../../_shared/libs/underscore-min.js"></script>
+		<script src="../../_shared/libs/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+		<script src="../../_shared/libs/bootstrap.min.js"></script>
+		<script src="../../_shared/libs/buzz.min.js"></script>
 		<!-- Custom CSS -->
-		<link href = "../_shared/styles/bootstrap.min.css" rel = "stylesheet">
-		<link href = "../_shared/styles/stylesheet.css" rel="stylesheet">
+		<link href = "../../_shared/styles/bootstrap.min.css" rel = "stylesheet">
+		<link href = "../../_shared/styles/stylesheet.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -92,17 +92,17 @@
 
 	</body>
 
-	<script src="../_shared/scripts/util.js"></script>
+	<script src="../../_shared/scripts/util.js"></script>
 	<script src="./params.js"></script>
-	<script src="../_shared/scripts/game.js"></script>
-	<script src="../_shared/conditions/AI.js"></script>
-	<script src="../_shared/conditions/AFC2.js"></script>
-	<script src="../_shared/conditions/AFCn.js"></script>
-	<script src="../_shared/conditions/evaluation.js"></script>
-	<script src="../_shared/conditions/eye_calibration.js"></script>
-	<script src="../_shared/conditions/instructions.js"></script>
-	<script src="../_shared/conditions/debrief.js"></script>
-	<script src="../_shared/experiments.js"></script>
+	<script src="../../_shared/scripts/game.js"></script>
+	<script src="../../_shared/conditions/AI.js"></script>
+	<script src="../../_shared/conditions/AFC2.js"></script>
+	<script src="../../_shared/conditions/AFCn.js"></script>
+	<script src="../../_shared/conditions/evaluation.js"></script>
+	<script src="../../_shared/conditions/eye_calibration.js"></script>
+	<script src="../../_shared/conditions/instructions.js"></script>
+	<script src="../../_shared/conditions/debrief.js"></script>
+	<script src="../../_shared/experiments.js"></script>
 	<script src="./experiment.js"></script>
 
 </html>
