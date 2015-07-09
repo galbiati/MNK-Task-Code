@@ -1,4 +1,4 @@
-var table = "learningA";
+var table = "learningC";
 var blocks = learning.odd;
 var current_block = 0;
 var MoveSound = new buzz.sound("../../_shared/sounds/stone3.ogg");

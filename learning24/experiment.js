@@ -1,5 +1,5 @@
-var table = "generalization";
-var blocks = generalization;
+var table = "learningE";
+var blocks = learning.even;
 var current_block = 0;
 
 // Launch!
