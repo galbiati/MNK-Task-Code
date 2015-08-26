@@ -7,7 +7,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="Ma Lab">
 
-		<title>A</title>
+		<title>C</title>
 
 		<!-- Libraries - may remove some later -->
 		<script src="../../_shared/libs/jquery-1.11.1.min.js"></script>

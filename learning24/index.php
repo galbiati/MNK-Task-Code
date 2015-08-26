@@ -7,7 +7,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="Ma Lab">
 
-		<title>generalization</title>
+		<title>24</title>
 
 		<!-- Libraries - may remove some later -->
 		<script src="../_shared/libs/jquery-1.11.1.min.js"></script>

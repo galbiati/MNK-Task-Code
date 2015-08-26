@@ -1,5 +1,5 @@
-var table = "learning24";
-var blocks = learning.even;
+var table = "debug";
+var blocks = reconstruction;
 var current_block = 0;
 
 // Launch!
