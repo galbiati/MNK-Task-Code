@@ -66,10 +66,6 @@ img {
 	z-index:7;
 }
 
-.blackPiece { background-color:black; }
-
-.whitePiece { background-color: white; }
-
 .blackShadow, .whiteShadow {
 	vertical-align:middle;
 	position: relative;
@@ -82,15 +78,9 @@ img {
 	z-index:6;
 }
 
-.blackShadow {
-	background-color: white;
-	box-shadow: 0px 0px 3vw .7vw white;
-}
+.blackShadow { box-shadow: 0px 0px 3vw .7vw white; }
 
-.whiteShadow {
-	background-color: white;
-	box-shadow: 0px 0px 3vw .7vw #333333;
-}
+.whiteShadow { box-shadow: 0px 0px 3vw .7vw #333333; }
 
 .blackChoice, .whiteChoice {
 	vertical-align:middle;
@@ -106,9 +96,9 @@ img {
 	z-index:7;
 }
 
-.blackChoice { border-color:black; }
+.blackPiece, .blackChoice,.blackMark { background-color:black; }
 
-.whiteChoice { border-color:white; }
+.whitePiece, .whiteChoice, .whiteShadow, .whiteMark, .blackShadow { background-color: white; }
 
 /* ~ MODAL DIALOGS ~ */
 

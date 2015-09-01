@@ -7,7 +7,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="Ma Lab">
 
-		<title>generalization</title>
+		<title>reconstruction</title>
 
 		<!-- Libraries - may remove some later -->
 		<script src="../_shared/libs/jquery-1.11.1.min.js"></script>
@@ -60,6 +60,8 @@
 				</div>
 			 </div>
 		</div>
+
+		<!-- container -->
 		<div class="container-fluid">
 			<div class="row">
 				<div class="indicator col-xs-24 col-sm-offset-6">
@@ -74,20 +76,16 @@
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-16 _blank_"></div>
             </div>
-            <div class="row text-center eval-element radio-bar">
-                <div class="container-fluid col-xs-4 col-xs-offset-4" id="evaluation-radio"><input type="radio" name="radio" value="1"></div>
-                <div class="container-fluid col-xs-4" id="evaluation-radio"><input type="radio" name="radio" value="2"></div>
-                <div class="container-fluid col-xs-4" id="evaluation-radio"><input type="radio" name="radio" value="3"></div>
-                <div class="container-fluid col-xs-4" id="evaluation-radio"><input type="radio" name="radio" value="4"></div>
-                <div class="container-fluid col-xs-4" id="evaluation-radio"><input type="radio" name="radio" value="5"></div>
-                <div class="container-fluid col-xs-4" id="evaluation-radio"><input type="radio" name="radio" value="6"></div>
-                <div class="container-fluid col-xs-4" id="evaluation-radio"><input type="radio" name="radio" value="7"></div>
-            </div>
-            <div class="row eval-element" id="scale-label">
-        		<div class="col-xs-4 col-xs-offset-4 scale-label-left"><p>Losing</p></div>
-        		<div class="col-xs-4 col-xs-offset-8 scale-label-center"><p>Equal</p></div>
-        		<div class="col-xs-4 col-xs-offset-8 scale-label-right"><p>Winning</p></div>
+			<div class='row' id='button-row'>
+				<div class='col-xs-4 col-xs-offset-16'>
+					<center><button class='btn btn-large btn-warning' id='submit'>Submit</button></center>
+				</div>
 			</div>
+			<div class="row" id='score-row'>
+				<div class='col-xs-10 col-xs-offset-13'>
+					<center><h2>Your Score</h2>
+					<h3 id='score-text'></h3></center>
+				</div>
 		</div>
 
 	</body>
@@ -98,6 +96,7 @@
 	<script src="../_shared/conditions/AI.js"></script>
 	<script src="../_shared/conditions/AFC2.js"></script>
 	<script src="../_shared/conditions/AFCn.js"></script>
+	<script src="../_shared/conditions/reconstruction.js"></script>
 	<script src="../_shared/conditions/evaluation.js"></script>
 	<script src="../_shared/conditions/eye_calibration.js"></script>
 	<script src="../_shared/conditions/instructions.js"></script>

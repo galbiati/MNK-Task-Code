@@ -27,8 +27,8 @@ function restore_array(dataString) {
 /* i/o functions */
 
 function ajax_submit_response(b, p) {
-	console.log(b.black_position.join(""));
-	console.log(b.white_position.join(""));
+	// console.log(b.black_position.join(""));
+	// console.log(b.white_position.join(""));
 	data = {"initials":String(p.initials),
 			"color":String(p.color),
 			"game_index":String(p.game_index),

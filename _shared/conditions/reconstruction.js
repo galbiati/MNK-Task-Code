@@ -4,10 +4,13 @@ function Reconstruction() {
 	this.duration = 20;
 	this.start_time = Date.now();
 	this.end_time = this.start_time + 60000 * this.duration;
-	this.instructions = "String of instructions...";
 	this.states = _.shuffle(AFCn_positions);
 	this.current_trial = 0;
-	this.current_position = {}
+	this.current_position = {};
+	this.stimDisplay = 3000;
+	this.stimDelay = 1000;
+	this.bp = []
+	this.wp = []
 
 	this.load_game = function(b, position_list) {
 		b.loaded_game = position_list[that.current_trial]
@@ -20,47 +23,107 @@ function Reconstruction() {
 				b.add_piece(i, 1)
 			}
 		}
+		that.bp = b.black_position;
+		that.wp = b.white_position;
 	}
 
-	this.action = function(b,p) {
+	this.action = function(b, p) {
+		$('#submit').prop('disabled', true);
 		p.move_start = Date.now()
-		var choices = [b.loaded_game.choices.A, b.loaded_game.choices.B];
-		var choice_selector = $("#" + choices[0] + ",#" + choices[1])
 		$('.canvas, .canvas div').css('cursor', 'default');
-		if(b.loaded_game.color == 0) {
-			$('.tile').css('cursor', 'pointer');
-			board.highlight_tiles();
-			$(".indicator").html("<h1>You are playing <b>BLACK</b></h1>").css("color","#000000");
-		} else {
-			$('.tile').css('cursor', 'pointer');
-			board.highlight_tiles();
-			$(".indicator").html("<h1>You are playing <b>WHITE</b></h1>").css("color","#000000");
-		}
-		$('.tile').on("click", function(e) {
-			$('.tile').off("mouseenter").off("mouseleave").css("backgroundColor", square_bkgcolor);
-			p.move_end = Date.now();
-			var choice = (e.target.id) ? e.target.id : $(e.target).parent().attr("id")
-			p.game_index ++;
-			p.move = parseInt(choice);
-			if(b.loaded_game.color == 0) {
-				$("#" + choice).append("<div class='blackPiece'></div>")
-			} else {
-				$("#" + choice).append("<div class='whitePiece'></div>")
-			}
-			p.duration = p.move_end - p.move_start
-			var send_promise = ajax_submit_response(b,p);
-			send_promise.done(function() {
-				that.current_trial ++;
-				setTimeout(that.do_trial, 1000)
-			})
-		})
+		$('.canvas').off()
+		$(".indicator").html("<h1>Try to remember this arrangement:</h1>").css("color","#000000");
+		
+		console.log("displaying stimulus...");
+		setTimeout(function() {
+			
+			console.log("hiding stimulus...");
+			ajax_submit_response(b, p);
+			$(".indicator").html("<h1>Please wait...</h1>");
+			board = new Board();
+			board.create_tiles();
+			board.game_status = 'recon';
+			$('.canvas').off()
+			setTimeout(function() { 
+				
+				console.log("reconstructing...");
+				$('.indicator').html("<h1>Please reconstruct the arrangement.</h1>");
+				$('.tile').css('cursor', 'pointer');
+				// click handler
+				$('.canvas').off().on({click: function toggle_bpiece(e) {
+						console.log("click!");
+						i = (e.target.id) ? e.target.id : $(e.target).parent().attr("id")
+						i = parseInt(i);
+						p.move = i;
+						p.color = 0;
+						tid = '#' + i.toString();
+						console.log(i);
+						if(board.black_position[i] == 0) {
+							if(board.white_position[i] == 1) {
+								$(tid).empty();
+								board.white_position[i] = 0;
+							}
+							board.add_piece(i, 0);
+							$(tid).removeClass('usedTile').addClass('tile');
+						} else {
+							$(tid).empty();
+							board.black_position[i] = 0;
+						}
+						ajax_submit_response(board, p);
+						board.move_index += 1;
+						$('#submit').prop('disabled', false);
+					}, contextmenu: function toggle_wpiece(e) {
+						e.preventDefault();
+						console.log("right click!");
+						i = (e.target.id) ? e.target.id : $(e.target).parent().attr("id")
+						i = parseInt(i);
+						p.move = i
+						p.color = 1;1;
+						tid = '#' + i.toString();
+						console.log(i);
+						if(board.white_position[i] == 0) {
+							if(board.black_position[i] == 1) {
+								$(tid).empty();
+								board.black_position[i] = 0;
+							}
+							board.add_piece(i, 1);
+							$(tid).removeClass('usedTile').addClass('tile');
+						} else {
+							$(tid).empty();
+							board.white_position[i] = 0;
+						}
+						ajax_submit_response(board, p);
+						board.move_index += 1
+						$('#submit').prop('disabled', false);
+					}}, '.tile, .tile .blackPiece, .tile .whitePiece')
+			}, that.stimDelay);
+		}, that.stimDisplay);
 	}
 
 	this.do_trial = function() {
+		player.score = 36
+		$('#score-text').text('');
 		if(that.current_trial < that.ntrials) {
 			board = new Board();
 			board.create_tiles();
-			board.game_status = "AFCn";
+			board.game_status = "recon";
+			$('.canvas').off();
+			$('#submit').off('click').on('click', function() {
+				$('.canvas').off();
+				$('.canvas, .canvas div').css('cursor', 'default');
+				$('#submit').prop('disabled', true);
+				ajax_submit_response(board, player);
+				for(i=0; i<M*N; i++) {
+					if(that.bp[i] != board.black_position[i]) {
+						player.score -= 1
+					} else if(that.wp[i] != board.white_position[i]) {
+						player.score -= 1
+					}
+				}
+				$('#score-text').text(player.score + " / 36");
+				that.current_trial ++;
+				setTimeout(that.do_trial, 5000);
+			});
 			that.load_game(board, that.states);
 			that.action(board, player);
 		} else {
@@ -82,7 +145,7 @@ function Reconstruction() {
 
 	this.run_block = function() {
 		$("html, #scale-label, input[type=radio], .scorebox").css("cursor", "default");
-		console.log("Run, Forest, run!");
+		console.log("running reconstruction");
 		$(".scorebox").animate({backgroundColor:"#FFFFFF", color:"FFFFFF", borderColor:"#FFFFFF"}, 2000);
 		$(".indicator").html("<h1>You are playing <b>BLACK</b></h1>").css("color","#FFFFFF");
 		board = new Board();
