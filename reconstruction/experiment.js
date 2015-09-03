@@ -1,4 +1,4 @@
-var table = "debug";
+var table = "reconstruction";
 var blocks = reconstruction;
 var current_block = 0;
 
