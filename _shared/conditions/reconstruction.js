@@ -129,7 +129,14 @@ function Reconstruction() {
 				$('#score-text').text(player.score + " / 36");
 				$('#score-row').show();
 				that.current_trial ++;
-				setTimeout(that.do_trial, 5000);
+
+				if((that.current_trial % 20) == 0) {
+					$('#feedback-modal').modal('show');
+					$('#next-trial').off().on('click', function() {
+						$('#feedback-modal').modal('hide');
+						setTimeout(that.do_trial, 500);
+					});
+				} else { setTimeout(that.do_trial, 5000); }
 			});
 			that.load_game(board, that.states);
 			board.game_status = 'reconi'

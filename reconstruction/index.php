@@ -49,13 +49,13 @@
 				<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h2 class="modal-title">Good game!</h2>
+						<h2 class="modal-title">Great work!</h2>
 						</div>
 					<div class="modal-body">
-						<h5>When you are ready, please press the button to play again.</h5>
+						<h5>Feel free to take a short break. When you are ready, please press the button to continue.</h5>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-large btn-warning" id="next-trial">Play</button>
+						<button class="btn btn-large btn-warning" id="next-trial">Continue</button>
 					</div>
 				</div>
 			 </div>
