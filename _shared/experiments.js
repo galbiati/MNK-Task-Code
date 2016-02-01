@@ -19,5 +19,5 @@ learning.odd = [new Condition_AI(30),
 				new Condition_Evaluation(),
 				new End_Message()];
 
-reconstruction = [new Reconstruction()];
+// reconstruction = [new Reconstruction()];
 

@@ -87,6 +87,7 @@ img {
 	text-align: center;
 	position: relative;
 	margin: 12.5% auto auto auto;
+	background-color: #999999;
 	border-radius:100%;
 	border-style:dotted;
 	border-width:6px;
@@ -96,9 +97,11 @@ img {
 	z-index:7;
 }
 
-.blackPiece, .blackChoice,.blackMark { background-color:black; }
+.blackChoice { border-color:black; }
+.whiteChoice { border-color:white; }
+.blackPiece, .blackMark { background-color:black; }
 
-.whitePiece, .whiteChoice, .whiteShadow, .whiteMark, .blackShadow { background-color: white; }
+.whitePiece, .whiteShadow, .whiteMark, .blackShadow { background-color: white; }
 
 /* ~ MODAL DIALOGS ~ */
 
