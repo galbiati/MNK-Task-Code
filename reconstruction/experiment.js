@@ -10,7 +10,7 @@ $(document).ready(function() {
 	$('#submit').hide();
 	$('#score-row').hide();
 	$(".indicator").css("color","#FFFFFF");
-	instructions = new Instructions();
+	instructions = new Instructions(instruction_text);
 	instructions.run_block();
 	board = new Board();
 	board.create_tiles();
