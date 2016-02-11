@@ -40,7 +40,7 @@ function Reconstruction() {
 			
 			console.log("hiding stimulus...");
 			ajax_submit_response(b, p);
-			$(".indicator").html("<h1>Please wait...</h1>");
+			$(".indicator").html("<h1></h1>");
 			board = new Board();
 			board.create_tiles();
 			board.game_status = 'recon';
@@ -78,7 +78,7 @@ function Reconstruction() {
 						i = (e.target.id) ? e.target.id : $(e.target).parent().attr("id")
 						i = parseInt(i);
 						p.move = i
-						p.color = 1;1;
+						p.color = 1;
 						tid = '#' + i.toString();
 						console.log(i);
 						if(board.white_position[i] == 0) {
@@ -125,11 +125,11 @@ function Reconstruction() {
 				board.game_status = 'reconf';
 				player.move = player.score;
 				ajax_submit_response(board, player);
-				$('#score-text').text(player.score + " / 36");
+				$('#score-text').text((player.score / .36).toFixed(1) + ' %');
 				$('#score-row').show();
 				that.current_trial ++;
 
-				if((that.current_trial % 20) == 0) {
+				if((that.current_trial % 34) == 0) {
 					$('#feedback-modal').modal('show');
 					$('#next-trial').off().on('click', function() {
 						$('#feedback-modal').modal('hide');
