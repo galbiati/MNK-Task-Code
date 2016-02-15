@@ -10,6 +10,8 @@ $(document).ready(function() {
 	$(".scorebox").animate({backgroundColor:"#FFFFFF", 
 		color:"#FFFFFF", 
 		borderColor:"#FFFFFF"}, 0);
+	board = new Board();
+	board.create_tiles()
 	$(".eval-element").css("opacity", 0);
 	$('input[name="radio"]').off('click').attr('disabled', true).css("cursor", "none");
 	
