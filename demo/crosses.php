@@ -18,7 +18,7 @@
 		<!-- Custom CSS -->
 		<!--<link href = "static/bootstrap.min.css" rel = "stylesheet">
 		<link href = "static/stylesheet.css" rel="stylesheet"> -->
-		<link href="static/crosses.css" rel="stylesheet">
+		<link href="../_shared/styles/crosses.css" rel="stylesheet">
 
 	</head>
 

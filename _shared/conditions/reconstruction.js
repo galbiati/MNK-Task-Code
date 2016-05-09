@@ -33,7 +33,7 @@ function Reconstruction() {
 		p.move_start = Date.now()
 		$('.canvas, .canvas div').css('cursor', 'default');
 		$('.canvas').off()
-		$(".indicator").html("<h1>Try to remember this arrangement:</h1>").css("color","#000000");
+		$(".indicator").html("<h1>Try to remember this position:</h1>").css("color","#000000");
 		
 		console.log("displaying stimulus...");
 		setTimeout(function() {
@@ -48,7 +48,7 @@ function Reconstruction() {
 			setTimeout(function() { 
 				
 				console.log("reconstructing...");
-				$('.indicator').html("<h1>Please reconstruct the arrangement.</h1>");
+				$('.indicator').html("<h1>Please reconstruct the position.</h1>");
 				$('.tile').css('cursor', 'pointer');
 				$('.canvas').off().on({click: function toggle_bpiece(e) {
 						console.log("click!");

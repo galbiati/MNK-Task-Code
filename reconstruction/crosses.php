@@ -10,15 +10,15 @@
 		<title>M N K</title>
 
 		<!-- Libraries - may remove some later -->
-		<!-- <script src="libs/jquery-1.11.1.min.js"></script>
-		<script src="libs/underscore-min.js"></script>
+		<script src="libs/jquery-1.11.1.min.js"></script>
+		<!-- <script src="libs/underscore-min.js"></script>
 		<script src="libs/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="libs/bootstrap.min.js"></script>
 		<script src="libs/buzz.min.js"></script> -->
 		<!-- Custom CSS -->
 		<!--<link href = "static/bootstrap.min.css" rel = "stylesheet">
 		<link href = "static/stylesheet.css" rel="stylesheet"> -->
-		<link href="static/crosses.css" rel="stylesheet">
+		<link href="../_shared/styles/crosses.css" rel="stylesheet">
 
 	</head>
 
@@ -32,6 +32,7 @@
 		<div class="bot left"><p>+</p></div>
 		<div class="bot center"><p>+</p></div>
 		<div class="bot right"><p>+</p></div>
-
 	</body>
+	<script src='../_shared/scripts/util.js'></script>
+	<script src='eyecal.js'></script>
 </html>

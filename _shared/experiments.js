@@ -19,7 +19,7 @@ learning.odd = [new Condition_AI(30),
 				new Condition_Evaluation(),
 				new End_Message()];
 
-reconstruction = [new Reconstruction()];
+reconstruction = [new Eye_Calibration, new Reconstruction()];
 
 demo = [new Demo(60),
 		new End_Message()]
