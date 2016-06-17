@@ -1,0 +1,32 @@
+{% extends "../templates/base.html" %}
+
+{% block title %}494 - Welcome!{% end %}
+
+{% block header %}
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-xs-2 col-xs-offset-5'>
+            <h1>Welcome!</h1>
+        </div>
+    </div>
+</div>
+{% end %}
+
+{% block loginform %}
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-xs-4'>
+            <form id='login-form' action='login' method='post'>
+                <label for='log'>Username</label><br>
+                <input type='text' name='userid' id='userid'><br>
+                <label for='pwd'>Password</label><br>
+                <input type='password' name='pass' id='pass'><br>
+                <input type='submit' class='button btn btn-default' id='loginbtn' name='login' value='LOGIN'>
+                <a href='register'>Sign Up</a>
+            </form>
+
+            
+        </div>
+    </div>  
+</div>
+{% end %}
