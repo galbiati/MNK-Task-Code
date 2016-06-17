@@ -10,3 +10,5 @@ The server must have a data base configured appropriately; instructions on this 
 In the next several months, this will be changed to a tornado-based server. This will have several advantages: easier templating, more flexible choice in database, greater portability between systems, and (hopefully) the ability to handle multiple connections and persistent users. The python backend should also make it easier to create a live dash for experimenters to monitor individual subjects as they play.
 
 While the organization of the client side scripts has been improved, there is still a lot more that can be done. Once there is a python backend, a lot of the client side code can be moved to the server (this will be more secure against users that might know to use the console).
+
+--
