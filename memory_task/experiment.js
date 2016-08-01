@@ -1,6 +1,7 @@
 var table = "reconstruction";
-var blocks = reconstruction;
+var blocks = memtask;
 var current_block = 0;
+instCal = instCal2;
 
 // Launch!
 

@@ -97,6 +97,7 @@
 	<script src="../_shared/conditions/AFC2.js"></script>
 	<script src="../_shared/conditions/AFCn.js"></script>
 	<script src="../_shared/conditions/reconstruction.js"></script>
+	<script src="../_shared/conditions/memtask.js"></script>
 	<script src="../_shared/conditions/evaluation.js"></script>
 	<script src="../_shared/conditions/eye_calibration.js"></script>
 	<script src="../_shared/conditions/instructions.js"></script>

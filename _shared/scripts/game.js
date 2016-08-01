@@ -14,6 +14,7 @@ function Board() {
 	this.canvas.empty();
 
 	this.create_tiles = function() {
+		console.log('tiles done')
 		for (i=0; i<N; i+=1) {
 			for(j=0; j<M; j+=1) {
 				var tile_div = "<div class = 'tile' id='" + this.tile_ids[i*M + j] + "'></div>";
@@ -139,9 +140,13 @@ function Board() {
 			$(".tile").off('click').off('mouseenter').off('mouseleave');
 			if(Date.now() < blocks[current_block].end_time){
 				$('.indicator').html("<h1>Game over!</h1>");
-				setTimeout(function() { $('#feedback-modal').modal('show');
-				$("html").css("cursor","default"); }, 500)
+				setTimeout(function() {
+					$('#feedback-modal').modal('show');
+					$("html").css("cursor","default");
+				}, 500)
+
 				that.show_win(col, array);
+				// FEROZ RESET TIMER
 			} else {
 				$('.indicator').html("<h1>Game over!</h1>");
 				that.show_win(col, array);

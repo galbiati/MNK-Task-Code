@@ -21,6 +21,8 @@ learning.odd = [new Condition_AI(30),
 
 reconstruction = [new Eye_Calibration, new Reconstruction()];
 
+memtask = [new Eye_Calibration, new MemoryTask()];
+
 demo = [new Demo(60),
 		new End_Message()]
 
