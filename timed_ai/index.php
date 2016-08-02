@@ -19,10 +19,41 @@
 		<link href = "../_shared/styles/bootstrap.min.css" rel = "stylesheet">
 		<link href = "../_shared/styles/stylesheet.css" rel="stylesheet">
 		<style>
-		    #timerContainer {
+		     #visTimerContainerOpp {
+		    	left: 122px;
+			    height: 412px;
+		      	/*border:1px solid red;*/			    
+			    width: 90px;
+			    position:relative;
+		    }
+
+		    #visTimerOpp{
+		        height: 403px;
+		        width: 88px;
+		        background-color: white;
+		        position: absolute;
+		        bottom: 6px;
+		    }
+
+   			#numTimerContainerOpp {
+		    	left: 123px;
+		    	top: -27px;
+			    width: 88px;
+			    position:relative;
+			    text-align: center;
+
+		    }
+		    #numTimerOpp {
+		    	text-align: center;
+		    	font-size: 60px;
+		    	width: 88px;
+			    position:absolute;
+		    }
+
+		    #visTimerContainer {
 		    	left: 10px;
 			    height: 412px;
-			    /* border:1px solid red;*/			    
+			      /*border:1px solid red;*/			    
 			    width: 90px;
 			    position:relative;
 		    }
@@ -114,18 +145,24 @@
 			 </div>
 		</div>
 
+		
+		
 		<div class="container-fluid">
 			<div class="row">
 				<div class="indicator col-xs-24 col-sm-offset-6">
 					<h1></h1>
 				</div>
 			</div>
+
 			<div class="row">
-				<div class="container-fluid col-xs-24 col-xs-offset-6 canvas-container"> <!--col-xs-offset-1-->
+				<div class="container-fluid col-xs-6">
+					<div id='visTimerContainerOpp'><div id='visTimerOpp'></div></div>
+				</div>
+				<div class="container-fluid col-xs-24 canvas-container"> <!--col-xs-offset-1-->
 					<div class="canvas"></div>
 				</div>
 				<div class="container-fluid col-xs-6">
-					<div id='timerContainer'><div id='visTimer'></div></div>
+					<div id='visTimerContainer'><div id='visTimer'></div></div>
 				</div>
             </div>
             <div class="row">
@@ -133,6 +170,9 @@
             </div>
 
             <div class="row">
+            	<div class='container col-xs-6'>	
+            		<div id='numTimerContainerOpp'><div id='numTimerOpp'></div></div>
+            	</div>
             	<div class='container col-xs-6 col-xs-offset-30'>
             		<div id='numTimerContainer'><div id='numTimer'></div></div>
             	</div>
@@ -175,33 +215,26 @@
 		};
 
 		function Beep(freq, dur) {
-			var endfunc = arguments[2];
 			var osc1 = audioCtx.createOscillator();
-			var osc2 = audioCtx.createOscillator();
 			var gain = audioCtx.createGain();
 			var disto = audioCtx.createWaveShaper();
 			osc1.connect(disto);
-			osc2.connect(disto);
 			disto.connect(gain);
 			gain.connect(audioCtx.destination);
 
-			osc1.type = 'sawtooth';
-			osc1.frequency.value = freq - 100;
+			osc1.type = 'sine';
+			osc1.frequency.value = freq;
 
-			osc2.type='sawtooth';
-			osc2.frequency.value = freq + 100;
+			gain.gain.value = .3;
 
 			disto.curve = makeDistortionCurve(100);
 			disto.oversample = '4x';
 
 			osc1.start(0);
-			osc2.start(0);
 			setTimeout(function() {
 				osc1.stop();
-				osc2.stop();
-				endfunc();
 			}, dur);
-		}
+		}  
 
 	</script>
 	<script src="../_shared/scripts/util.js"></script>

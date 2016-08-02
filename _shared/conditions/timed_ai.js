@@ -25,64 +25,6 @@ function Timed_AI(dur) {
 	this.original_initials = 0;
 	this.is_first_move = true;
 
-	this.reset_timer = function() {
-		that.auto_refresh = "";
-		//that.timerheight = ((that.timerCount * 15) + 'px');
-		$('#numTimer').text(that.timerStart/1000);
-		$('#visTimer').stop().animate({height: that.timerStartHeight}, {duration: 750});
-      	$('#visTimer').animate({backgroundColor: that.timerStartColor});
-      	that.timerCurrent = that.timerStart;
-    }
-
-	this.draw_time = function() {
-		that.timeridx = Math.floor(3*Math.random())
-		that.timerStart = that.timelist[that.timeridx];
-		that.timerCurrent = that.timelist[that.timeridx];
-		that.timerStartColor = that.colorlist[that.timeridx];
-		that.timerCurrentColor = that.timerStartColor;
-		that.timerStartHeight = (that.timerStart * ((403/20)/1000) + 'px');
-		$('#numTimer').text(that.timerStart/1000);
-		player.initials = that.original_initials + '_' + String(that.timeridx);
-		that.current_opponent = that.current_opponent + (30*(that.timeridx+1));
-		that.reset_timer();
-	}
-    this.start_timer = function() {
-		if (that.auto_refresh !== "") {
-	      return;
-	    }
-    	that.auto_refresh = setInterval(function() {
-        	that.timerCurrent += -1000;
-        	$('#numTimer').text(that.timerCurrent/1000);
-        	console.log(that.timerCurrent);
-	        if (that.timerCurrent <= 0) {
-	            $('#numTimer').text('0');
-	            clearInterval(that.auto_refresh);
-	            that.draw_time();
-	            $('#feedback-constraint').text(that.timerStart/1000);
-	            $('#feedback-constraint').css('color', that.timerStartColor);
-	            $('#feedback-modal-title').text('Time ran out!');
-	            $('#feedback-modal').modal('show');
-				$('html').css('cursor', 'default');
-	            
-
- 
-	        } else if (that.timerCurrent/1000 <= 5) {
-	          	$('#visTimer').animate({backgroundColor: that.colorlist[0]});
-     		} else if (that.timerCurrent/1000 <= 10) {
-          		$('#visTimer').animate({backgroundColor: that.colorlist[1]});
-      		} else { 
-	      		$('#visTimer').css('background-color', that.colorlist[2]);
-	      	};
-
-   		}, 1000);
-    	$('#visTimer').animate({height: '0px'}, {duration:that.timerStart, easing:'linear', queue:false});
-	};
-     
-	this.stop_timer = function() {
-		clearInterval(that.auto_refresh);
-      	$('#visTimer').stop().animate({height: that.timerStartHeight});
-	}
-
 	this.change_opponent = function(p) {
 		var first_opp = Math.floor(that.opponents.length/2);
 		var lvl = p.opponent_score - p.score + first_opp
@@ -96,20 +38,93 @@ function Timed_AI(dur) {
 		return _.sample(new_opp)
 	}
 
+	this.reset_timer = function(numTimer, visTimer) {
+		that.auto_refresh = "";
+		//that.timerheight = ((that.timerCount * 15) + 'px');
+		numTimer.text(that.timerStart/1000);
+		visTimer.animate({height: that.timerStartHeight}, {duration: 300});
+      	visTimer.animate({backgroundColor: that.timerStartColor});
+      	that.timerCurrent = that.timerStart;
+    }
+
+	this.draw_time = function(numTimer, visTimer) {
+		that.timeridx = Math.floor(3*Math.random())
+		that.timerStart = that.timelist[that.timeridx];
+		that.timerCurrent = that.timelist[that.timeridx];
+		that.timerStartColor = that.colorlist[that.timeridx];
+		that.timerCurrentColor = that.timerStartColor;
+		that.timerStartHeight = (that.timerStart * ((403/20)/1000) + 'px');
+		numTimer.text(that.timerStart/1000);
+		player.initials = that.original_initials + '_' + String(that.timeridx);
+		that.current_opponent = that.current_opponent + (30*(that.timeridx+1));
+
+	}
+
+    this.start_timer = function(numTimer, visTimer) {
+		if (that.auto_refresh !== "") {
+	      return;
+	    }
+    	that.auto_refresh = setInterval(function() {
+        	that.timerCurrent += -1000;
+        	$(numTimer).text(that.timerCurrent/1000);
+        	console.log(that.timerCurrent);
+	        if (that.timerCurrent <= 0) {
+	        	Beep(1200, 500);
+	            numTimer.text('0');
+	            board.game_status = 'timeout';
+	            clearInterval(that.auto_refresh);
+	            that.draw_time(numTimer,visTimer);
+	            that.reset_timer($('#numTimer'),$('#visTimer'));
+	            that.reset_timer($('#numTimerOpp'),$('#visTimerOpp'));
+	            $('#feedback-constraint').text(that.timerStart/1000);
+	            $('#feedback-constraint').css('color', that.timerStartColor);
+	            $('#feedback-modal-title').text('Time ran out!');
+	            player.opponent_score ++
+	            player.duration = Date.now() - player.move_start;
+	            var send_promise = ajax_submit_response(board, player);
+	            send_promise.done(function() {
+		            $('#feedback-modal').modal('show');
+					$('html').css('cursor', 'default');
+				});
+	            
+	        } else if (that.timerCurrent/1000 <= 5) {
+	          	visTimer.animate({backgroundColor: that.colorlist[0]});
+     		} else if (that.timerCurrent/1000 <= 10) {
+          		visTimer.animate({backgroundColor: that.colorlist[1]});
+      		} else { 
+	      		visTimer.css('background-color', that.colorlist[2]);
+	      	};
+
+	      	if (that.timerCurrent/1000 == 2) {
+	      		Beep(300, 250);
+	      	} else if (that.timerCurrent/1000 == 1) {
+	      		Beep(600, 250);
+	      	}
+
+   		}, 1000);
+    	visTimer.stop(true, true).animate({height: '0px'}, {duration:that.timerStart-250, easing:'linear', queue:false});
+	};
+     
+	this.stop_timer = function(numTimer, visTimer) {
+		clearInterval(that.auto_refresh);
+      	visTimer.stop().animate({height: that.timerStartHeight});
+	}
+
 	this.action = function(b, p) {
 		p.move_start = Date.now();
 		b.highlight_tiles();
 		$(".indicator").html("<h1>Your turn</h1>").css("color","#000000");
 		$('.canvas').css("cursor", "pointer");
 		$('.usedTile, .usedTile div').css("cursor", "default");
-		that.reset_timer();
-		that.start_timer();
+		that.reset_timer($('#numTimer'),$('#visTimer'));
+		that.start_timer($('#numTimer'),$('#visTimer'));
 		$('.tile').off('click').css("cursor", "pointer").on('click', function(e) {
 			p.move_end = Date.now();
 			$('.tile').off('mouseenter').off('mouseleave').off('click');
-			$('.canvas, .canvas div').css("cursor", "none");
-			that.stop_timer();
-			that.reset_timer();
+			$('.canvas, .canvas div').css("cursor", "default");
+			that.stop_timer($('#numTimer'),$('#visTimer'));
+			that.reset_timer($('#numTimer'),$('#visTimer'));
+			that.reset_timer($('#numTimerOpp'),$('#visTimerOpp'));
 			$(".indicator").html(waiting_html+ "<h1>Waiting for opponent</h1>").css("color","#333333");
 			p.move = parseInt(e.target.id);
 			b.move_index ++;
@@ -119,22 +134,28 @@ function Timed_AI(dur) {
 			b.evaluate_win(p.color);
 			if(b.game_status=="win" || b.game_status=="draw"){ 
 				p.score ++;
-				that.draw_time();
+				that.draw_time($('#numTimer'),$('#visTimer'));
+				that.reset_timer($('#numTimer'),$('#visTimer'));
+				that.reset_timer($('#numTimerOpp'),$('#visTimerOpp'));
 				$('#feedback-constraint').text(that.timerStart/1000);
 	            $('#feedback-constraint').css('color', that.timerStartColor); 
 			};
 			p.duration = p.move_end - p.move_start
 			var send_promise = ajax_submit_response(b, p);
+			if(b.game_status == "ready" || b.game_status == "playing") {
+				that.start_timer($('#numTimerOpp'),$('#visTimerOpp'));};
 			send_promise.done(function() {
 				get_promise = ajax_retrieve_response();
 				if(b.game_status == "ready" || b.game_status == "playing") {
 					ajax_poll(b, p, get_promise, function() { that.opponent_action(b,p) })
-				}
+					}
 			});
 		})
 	}
 
 	this.opponent_action = function(b, p) {
+		that.stop_timer($('#numTimerOpp'),$('#visTimerOpp'));
+		that.reset_timer($('#numTimerOpp'),$('#visTimerOpp'));
 		b.add_piece(b.last_move, p.opponent_color);
 		MoveSound.play();
 		b.show_last_move(b.last_move, p.opponent_color);
@@ -160,8 +181,8 @@ function Timed_AI(dur) {
 				})
 			})
 		} else { // if (Date.now() < that.end_time) {
-			$('.tile').css("cursor", "none");
-			if(p.color==1){ $(".indicator").html(waiting_html + "<h1>Waiting for opponent</h1>").css("color","#333333");}
+			$('.tile').css("cursor", "default");
+			if(p.color==1){ $(".indicator").html(waiting_html + "<h1>Waiting for opponent</h1>").css("color","#333333"); that.start_timer($('#numTimerOpp'),$('#visTimerOpp'));}
 			var first_send_promise = ajax_submit_response(b,p);
 			first_send_promise.done(function() {
 				var get_promise = ajax_retrieve_response();
@@ -184,7 +205,9 @@ function Timed_AI(dur) {
 		player.color = 0;
 		player.opponent_color = 1;
 		that.original_initials = player.initials;
-		that.draw_time();
+		that.draw_time($('#numTimer'),$('#visTimer'));
+		that.reset_timer($('#numTimer'),$('#visTimer'));
+		that.reset_timer($('#numTimerOpp'),$('#visTimerOpp'));
 		$('#feedback-constraint').text(that.timerStart/1000);
 		$('#block-modal .modal-body').empty().append(instTimedAI);
 		$('#block-modal').modal('show');
@@ -202,7 +225,7 @@ function Timed_AI(dur) {
 		});
 		$('#feedback-modal button').on('click', function() {
 			$('#feedback-modal').modal('hide')
-			$("html, #scale-label, input[type=radio]").css("cursor", "none");
+			//$("#scale-label, input[type=radio]").css("cursor", "none");
 			
 			if (that.is_first_move) {
 				that.is_first_move = false

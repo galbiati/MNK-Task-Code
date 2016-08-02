@@ -15,7 +15,4 @@ $(document).ready(function() {
 	instructions.run_block();
 	board = new Board();
 	board.create_tiles();
-	Beep(220, 500, function() {
-		Beep(440, 500);
-	});
 })
