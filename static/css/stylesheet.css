@@ -223,34 +223,3 @@ input[type=radio] {
 .radio-bar {
 	min-height:5vh;
 } 
-
-/* ~ ANIMATED LOADER ~ */
-
-.wait-container {
-  width: 60px;
-  height: 80px;
-  margin: 80px auto;
-  margin-top: 50px;
-}
-
-.wait-block {
-  position: relative;
-  box-sizing: border-box;
-  float: left;
-  margin: 0 8px 8px 0;
-  width: 9px;
-  height: 9px;
-  border-radius: 100%;
-  background: #000;
-}
-
-.wait-block:nth-child(4n+1) { -webkit-animation: wave 2s ease .0s infinite; }
-.wait-block:nth-child(4n+2) { -webkit-animation: wave 2s ease .2s infinite; }
-.wait-block:nth-child(4n+3) { -webkit-animation: wave 2s ease .4s infinite; }
-.wait-block:nth-child(4n+4) { -webkit-animation: wave 2s ease .6s infinite; margin-right: 0; }
-
-@-webkit-keyframes wave {
-  0%   { top: 0;     opacity: 1; }
-  50%  { top: 24px;  opacity: .2; }
-  100% { top: 0;     opacity: 1; }
-}

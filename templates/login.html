@@ -1,0 +1,40 @@
+{% extends "../templates/base.html" %}
+
+{% block title %}Welcome!{% end %}
+
+{% block headertext %}Welcome!{% end %}
+
+{% block form %}
+    <div class='row'>
+        <div class='login-fields col-xs-4 col-xs-offset-4 text-center'>
+
+            <p>Please log in to contine.</p>
+             <form id='login-form' method='post'></form>
+
+                <div class='row'>
+                    <div class='col-xs-5 col-xs-offset-1'>
+                        <input type='text' form='login-form' name='username' id='username-field' placeholder='Username' required>
+                    </div>
+
+                    <div class='col-xs-5'>
+                        <input type='password' form='login-form' name='password' id='password-field' placeholder='Password' required>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <div class='col-xs-12'>
+                        <button class='btn btn-default' id='login-btn' type='submit' form='login-form' formaction='/register'>Login</button>
+                    </div>
+                </div>
+
+                <div class='row'>
+                    <p><a href='register'>Sign up!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% end %}
+
+{% block scripts %}
+
+{% end %}

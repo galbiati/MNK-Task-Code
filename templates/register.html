@@ -1,0 +1,22 @@
+{% extends "../templates/login.html" %} 
+
+{% block title %}Register{% end %}
+{% block headertext %}Sign Up{% end %}
+
+{% block form %}
+    <div class='row'>
+        <div class='col-xs-6 col-xs-offset-3 registration-info text-center'>
+            <p>
+                {% include "../static/media/consent.html" %}
+            </p>
+        </div>
+    </div>
+
+    {% include "../static/media/registrationform.html" %}
+    
+    <div class='row'>
+        <div id='response-div' class='col-xs-4 col-xs-offset-4'></div>
+    </div>
+
+{% end %}
+

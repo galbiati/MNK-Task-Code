@@ -1,52 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset = "utf-8">
-		<meta http-equiv = "X-UA-Compatible" content = "IE=edge">
-		<meta name="viewport" content="width=device-width">
-		<meta name="description" content="">
-		<meta name="author" content="Ma Lab">
-
-		<title>generalization</title>
-
-		<!-- Libraries - may remove some later -->
-		<script src="static/js/lib/jquery-2.2.4.min.js"></script>
-		<script src="static/js/lib/jquery-ui.min.js"></script>
-		<script src="static/js/lib/bootstrap.min.js"></script>
-		<script src="static/js/lib/buzz.min.js"></script>
-		<script src="static/js/lib/underscore-min.js"></script>
-		<!-- Custom CSS -->
-		<link href = "static/css/lib/bootstrap.min.css" rel = "stylesheet">
-		<link href = "static/css/stylesheet.css" rel="stylesheet">
-	</head>
+{% extends "../templates/gamebase.html" %}
+{% block title %}Demo{% end %}
+{% block headertext %}Demo{% end %}
+{% block canvas %}
 
 	<body>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="indicator col-xs-24 col-sm-offset-6">
-					<h1></h1>
-				</div>
+        <div class='row _blank_'></div>
+		<div class="row">
+			<div class="container-fluid col-xs-8 col-xs-offset-2 canvas-container">
+				<div class="canvas"></div>
 			</div>
-			<div class="row">
-				<div class="container-fluid col-xs-24 col-xs-offset-6 canvas-container">
-					<div class="canvas"></div>
-				</div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4 col-xs-offset-16 _blank_"></div>
-            </div>
-
-            <script>
-            	function init_ws() {
-            		var url, ws;
-            		url = "ws://" + window.location.host + "/ws/{{ clientid }}";
-            		ws = new WebSocket(url);
-            	}
-
-
-
-            </script>
+        </div>
 	</body>
+
+{% end %}
+
+{% block scripts %}
 
 	<script src="static/js/util.js"></script>
 	<script src="static/js/io.js"></script>
@@ -56,4 +24,4 @@
 	<script src="static/js/conditions/demo.js"></script>
 	<script src="static/js/experiment.js"></script>
 
-</html>
+{% end %}

@@ -1,11 +1,8 @@
 /* i/o functions */
 
-function ws_submit_response(b, p) {
+// function ws_submit_response(b, p) {
     
-    
-}
-
-
+// }
 
 function ajax_submit_response(b, p) {
     // console.log(b.black_position.join(""));
