@@ -4,24 +4,32 @@ import tornado.ioloop as ti
 from tornado.web import Application
 from handlers.base import BaseHandler
 from handlers.login import LoginHandler
-from handlers.index import IndexHandler
 from handlers.register import RegisterHandler
 from handlers.demo import DemoHandler
+from handlers.turing import TuringHandler
 
+import numpy as np
+
+client = motor.motor_tornado.MotorClient('localhost', 27017)
+db = client.gamesdb
 
 
 handlebars = [
-    (r'/', IndexHandler),
+    (r'/', BaseHandler),
     (r'/login', LoginHandler),
     (r'/register', RegisterHandler),
     (r'/demo', DemoHandler),
+    (r'/turing', TuringHandler)
 ]
 
 def make_app():
     return Application(
         handlebars, 
         static_path=os.path.join(os.path.dirname(__file__), "static"),
-        debug=True
+        debug=True,
+        db=db,
+        cookie_secret=str(np.random.randint(1, 99999)),
+        login_url='/login'
     )
 
 if __name__ == '__main__':

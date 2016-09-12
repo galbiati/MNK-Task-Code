@@ -36,7 +36,9 @@
 
                 {% end %}
 
-                {% block form %}{% end %}
+                {% block content %}
+                    {% block form %}{% end %}
+                {% end %}
 
             </div>
         {% end %}

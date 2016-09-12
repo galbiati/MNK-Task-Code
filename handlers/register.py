@@ -3,6 +3,7 @@ from .base import BaseHandler
 
 class RegisterHandler(BaseHandler):
     def get(self):
+        # todo: redirect if user is already logged in
         self.render('../templates/register.html')
 
     def post(self):
@@ -12,5 +13,5 @@ class RegisterHandler(BaseHandler):
         for arg in self.request.arguments:
             print(arg, self.get_argument(arg))
 
-        self.redirect(r'/demo')
+        self.redirect('/')
 

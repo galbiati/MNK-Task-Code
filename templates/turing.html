@@ -1,0 +1,33 @@
+{% extends "../templates/gamebase.html" %}
+{% block title %}Turing test{% end %}
+{% block headertext %}Are the players humans or computers?{% end %}
+{% block extra_styles %}
+    <style>
+        #turing-stim { display: block; width: 1000px; margin: 0 auto; }
+    </style>
+{% end %}
+
+{% block canvas %}
+
+    <div class='row _blank_'></div>
+    <div class="row">
+        <div class="container-fluid col-xs-10 col-xs-offset-1 turing-container">
+            <video id='turing-stim' poster='../static/media/images/turing_placeholder.png'>
+                <source id='stim-source' src='' type='video/mp4'>
+            </video>
+        </div>
+    </div>
+
+    <div class='row _blank_'></div>
+    <div class='row'>
+        <div class='container col-xs-2 col-xs-offset-5 turing-response-container'>
+            <button class='btn btn-lrg response-btn' id='human' disabled>Human</button>
+            <button class='btn btn-lrg response-btn' id='computer' disabled>Computer</button>
+        </div>
+    </div>
+
+{% end %}
+
+{% block scripts %}
+    <script src="../static/js/conditions/turing.js"></script>
+{% end %}

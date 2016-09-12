@@ -22,6 +22,8 @@
             <link href = 'static/css/stylesheet.css' rel='stylesheet'>
         {% end %}
 
+        {% block extra_styles %}{% end %}
+
     </head>
 
     <body>
@@ -30,7 +32,7 @@
                 {% block header %}
 
                     <div class='row'>
-                        <div class='col-xs-4 col-xs-offset-4 text-center'>
+                        <div class='col-xs-8 col-xs-offset-2 text-center'>
                             <h1>{% block headertext %}Default Title{% end %}</h1>
                         </div>
                     </div>

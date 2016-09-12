@@ -6,12 +6,8 @@ class LoginHandler(BaseHandler):
         self.render('../templates/login.html')
 
     def post(self):
-        user = self.get_argument('username', '')
-        password = self.get_argument('password', '')
-        print('Login attempt by {}!'.format(user))
-        print(password)
-        self.write(
-            {'username': user[::-1]}
-        )
-
-        # self.redirect(u'/')
+        user = self.get_argument('username')
+        password = self.get_argument('password')
+        self.set_secure_cookie('user', user)
+        self.redirect('/') # need to redirect to previous page otherwise?
+        
