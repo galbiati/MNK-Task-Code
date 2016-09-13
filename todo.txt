@@ -1,0 +1,4 @@
+- consent text in txt file, load through python/server as variable
+    (yay super fancy tornado stuff)
+
+- fix form boxes to be aligned

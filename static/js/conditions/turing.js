@@ -1,11 +1,10 @@
-// Questions:
-//   Autoplay?
-//   Interface? (Buttons, radios+submit, keypress)
-//   Loop video? Allow multiple plays?
-//   Change play interface
-//      Tracker bar below video, not over
-//      Allow tracker bar?
-//   Force choice delay; full video or time limit?
+// Todos
+//   Play button
+//   Slider + submit button
+//   No controls
+//   Feedback
+//   No early choices
+//   
 
 var clip, trial_start
 var clip_files = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
