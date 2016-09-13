@@ -24,7 +24,7 @@ $(document).ready(function() {
     initPlayer();
     loadVideo(clip);
     trial_start = Date.now();
-    $('.submit-btn').on('click', function(e) { submitHandler(e); }).prop('disabled', true);
+    $('.submit-btn').on('click', function(e) { submitHandler(e); }).prop('disabled', true).hide();
     $('.play-btn').on('click', function(e) { playHandler(e); })
     player.addEventListener('ended',function(e) { endHandler(e); }) 
     $('#slider').on('click', function(e) { sliderchangeHandler(e); })
