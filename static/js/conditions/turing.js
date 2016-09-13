@@ -1,7 +1,7 @@
 // Todos
 // Shuffling
-// Get correct answers
 // Get all filenames
+// Get correct answers
 
 // Make it nice :)
 // poster
