@@ -20,12 +20,17 @@
 
     <div class='row _blank_'></div>
     <div class='row'>
-        <div class='container col-xs-2 col-xs-offset-5 turing-response-container'>
+        <div class='container col-xs-4 col-xs-offset-4 turing-response-container'>
             <button class='btn btn-lrg response-btn' id='human' disabled>Human</button>
             <button class='btn btn-lrg response-btn' id='computer' disabled>Computer</button>
+            <button class='btn btn-lrg play-btn' id='play' disabled>Play</button>
         </div>
     </div>
-
+    <div class='row'>
+        <div class='container col-xs-6 col-xs-offset-4 turing-feedback'>
+            <p id='feedbacktext'></p>
+        </div>
+    </div>
 {% end %}
 
 {% block scripts %}
