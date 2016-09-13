@@ -4,6 +4,8 @@
 {% block extra_styles %}
     <style>
         #turing-stim { display: block; width: 1000px; margin: 0 auto; }
+/*        .turing-response-container { display: block; margin: 0 auto; }
+*/      #submit, #play {float: none; margin: 0 auto;}
     </style>
 {% end %}
 
@@ -20,8 +22,8 @@
 
     <div class='row _blank_'></div>
     <div class='row'>
-        <div class='container col-xs-4 col-xs-offset-4 turing-response-container'>
-            <button class='btn btn-lrg submit-btn' id='submit' disabled>Submit</button>
+        <div class='container text-center col-xs-12'>
+            <button class='btn btn-lrg submit-btn' id='submit' hidden>Submit</button>
             <button class='btn btn-lrg play-btn' id='play' disabled>Play</button>
         </div>
     </div>

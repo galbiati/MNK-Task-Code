@@ -45,7 +45,8 @@ function loadVideo(clipno) {
 
 function playHandler(e){
     player.play();
-    $('.play-btn').prop('disabled', true);
+    $('.play-btn').prop('disabled', true).hide();
+    $('.submit-btn').show();
     $('#feedbacktext').text("");
 }
 
@@ -78,7 +79,8 @@ function submitHandler(e) {
     if (i >= clip_files.length) {
         i = 0;
     }
-    $('.submit-btn').prop('disabled', true);
+    $('.submit-btn').prop('disabled', true).hide();
+    $('.play-btn').show();
     clip = clip_files[i];
     loadVideo(clip);
 }
