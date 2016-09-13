@@ -19,9 +19,7 @@ $(document).ready(function() {
     loadVideo(clip);
     trial_start = Date.now();
     player.play() // probably want custom function for playing, to add callbacks etc
-    $('.response-btn').on('click', function(e) {
-        buttonHandler(e);
-    }).prop('disabled', false);
+    $('.response-btn').on('click', function(e) { buttonHandler(e); }).prop('disabled', false);
 })
 
 function initPlayer() {
@@ -32,6 +30,7 @@ function loadVideo(clipno) {
     // add optional callback
     stim_source.attr('src', getClip(clipno));
     player.load();
+    //
 }
 
 function submit_response(val) {
@@ -50,7 +49,7 @@ function buttonHandler(e) {
     var val = (e.target.id) ? e.target.id : $(e.target).parent().attr("id");
     res = submit_response(val);
     res.done(console.log('Data sent!'));
-    i ++;
+    i ++ ;
     if (i >= clip_files.length) {
         i = 0;
     }
