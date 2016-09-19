@@ -19,7 +19,9 @@ handlebars = [
     (r'/login', LoginHandler),
     (r'/register', RegisterHandler),
     (r'/demo', DemoHandler),
-    (r'/turing', TuringHandler)
+    (r'/turing', TuringHandler),
+    (r'/AI', AIHandler),
+    (r'/AIData', AIDataHandler)
 ]
 
 def make_app():

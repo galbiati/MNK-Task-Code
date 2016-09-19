@@ -20,6 +20,21 @@
 	<script src="static/js/params.js"></script>
 	<script src="static/js/game.js"></script>
 	<script src="static/js/conditions/demo.js"></script>
-	<script src="static/js/experiment.js"></script>
+	<script>
+		// init experiment
+		var blocks = [new Demo(60)];
+		var current_block = 0;
 
+		// launch
+		$(document).ready(function() {
+			current_block = 0;
+			$(".indicator").css("color","#FFFFFF");
+			board = new Board();
+			board.create_tiles()
+			player = new Player();
+			player.initials = Date.now();
+			track_mouse(player);
+			blocks[current_block].run_block()
+		});
+	</script>
 {% end %}

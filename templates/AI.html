@@ -1,0 +1,40 @@
+{% extends "../templates/gamebase.html" %}
+{% block title %}AI{% end %}
+{% block headertext %}Welcome!{% end %}
+{% block canvas %}
+
+    <div class='row _blank_'></div>
+    <div class="row">
+        <div class="container-fluid col-xs-8 col-xs-offset-2 canvas-container">
+            <div class="canvas"></div>
+        </div>
+    </div>
+
+{% end %}
+
+{% block scripts %}
+
+    <script src="static/js/util.js"></script>
+    <script src="static/js/io.js"></script>
+    <script src="static/js/instructions.js"></script>
+    <script src="static/js/params.js"></script>
+    <script src="static/js/game.js"></script>
+    <script src="static/js/conditions/AI.js"></script>
+    <script>
+        // init experiment
+        var blocks = [new Condition_AI(60)];
+        var current_block = 0;
+
+        // launch
+        $(document).ready(function() {
+            current_block = 0;
+            board = new Board();
+            board.create_tiles()
+            player = new Player();
+            player.initials = Date.now();
+            track_mouse(player);
+            blocks[current_block].run_block()
+        });
+    </script>
+
+{% end %}

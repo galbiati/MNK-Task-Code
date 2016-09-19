@@ -1,7 +1,3 @@
-// To Dos
-// move evaluate win to server (edit board file as well)
-// further break down event handlers etc
-
 function Condition_AI(dur, opp_list, player) {
     var that = this;
     this.duration = dur
@@ -35,7 +31,11 @@ function Condition_AI(dur, opp_list, player) {
         that.p.mouse_x = [];
         that.p.mouse_t = [];
 
-        return $.ajax({type:'POST', url:'/AI', dataType:'JSON', data:data})
+        return $.ajax({type:'POST', url:'/AIData', dataType:'JSON', data:data})
+    }
+
+    this.get_response = function() {
+        return $.ajax({type:'GET', url:'/AIData', dataType:'JSON', data:})
     }
 
     this.change_opponent = function(p) {
@@ -62,7 +62,7 @@ function Condition_AI(dur, opp_list, player) {
     }
 
     this.afterPromise = function() {
-        get_promise = ajax_retrieve_response();
+        get_promise = this.get_response();
         if(that.b.game_status == 'ready' || that.b.game_status == 'playing') {
             ajax_poll(that.b, that.p, get_promise, function() { that.opponent_action(that.b, that.p); });
         }
@@ -84,7 +84,7 @@ function Condition_AI(dur, opp_list, player) {
         that.p.duration = that.p.move_end - that.p.move_start;
 
         // the below will need to be modified for websocket version 
-        var send_promise = ajax_submit_response(that.b, that.p);
+        var send_promise = this.submit_response(that.b, that.p);
         send_promise.done(that.afterPromise);
 
     }
@@ -107,7 +107,7 @@ function Condition_AI(dur, opp_list, player) {
     }
 
     this.trial_start_promise = function() {
-        var get_promise = ajax_retrieve_response();
+        var get_promise = this.get_response();
         ajax_poll(that.b, that.p, get_promise, function() {
             if (that.p.color==0) { 
                 that.action(); 
@@ -122,7 +122,7 @@ function Condition_AI(dur, opp_list, player) {
         // expand to allow for color setting?
         that.start_time = Date.now();
         that.end_time = that.start_time + 60000*that.duration;
-        var send_promise = ajax_submit_response(that.b, that.p);
+        var send_promise = this.submit_response(that.b, that.p);
         send_promise.done(that.trial_start_promise);
     }
 
@@ -131,7 +131,7 @@ function Condition_AI(dur, opp_list, player) {
         if (that.p.color==1) { 
             $('.indicator').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
         }
-        var send_promise = ajax_submit_response(that.b, that.p);
+        var send_promise = this.submit_response(that.b, that.p);
         send_promise.done(that.trial_start_promise);
     }
 
@@ -177,29 +177,6 @@ function Condition_AI(dur, opp_list, player) {
 
     }
 
-}
-
-function ajax_submit_response(b, p) {
-    // console.log(b.black_position.join(""));
-    // console.log(b.white_position.join(""));
-    data = {"initials":String(p.initials),
-            "color":String(p.color),
-            "game_index":String(p.game_index),
-            "move_index":String(b.move_index),
-            "game_status":String(b.game_status),
-            "black_position":String(b.black_position.join("")),
-            "white_position":String(b.white_position.join("")),
-            "response":String(p.move),
-            "duration":String(p.duration),
-            "timestamp":String(Date.now()),
-            "mouse_t":String(p.mouse_t.join(",")),
-            "mouse_x":String(p.mouse_x.join(";")),
-            "opponent_color":String(p.opponent_color),
-            "opponent_strength":String(blocks[current_block].current_opponent),
-            "table":String(table)};
-            p.mouse_x = [];
-            p.mouse_t = [];
-    return $.ajax({type:"POST", url:"/", dataType:"JSON", data:data})
 }
 
 var opponent_list = [[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24],[25,26,27,28,29]]
