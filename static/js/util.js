@@ -17,8 +17,6 @@ function restore_array(dataString) {
 	return dataString;
 }
 
-
-
 function track_mouse(p) {
 		$(".canvas").on('mousemove', function(e) {
 			p.mouse_t.push(Date.now())
@@ -35,6 +33,18 @@ function every_n(list, n) {
 		}
 	}
 	return new_list
+}
+
+function rand_int(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min)) + min
+}
+
+function sample_array(array) {
+	n = array.length;
+	i = rand_int(0, n)
+	return array[i]
 }
 
 function Positions(black_pos,white_pos) {
