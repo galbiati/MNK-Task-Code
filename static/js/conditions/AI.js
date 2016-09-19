@@ -16,6 +16,28 @@ function Condition_AI(dur, opp_list, player) {
     this.p = player;
     this.b = new Board();
 
+    this.submit_response = function() {
+        data = {
+            'initials':String(that.p.initials),
+            'color':String(that.p.color),
+            'gi':String(that.p.game_index),
+            'mi':String(that.b.move_index),
+            'status':String(that.b.game_status),
+            'bp':String(that.b.black_position.join('')),
+            'wp':String(that.b.white_position.join('')),
+            'response':String(that.p.move),
+            'rt':String(that.p.duration),
+            'ts':String(Date.now()),
+            'mt':String(that.p.mouse_t.join(',')),
+            'mxy':String(that.p.mouse_x.join(';')),
+            'opponent':String(that.current_opponent)
+        };
+        that.p.mouse_x = [];
+        that.p.mouse_t = [];
+
+        return $.ajax({type:'POST', url:'/AI', dataType:'JSON', data:data})
+    }
+
     this.change_opponent = function(p) {
         var ol = that.opp_list.length;
         var first = Math.floor(ol/2);
@@ -155,6 +177,29 @@ function Condition_AI(dur, opp_list, player) {
 
     }
 
+}
+
+function ajax_submit_response(b, p) {
+    // console.log(b.black_position.join(""));
+    // console.log(b.white_position.join(""));
+    data = {"initials":String(p.initials),
+            "color":String(p.color),
+            "game_index":String(p.game_index),
+            "move_index":String(b.move_index),
+            "game_status":String(b.game_status),
+            "black_position":String(b.black_position.join("")),
+            "white_position":String(b.white_position.join("")),
+            "response":String(p.move),
+            "duration":String(p.duration),
+            "timestamp":String(Date.now()),
+            "mouse_t":String(p.mouse_t.join(",")),
+            "mouse_x":String(p.mouse_x.join(";")),
+            "opponent_color":String(p.opponent_color),
+            "opponent_strength":String(blocks[current_block].current_opponent),
+            "table":String(table)};
+            p.mouse_x = [];
+            p.mouse_t = [];
+    return $.ajax({type:"POST", url:"/", dataType:"JSON", data:data})
 }
 
 var opponent_list = [[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24],[25,26,27,28,29]]

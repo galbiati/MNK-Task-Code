@@ -24,7 +24,7 @@ function ajax_submit_response(b, p) {
             "table":String(table)};
             p.mouse_x = [];
             p.mouse_t = [];
-    return $.ajax({type:"POST", url:"../_shared/scripts/submit.php", dataType:"JSON", data:data})
+    return $.ajax({type:"POST", url:"/", dataType:"JSON", data:data})
 }
 
 function ajax_retrieve_response() {
