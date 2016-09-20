@@ -7,13 +7,19 @@ class AIHandler(BaseHandler):
     def get(self):
         self.render('../templates/AI.html')
 
-class AIDataHandler(BaseHandler):
-    # sike, turns out you NEED game room to avoid DB probs
+class GameHandler(BaseHandler):
+    def __init__(self):
+        super(GameHandler, self).__init__()
 
     @tw.authenticated
     def get(self):
-        # return move for AI
-        pass
+        cu = self.current_user.decode()
+
+        data = {
+            'initials': self.initials
+            'res': self.last_move,
+            'bp'
+        }
 
     @tw.authenticated
     def post(self):
@@ -23,7 +29,9 @@ class AIDataHandler(BaseHandler):
 
         argdict = {key: self.get_argument(key) for key in self.request.arguments}
         argdict['user_name'] = self.current_user.decode()  
-        argdict['task'] = 'AI'      
+        argdict['task'] = 'AI'
+        for k, v in argdict.items():
+            print(k, v) 
         def insert_cb(result, error):
             if error:
                 raise error
@@ -32,5 +40,5 @@ class AIDataHandler(BaseHandler):
                 return
         db.test_collection.insert(argdict, callback=insert_cb)
 
-        
+
         

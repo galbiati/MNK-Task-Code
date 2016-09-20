@@ -22,8 +22,7 @@
     <script src="static/js/conditions/AI.js"></script>
     <script>
         // init experiment
-        var blocks = [new Condition_AI(60)];
-        var current_block = 0;
+        var blocks;
 
         // launch
         $(document).ready(function() {
@@ -33,6 +32,7 @@
             player = new Player();
             player.initials = Date.now();
             track_mouse(player);
+            blocks = [new Condition_AI(60)];
             blocks[current_block].run_block()
         });
     </script>

@@ -56,12 +56,13 @@ function unpack_response(data, b, p) {
 }
 
 function ajax_poll(b, p, promise, callback) {
-    promise.then(function(data) { unpack_response(data, b, p); }).done(function(data) {
+    console.log('DEBUG: polling loop continuing')
+    promise.then(function(data) { 
+        unpack_response(data, b, p); 
+    }).done(function(data) {
         if(p.initials != p.last_initials) {
             callback();
         } else {
-            console.log(b.black_position.join(""));
-            console.log(b.white_position.join(""));
             setTimeout(function() {
                 get_promise = ajax_retrieve_response();
                 ajax_poll(b, p, get_promise, callback);

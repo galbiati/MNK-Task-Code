@@ -8,12 +8,13 @@ function Condition_AI(dur) {
     this.current_trial = 0;
 
     this.opp_list = opponent_list;
-    this.current_opponent = sample_array(opp_list[Math.floor(opp_list.length/2)]);
+    this.current_opponent = sample_array(this.opp_list[Math.floor(this.opp_list.length/2)]);
 
     this.p = player;
     this.b = new Board();
 
     this.submit_response = function() {
+        console.log('DEBUG: response submitted')
         data = {
             'initials':String(that.p.initials),
             'color':String(that.p.color),
@@ -71,6 +72,7 @@ function Condition_AI(dur) {
     }
 
     this.tileClickHandler = function(e) {
+        console.log('DEBUG: tile clicked')
         // ideally this will be split up into canvas aesthetics, board aesthetics, and io stuff
         that.p.move_end = Date.now();
         $('.tile').off('mousenter').off('mouseleave').off('click');
@@ -86,12 +88,13 @@ function Condition_AI(dur) {
         that.p.duration = that.p.move_end - that.p.move_start;
 
         // the below will need to be modified for websocket version 
-        var send_promise = this.submit_response(that.b, that.p);
+        var send_promise = that.submit_response(that.b, that.p);
         send_promise.done(that.afterPromise);
 
     }
 
     this.action = function() {
+        console.log('DEBUG: action assigned')
         that.init_turn(); // aesthetics
         $('.tile').off('click').on('click', function(e) { that.tileClickHandler(e); });
     }
