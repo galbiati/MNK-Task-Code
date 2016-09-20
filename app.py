@@ -7,6 +7,7 @@ from handlers.login import LoginHandler
 from handlers.register import RegisterHandler
 from handlers.demo import DemoHandler
 from handlers.turing import TuringHandler
+from handlers.AI import AIHandler, AIDataHandler
 
 import numpy as np
 

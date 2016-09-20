@@ -1,12 +1,13 @@
-function Condition_AI(dur, opp_list, player) {
+function Condition_AI(dur) {
     var that = this;
+    this.task_id = 'AI'
     this.duration = dur
     this.start_time = Date.now();
     this.end_time = this.start_time + 60000*this.duration;
 
     this.current_trial = 0;
 
-    this.opp_list = opp_list;
+    this.opp_list = opponent_list;
     this.current_opponent = sample_array(opp_list[Math.floor(opp_list.length/2)]);
 
     this.p = player;
@@ -26,7 +27,8 @@ function Condition_AI(dur, opp_list, player) {
             'ts':String(Date.now()),
             'mt':String(that.p.mouse_t.join(',')),
             'mxy':String(that.p.mouse_x.join(';')),
-            'opponent':String(that.current_opponent)
+            'opponent':String(that.current_opponent),
+            'task':String(that.task_id)
         };
         that.p.mouse_x = [];
         that.p.mouse_t = [];
@@ -35,7 +37,7 @@ function Condition_AI(dur, opp_list, player) {
     }
 
     this.get_response = function() {
-        return $.ajax({type:'GET', url:'/AIData', dataType:'JSON', data:})
+        return $.ajax({type:'GET', url:'/AIData', dataType:'JSON', data:{}})
     }
 
     this.change_opponent = function(p) {

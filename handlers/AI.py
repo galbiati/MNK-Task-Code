@@ -8,6 +8,7 @@ class AIHandler(BaseHandler):
         self.render('../templates/AI.html')
 
 class AIDataHandler(BaseHandler):
+    # sike, turns out you NEED game room to avoid DB probs
 
     @tw.authenticated
     def get(self):
@@ -16,8 +17,18 @@ class AIDataHandler(BaseHandler):
 
     @tw.authenticated
     def post(self):
-        # write to DB
-        pass
+        db = self.settings['db']
 
-class AIOpponent():
-    pass
+        argdict = {key: self.get_argument(key) for key in self.request.arguments}
+        argdict['user_name'] = self.current_user.decode()  
+        argdict['task'] = 'AI'      
+
+        def insert_cb(result, error):
+            if error:
+                raise error
+            else:
+                print('result: {}'.format(result))
+                return
+        db.test_collection.insert(argdict, callback=insert_cb)
+        # write to DB
+        
