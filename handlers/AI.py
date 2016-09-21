@@ -10,6 +10,7 @@ class AIHandler(BaseHandler):
 class GameHandler(BaseHandler):
     def __init__(self):
         super(GameHandler, self).__init__()
+        self.users = {}
 
     @tw.authenticated
     def get(self):
@@ -24,7 +25,7 @@ class GameHandler(BaseHandler):
     @tw.authenticated
     def post(self):
 
-        # handle data
+        # convert data to dictionary
         db = self.settings['db']
 
         argdict = {key: self.get_argument(key) for key in self.request.arguments}
@@ -32,6 +33,8 @@ class GameHandler(BaseHandler):
         argdict['task'] = 'AI'
         for k, v in argdict.items():
             print(k, v) 
+
+        # add data to MongoDB
         def insert_cb(result, error):
             if error:
                 raise error
@@ -39,6 +42,8 @@ class GameHandler(BaseHandler):
                 print('result: {}'.format(result))
                 return
         db.test_collection.insert(argdict, callback=insert_cb)
+
+        # 
 
 
         
