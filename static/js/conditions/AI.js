@@ -19,7 +19,6 @@ function Condition_AI(dur) {
             'initials':String(that.p.initials),
             'color':String(that.p.color),
             'gi':String(that.p.game_index),
-            'mi':String(that.b.move_index),
             'status':String(that.b.game_status),
             'bp':String(that.b.black_position.join('')),
             'wp':String(that.b.white_position.join('')),

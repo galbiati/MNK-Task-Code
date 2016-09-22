@@ -7,14 +7,12 @@ from handlers.login import LoginHandler
 from handlers.register import RegisterHandler
 from handlers.demo import DemoHandler
 from handlers.turing import TuringHandler
-from handlers.AI import AIHandler, GameHandler, GameCache
+from handlers.AI import *
 
 import numpy as np
 
 client = motor.motor_tornado.MotorClient('localhost', 27017)
 db = client.gamesdb
-
-game_cache_buffer = {}
 
 handlebars = [
     (r'/', BaseHandler),

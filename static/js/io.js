@@ -44,7 +44,6 @@ function unpack_tiles(dataString) {
 }
 
 function unpack_response(data, b, p) {
-    b.move_index = parseInt(data.move_index);
     p.game_index = parseInt(data.game_index);
     b.game_status = parseInt(data.game_status)
     b.black_position = restore_array(data.black_position)
