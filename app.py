@@ -7,7 +7,7 @@ from handlers.login import LoginHandler
 from handlers.register import RegisterHandler
 from handlers.demo import DemoHandler
 from handlers.turing import TuringHandler
-from handlers.AI import AIHandler, GameHandler
+from handlers.AI import AIHandler, GameHandler, GameCache
 
 import numpy as np
 
@@ -24,6 +24,8 @@ handlebars = [
     (r'/AI', AIHandler),
     (r'/AIData', GameHandler)
 ]
+
+game_cache_buffer = {}
 
 def make_app():
     return Application(
