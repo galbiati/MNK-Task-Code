@@ -14,6 +14,7 @@ import numpy as np
 client = motor.motor_tornado.MotorClient('localhost', 27017)
 db = client.gamesdb
 
+game_cache_buffer = {}
 
 handlebars = [
     (r'/', BaseHandler),
@@ -25,12 +26,11 @@ handlebars = [
     (r'/AIData', GameHandler)
 ]
 
-game_cache_buffer = {}
-
 def make_app():
     return Application(
         handlebars, 
-        static_path=os.path.join(os.path.dirname(__file__), "static"),
+        static_path=os.path.join(os.path.dirname(__file__), 'static'),
+        template_path=os.path.join(os.path.dirname(__file__), 'templates'),
         debug=True,
         db=db,
         cookie_secret=str(np.random.randint(1, 99999)),

@@ -16,6 +16,7 @@ class GameCache(object):
         self.position_history = [] # positions are tuples of integers
         self.move_history = []
         self.game_status = 'ready'
+        self.user_turn = 0
 
     def update(self, move, position):
         if position[0] is str:
@@ -49,8 +50,8 @@ class GameCache(object):
         else:
             newp = (position[0], position[1] + 2**newm)
 
-        self.position_history.append(newp)
-        self.move_history.append(newm)
+        self.update(newm, newp)
+        self.user_turn = 1
 
     def choose_move(self, position):
         # replace this or subclass GameCache as necessary
@@ -80,16 +81,24 @@ class GameCache(object):
     def strings_to_int(self, position):
         bp, wp = position
         return (int(bp, 2), int(wp, 2))
-        
+
 
 class GameHandler(BaseHandler):
 
     @tw.authenticated
     def get(self):
         user = self.current_user.decode()
+        G = game_cache_buffer[user]
+        if G.user_turn:
+
+            self.write(reply_data)
 
     @tw.authenticated
     def post(self):
+        # TODO: remove last move from incoming position
+        # TODO: force correct move index by couting pieces
+        # TODO: add more to cache, eg GI
+        # TODO: edit JS to modify turn monitoring
 
         # convert data to dictionary
         db = self.settings['db']
@@ -99,7 +108,6 @@ class GameHandler(BaseHandler):
         argdict['user_name'] = user
         argdict['task'] = 'AI'
 
-        argdict[]
         for k, v in argdict.items():
             print(k, v) 
 
@@ -113,18 +121,16 @@ class GameHandler(BaseHandler):
         db.test_collection.insert(argdict, callback=insert_cb)
 
         # add data to cache
-        if not (user in game_cache_buffer.keys()]:
+        if not (user in game_cache_buffer.keys()):
             game_cache_buffer[user] = GameCache(user)
+
         G = game_cache_buffer[user]
+        G.user_turn = 0
         G.update(
             argdict['response'], 
             (argdict['bp'], argdict['wp'])
         )
 
         if G.game_status == 'playing':
-            reply = G.make_move(G.position_history[:-1])
-
-
-
-
-        
+            color = (argdict['color'] + 1) % 2
+            G.make_move(G.position_history[:-1], color)        
