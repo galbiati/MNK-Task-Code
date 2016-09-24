@@ -1,16 +1,167 @@
-{% extends "gamebase.html" %}
+{% extends "../templates/gamebase.html" %}
 {% block title %}Turing test{% end %}
-{% block headertext %}Are the players humans or computers?{% end %}
+{% block headertext %} Are the players humans or computers?{% end %}
 {% block extra_styles %}
+
     <style>
+    /* slider stylizing */
+        input[type='range'] {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: solid 0 transparent;
+            border-width: 0 1em;
+            padding: 1em 0 0;
+            width: 65em;
+            height: 2em;
+            border-radius: .25em;
+            transform: translate(-50%, -50%);
+            background: transparent;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        input[type='range'], input[type='range']::-webkit-slider-runnable-track, input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+        }
+        input[type='range']::-webkit-slider-runnable-track {
+            position: relative;
+            width: 32em;
+            height: 0.375em;
+            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #ace600, #e6e600, #e6ac00, #e67300, #e63900, #e60000);
+            background-size: 2em 100%, 100% 100%;
+        }
+        input[type='range']::-moz-range-track {
+            width: 32em;
+            height: 0.375em;
+            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #ace600, #e6e600, #e6ac00, #e67300, #e63900, #e60000);
+            background-size: 2em 100%, 100% 100%;
+        }
+        input[type='range']::-ms-track {
+            border: none;
+            width: 32em;
+            height: 0.375em;
+            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #ace600, #e6e600, #e6ac00, #e67300, #e63900, #e60000);
+            background-size: 2em 100%, 100% 100%;
+            color: transparent;
+        }
+        input[type='range']::-ms-fill-lower {
+            display: none;
+        }
+        input[type='range']::-webkit-slider-thumb {
+            margin-top: -0.8125em;
+            box-sizing: border-box;
+            border: solid 1px transparent;
+            width: 2em;
+            height: 2em;
+            border-radius: 0;
+            transform: translateY(75%) rotate(30deg) skewY(30deg) scaleX(0.86603);               
+            background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;
+        }
+        input[type='range']::-moz-range-thumb {
+            box-sizing: border-box;
+            border: solid 1px transparent;
+            width: 2em;
+            height: 2em;
+            border-radius: 0;
+            transform: translateY(75%) rotate(30deg) skewY(30deg) scaleX(0.86603);
+            background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;
+        }
+        input[type='range']::-ms-thumb {
+            box-sizing: border-box;
+            border: solid 1px transparent;
+            width: 2em;
+            height: 2em;
+            border-radius: 0;
+            transform: translateY(75%) rotate(30deg) skewY(30deg) scaleX(0.86603);
+            background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;
+        }
+        input[type='range']::-webkit-slider-runnable-track:before, input[type='range']::-webkit-slider-runnable-track:after, input[type='range'] /deep/ #track:before, input[type='range'] /deep/ #track:after {
+            position: absolute;
+            bottom: 100%;
+            color: #2c2c2b;
+            font: 700 0.875em / 2 arial, sans-serif;
+        }
+        input[type='range']::-webkit-slider-runnable-track:before, input[type='range'] /deep/ #track:before {
+            left: 0.8125em;
+            word-spacing: 1.4375em;
+            content: '1 2 3 4 5 6 7 8 9';
+        }
+        input[type='range']::-webkit-slider-runnable-track:after, input[type='range'] /deep/ #track:after {
+            right: 0.625em;
+            word-spacing: 0.875em;
+            content: '10 11 12 13 14 15 16';
+        }
+        input[type='range']:focus {
+            outline: none;
+            box-shadow: 0 0 .25em orange;
+        }
         #turing-stim { display: block; width: 1000px; margin: 0 auto; }
 /*        .turing-response-container { display: block; margin: 0 auto; }
 */      #submit, #play {float: none; margin: 0 auto;}
+
+/* http://codepen.io/search/pens?q=button+style&limit=all&type=type-pens */
+        html, body {
+            text-align: center;
+            padding-top: 40px;
+            -webkit-perspective: 700px;
+            -moz-perspective: 700px;
+            -ms-perspective: 700px;
+            perspective: 700px;
+        }
+        /* Reset */
+        button {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            outline: 0;
+            -webkit-appearance: none;
+        }
+
+        /* Custom */
+        button {
+            display: inline-block;
+            position: relative;
+            padding: 20px 38px;
+            top: 0;
+            font-family: "Open Sans", Helvetica;
+            font-size: 30px;
+            border-radius: 4px;
+            border-bottom: 1px solid rgba( 28, 227, 125, 0.5 );
+            background: rgba( 22, 100, 177, 1 );
+            color: #fff;
+            box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.1 );
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+
+            -webkit-transition: all 0.2s ease;
+            -moz-transition: all 0.2s ease;
+            -ms-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            top: -10px;
+            box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
+
+            -webkit-transform: rotateX(20deg);
+            -moz-transform: rotateX(20deg);
+            -ms-transform: rotateX(20deg);
+            transform: rotateX(20deg);
+        }
+
+        button:active {
+            top: 0px;
+            box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
+            background: rgba( 20, 224, 133, 1 );
+        }
+
     </style>
 {% end %}
 
 {% block canvas %}
-
     <div class='row _blank_'></div>
     <div class="row">
         <div class="container-fluid col-xs-10 col-xs-offset-1 turing-container">
@@ -22,7 +173,7 @@
 
     <div class='row _blank_'></div>
     <div class='row'>
-        <div class='container text-center col-xs-12'>
+        <div class='container text-center col-xs-2 col-xs-offset-5'>
             <button class='btn btn-lrg submit-btn' id='submit' disabled>Submit</button>
             <button class='btn btn-lrg play-btn' id='play' disabled>Play</button>
         </div>
@@ -37,12 +188,12 @@
 
     <div class='row _blank_'></div>
     <div class='row'>
-        <div class='container text-center col-xs-8 col-xs-offset-2 turing-feedback'>
-            <p id='feedbacktext'></p>
+        <div class='container text-center col-xs-6 col-xs-offset-3 turing-feedback'>
+            <p style="font-size:35px; color:green" id='feedbacktext'></p>
         </div>
     </div>
 {% end %}
 
 {% block scripts %}
-    <script src="../static/js/conditions/turing.js"></script>
+ <script src="../static/js/conditions/turing.js"></script>
 {% end %}
