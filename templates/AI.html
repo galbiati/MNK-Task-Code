@@ -22,14 +22,15 @@
     <script src="static/js/conditions/AI.js"></script>
     <script>
         // init experiment
-        var blocks;
-
+        var blocks, player;
+        player = new Player();
+        blocks = [new Condition_AI(60)];
+       
         // launch
         $(document).ready(function() {
             current_block = 0;
             board = new Board();
             board.create_tiles()
-            player = new Player();
             player.initials = Date.now();
             track_mouse(player);
             blocks = [new Condition_AI(60)];

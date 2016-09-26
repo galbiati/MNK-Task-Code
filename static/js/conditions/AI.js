@@ -40,6 +40,33 @@ function Condition_AI(dur) {
         return $.ajax({type:'GET', url:'/AIData', dataType:'JSON', data:{}})
     }
 
+    this.unpack_response = function(data, b, p) {
+        that.p.game_index = parseInt(data.game_index);
+        that.b.game_status = parseInt(data.game_status)
+        that.b.black_position = restore_array(data.black_position)
+        that.b.white_position = restore_array(data.white_position)
+        that.b.last_move = parseInt(data.response)
+        that.p.last_initials = parseInt(data.initials)
+
+        return data
+    }
+
+    this.ajax_poll = function(b, p, promise, callback) {
+        console.log('DEBUG: polling loop continuing')
+        promise.then(function(data) { 
+            that.unpack_response(data, b, p); 
+        }).done(function(data) {
+            if(that.p.initials != that.p.last_initials) {
+                callback();
+            } else {
+                setTimeout(function() {
+                    get_promise = that.get_response();
+                    that.ajax_poll(b, p, get_promise, callback);
+                }, ajax_freq);
+            }
+        })
+    }
+
     this.change_opponent = function(p) {
         var ol = that.opp_list.length;
         var first = Math.floor(ol/2);
