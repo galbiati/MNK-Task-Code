@@ -1,12 +1,9 @@
 // Todos
-// Shuffling: use random number choosing, seem to be working
 // Get all filenames: waiting
 // Get correct answers: waiting
 
-// Make it nice :)
 // poster: no idea
-// Slider Aesthetics: need confirmation
-
+// Slider Aesthetics: redo the colors: white for no-clue, red for computer and green for human (jut 2 colors)
 
 var clip, trial_start
 var clip_files = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -26,6 +23,7 @@ $(document).ready(function() {
     i = Math.floor(Math.random() * clip_files.length);
 
     clip = clip_files[i]
+    $('.slidertext').addClass("hidden");
     initPlayer();
     loadVideo(clip);
     trial_start = Date.now();
@@ -33,7 +31,7 @@ $(document).ready(function() {
     $('.play-btn').on('click', function(e) { playHandler(e); });
     player.addEventListener('ended',function(e) { endHandler(e); }); 
     $('#slider').on('click', function(e) { sliderchangeHandler(e); }).hide();
-
+    
 })
 
 function initPlayer() {
@@ -56,12 +54,13 @@ function playHandler(e){
 }
 
 function endHandler(e){
-    $('#slider').prop('disabled', false).fadeIn();
+    $('#slider').prop('disabled', false).fadeIn(1000);
+    $('.slidertext').removeClass("hidden").addClass("visible");
 }
 
 function sliderchangeHandler(e){
     $('.submit-btn').prop('disabled', false);
-    $('.submit-btn').fadeIn();
+    $('.submit-btn').fadeIn(1000);
 }
 
 function submit_response(val) {
@@ -100,6 +99,8 @@ function submitHandler(e) {
 
     $('.submit-btn').prop('disabled', true).hide();
     $('.play-btn').fadeIn();
+    $('.slidertext').removeClass("visible").addClass("hidden");
+
     clip = clip_files[i];
     loadVideo(clip);
 }

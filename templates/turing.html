@@ -27,20 +27,20 @@
             position: relative;
             width: 32em;
             height: 0.375em;
-            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #ace600, #e6e600, #e6ac00, #e67300, #e63900, #e60000);
+            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #81e819, #8fed32, #9ded4c, #abf066, #b9f27f, #c7f599, #e3facc, #ffffff, #facccc, #f59999, #f27f7f, #f06666, #ed4c4c, #eb3232, #e81919, #e60000);
             background-size: 2em 100%, 100% 100%;
         }
         input[type='range']::-moz-range-track {
             width: 32em;
             height: 0.375em;
-            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #ace600, #e6e600, #e6ac00, #e67300, #e63900, #e60000);
+            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #81e819, #8fed32, #9ded4c, #abf066, #b9f27f, #c7f599, #e3facc, #ffffff, #facccc, #f59999, #f27f7f, #f06666, #ed4c4c, #eb3232, #e81919, #e60000);
             background-size: 2em 100%, 100% 100%;
         }
         input[type='range']::-ms-track {
             border: none;
             width: 32em;
             height: 0.375em;
-            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #ace600, #e6e600, #e6ac00, #e67300, #e63900, #e60000);
+            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #81e819, #8fed32, #9ded4c, #abf066, #b9f27f, #c7f599, #e3facc, #ffffff, #facccc, #f59999, #f27f7f, #f06666, #ed4c4c, #eb3232, #e81919, #e60000);
             background-size: 2em 100%, 100% 100%;
             color: transparent;
         }
@@ -95,11 +95,8 @@
             outline: none;
             box-shadow: 0 0 .25em orange;
         }
-        #turing-stim { display: block; width: 1000px; margin: 0 auto; }
-/*        .turing-response-container { display: block; margin: 0 auto; }
-*/      #submit, #play {float: none; margin: 0 auto;}
 
-/* http://codepen.io/search/pens?q=button+style&limit=all&type=type-pens */
+        /* http://codepen.io/search/pens?q=button+style&limit=all&type=type-pens */
         html, body {
             text-align: center;
             padding-top: 40px;
@@ -158,7 +155,20 @@
             background: rgba( 20, 224, 133, 1 );
         }
 
+        .hidden>div {
+            display:none;
+        }
+
+        .visible>div {
+            display:block;
+        }
+
+        #turing-stim { display: block; width: 1000px; margin: 0 auto; }
+/*        .turing-response-container { display: block; margin: 0 auto; }
+*/      #submit, #play {float: none; margin: 0 auto;}
+
     </style>
+
 {% end %}
 
 {% block canvas %}
@@ -184,6 +194,14 @@
         <div class='container col-xs-8 col-xs-offset-2'>
             <input type='range' min=0 max=99 id='slider'></input>
         </div>
+    </div>
+
+    <div class='row _blank_'></div>
+    <div class='slidertext'>
+        <div style="float: left; margin-left: 15%">Certainly Humans</div>
+        <div style="float: right; margin-right: 15%">Certainly Computers</div>
+        <div style="text-align:center">No Clue At All</div>
+    </div>
     </div>
 
     <div class='row _blank_'></div>
