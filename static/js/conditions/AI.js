@@ -37,31 +37,32 @@ function Condition_AI(dur) {
     }
 
     this.get_response = function() {
+        console.log("DEBUG: data requested")
         return $.ajax({type:'GET', url:'/AIData', dataType:'JSON', data:{}})
     }
 
-    this.unpack_response = function(data, b, p) {
-        that.p.game_index = parseInt(data.game_index);
-        that.b.game_status = parseInt(data.game_status)
-        that.b.black_position = restore_array(data.black_position)
-        that.b.white_position = restore_array(data.white_position)
+    this.unpack_response = function(data) {
+        that.p.game_index = parseInt(data.gi);
+        that.b.game_status = parseInt(data.status)
+        that.b.black_position = restore_array(data.bp)
+        that.b.white_position = restore_array(data.wp)
         that.b.last_move = parseInt(data.response)
         that.p.last_initials = parseInt(data.initials)
 
         return data
     }
 
-    this.ajax_poll = function(b, p, promise, callback) {
+    this.ajax_poll = function(promise, callback) {
         console.log('DEBUG: polling loop continuing')
         promise.then(function(data) { 
-            that.unpack_response(data, b, p); 
+            that.unpack_response(data); 
         }).done(function(data) {
             if(that.p.initials != that.p.last_initials) {
                 callback();
             } else {
                 setTimeout(function() {
                     get_promise = that.get_response();
-                    that.ajax_poll(b, p, get_promise, callback);
+                    that.ajax_poll(get_promise, callback);
                 }, ajax_freq);
             }
         })
@@ -91,9 +92,9 @@ function Condition_AI(dur) {
     }
 
     this.afterPromise = function() {
-        get_promise = this.get_response();
+        get_promise = that.get_response();
         if(that.b.game_status == 'ready' || that.b.game_status == 'playing') {
-            ajax_poll(that.b, that.p, get_promise, function() { that.opponent_action(that.b, that.p); });
+            that.ajax_poll(get_promise, function() { that.opponent_action(); });
         }
     }
 
@@ -129,7 +130,7 @@ function Condition_AI(dur) {
         that.b.add_piece(that.b.last_move, that.p.opponent_color);
         that.b.show_last_move(that.b.last_move, that.p.opponent_color);
         MoveSound.play()
-        that.b.evaluate_win(p.opponent_color); // move to server!
+        that.b.evaluate_win(that.p.opponent_color); // move to server!
         if (that.b.game_status == 'win') {
             that.p.opponent_score ++;
         } else if (that.b.game_status == 'playing') {
@@ -138,8 +139,9 @@ function Condition_AI(dur) {
     }
 
     this.trial_start_promise = function() {
-        var get_promise = this.get_response();
-        ajax_poll(that.b, that.p, get_promise, function() {
+        console.log("DEBUG: get request promise")
+        var get_promise = that.get_response();
+        that.ajax_poll(get_promise, function() {
             if (that.p.color==0) { 
                 that.action(); 
             } else {
@@ -151,10 +153,14 @@ function Condition_AI(dur) {
 
     this.first_trial = function() {
         // expand to allow for color setting?
+        console.log('DEBUG: First trial function');
         that.start_time = Date.now();
         that.end_time = that.start_time + 60000*that.duration;
-        var send_promise = this.submit_response(that.b, that.p);
-        send_promise.done(that.trial_start_promise);
+        var send_promise = that.submit_response();
+        send_promise.done(function(data) { 
+            console.log(data);
+            that.trial_start_promise();
+        });
     }
 
     this.further_trial = function() {
@@ -162,7 +168,7 @@ function Condition_AI(dur) {
         if (that.p.color==1) { 
             $('.indicator').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
         }
-        var send_promise = this.submit_response(that.b, that.p);
+        var send_promise = that.submit_response(that.b, that.p);
         send_promise.done(that.trial_start_promise);
     }
 

@@ -10,12 +10,15 @@ class AIHandler(BaseHandler):
 
 
 class GameCache(object):
+    # move utility functions to new file 'util.py' in lib
+
     def __init__(self, user):
         self.user = user
         self.position_history = [] # positions are tuples of integers
         self.move_history = []
         self.game_status = 'ready'
         self.user_turn = 0
+        self.game_index = 0
 
     def update(self, move, position):
         if type(position[0]) is str:
@@ -94,12 +97,13 @@ class GameHandler(BaseHandler):
             reply_data = {
                 'gi': G.game_index,
                 'status': G.game_status,
-                'bp': G.position_history[-1][0],
-                'wp': G.position_history[-1][1],
-                'response': G.move_history[-1],
+                'bp': G.int_to_binstring(G.position_history[-1][0]),
+                'wp': G.int_to_binstring(G.position_history[-1][1]),
+                'response': int(G.move_history[-1]),
                 'initials': 'AI'
             }
-            self.write(reply_data)
+            print(reply_data)
+            self.write(dict(reply_data))
 
     @tw.authenticated
     def post(self):
@@ -128,6 +132,8 @@ class GameHandler(BaseHandler):
                 print('result: {}'.format(result))
                 return
         db.test_collection.insert(argdict, callback=insert_cb)
+
+        self.write({'post_success':"OK"})
 
         # add data to cache
         if not (user in game_cache_buffer.keys()):
