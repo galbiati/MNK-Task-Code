@@ -27,20 +27,20 @@
             position: relative;
             width: 32em;
             height: 0.375em;
-            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #81e819, #8fed32, #9ded4c, #abf066, #b9f27f, #c7f599, #e3facc, #ffffff, #facccc, #f59999, #f27f7f, #f06666, #ed4c4c, #eb3232, #e81919, #e60000);
+            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
             background-size: 2em 100%, 100% 100%;
         }
         input[type='range']::-moz-range-track {
             width: 32em;
             height: 0.375em;
-            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #81e819, #8fed32, #9ded4c, #abf066, #b9f27f, #c7f599, #e3facc, #ffffff, #facccc, #f59999, #f27f7f, #f06666, #ed4c4c, #eb3232, #e81919, #e60000);
+            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
             background-size: 2em 100%, 100% 100%;
         }
         input[type='range']::-ms-track {
             border: none;
             width: 32em;
             height: 0.375em;
-            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #73e600, #81e819, #8fed32, #9ded4c, #abf066, #b9f27f, #c7f599, #e3facc, #ffffff, #facccc, #f59999, #f27f7f, #f06666, #ed4c4c, #eb3232, #e81919, #e60000);
+            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
             background-size: 2em 100%, 100% 100%;
             color: transparent;
         }
@@ -93,7 +93,7 @@
         }
         input[type='range']:focus {
             outline: none;
-            box-shadow: 0 0 .25em orange;
+            box-shadow: 0 0 .25em transparent;
         }
 
         /* http://codepen.io/search/pens?q=button+style&limit=all&type=type-pens */
@@ -125,7 +125,7 @@
             font-size: 30px;
             border-radius: 4px;
             border-bottom: 1px solid rgba( 28, 227, 125, 0.5 );
-            background: rgba( 22, 100, 177, 1 );
+            background: grey;
             color: #fff;
             box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.1 );
             -webkit-transform: translateZ(0);
@@ -139,19 +139,9 @@
             transition: all 0.2s ease;
         }
 
-        button:hover {
-            top: -10px;
-            box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
-
-            -webkit-transform: rotateX(20deg);
-            -moz-transform: rotateX(20deg);
-            -ms-transform: rotateX(20deg);
-            transform: rotateX(20deg);
-        }
-
         button:active {
             top: 0px;
-            box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
+            box-shadow: 0px 0px 0px rgba( 0,0,0,0 );
             background: rgba( 20, 224, 133, 1 );
         }
 
@@ -166,6 +156,15 @@
         #turing-stim { display: block; width: 1000px; margin: 0 auto; }
 /*        .turing-response-container { display: block; margin: 0 auto; }
 */      #submit, #play {float: none; margin: 0 auto;}
+
+        .buttons{
+            height:20px;
+        }
+
+        .feedback{
+            height:40px;
+        }
+
 
     </style>
 
@@ -182,7 +181,7 @@
     </div>
 
     <div class='row _blank_'></div>
-    <div class='row'>
+    <div class='buttons'>
         <div class='container text-center col-xs-2 col-xs-offset-5'>
             <button class='btn btn-lrg submit-btn' id='submit' disabled>Submit</button>
             <button class='btn btn-lrg play-btn' id='play' disabled>Play</button>
@@ -198,16 +197,16 @@
 
     <div class='row _blank_'></div>
     <div class='slidertext'>
-        <div style="float: left; margin-left: 15%">Certainly Humans</div>
-        <div style="float: right; margin-right: 15%">Certainly Computers</div>
+        <div style="float: left; margin-left: 18.5em">Certainly Humans</div>
+        <div style="float: right; margin-right: 18.5em">Certainly Computers</div>
         <div style="text-align:center">No Clue At All</div>
     </div>
     </div>
 
     <div class='row _blank_'></div>
-    <div class='row'>
+    <div class='feedback'>
         <div class='container text-center col-xs-6 col-xs-offset-3 turing-feedback'>
-            <p style="font-size:35px; color:green" id='feedbacktext'></p>
+            <p style="font-size:30px; color:black" id='feedbacktext'></p>
         </div>
     </div>
 {% end %}

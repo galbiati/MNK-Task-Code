@@ -30,7 +30,7 @@ $(document).ready(function() {
     $('.submit-btn').on('click', function(e) { submitHandler(e); }).prop('disabled', true).hide();
     $('.play-btn').on('click', function(e) { playHandler(e); });
     player.addEventListener('ended',function(e) { endHandler(e); }); 
-    $('#slider').on('click', function(e) { sliderchangeHandler(e); }).hide();
+    $('#slider').on('click', function(e) { sliderchangeHandler(e); }).fadeOut(500);
     
 })
 
@@ -42,7 +42,7 @@ function loadVideo(clipno) {
     // add optional callback
     stim_source.attr('src', getClip(clipno));
     player.load();
-    $('#slider').prop('disabled', true).hide();
+    $('#slider').prop('disabled', true).fadeOut(500);
     $('.play-btn').prop('disabled', false);
 
 }
@@ -54,13 +54,13 @@ function playHandler(e){
 }
 
 function endHandler(e){
-    $('#slider').prop('disabled', false).fadeIn(1000);
+    $('#slider').prop('disabled', false).fadeIn(500);
     $('.slidertext').removeClass("hidden").addClass("visible");
 }
 
 function sliderchangeHandler(e){
     $('.submit-btn').prop('disabled', false);
-    $('.submit-btn').fadeIn(1000);
+    $('.submit-btn').show();
 }
 
 function submit_response(val) {
@@ -97,8 +97,8 @@ function submitHandler(e) {
     }
     */
 
-    $('.submit-btn').prop('disabled', true).hide();
-    $('.play-btn').fadeIn();
+    $('.submit-btn').prop('disabled', true).fadeOut();
+    $('.play-btn').fadeIn(500);
     $('.slidertext').removeClass("visible").addClass("hidden");
 
     clip = clip_files[i];
