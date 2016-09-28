@@ -2,13 +2,15 @@
 // Get all filenames: waiting
 // Get correct answers: waiting
 
-// poster: no idea
+// poster: can we get rid of the flash problem?
+// align the slider texts to the board?
+// (done, confirmation?) change "play" button text to "play next" for all videos after 1st
 
 var clip, trial_start
 var clip_files = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 //initiate an array for storing played videos - just for safety?
 var clip_played = []
-//humans: 0; computers: 1
+//humans: 1; computers: 0
 var clip_answers = [0, 1, 1, 0, 0, 1, 0, 1, 0, 1]
 
 var stim_source = $('#stim-source') //document.getElementById('stim-source');
@@ -47,6 +49,7 @@ function loadVideo(clipno) {
 
 function playHandler(e){
     player.play();
+    document.getElementById('play').value = "Play next";
     $('.play-btn').prop('disabled', true).hide();
     $('#feedbacktext').text("");
 }

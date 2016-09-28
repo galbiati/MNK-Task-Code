@@ -94,32 +94,13 @@
             box-shadow: 0 0 .25em transparent;
         }
 
-        /* http://codepen.io/search/pens?q=button+style&limit=all&type=type-pens */
-
-        /* Reset */
-        button {
-            cursor: pointer;
-        }
-
-        /* Custom */
-        button {
-            display: inline-block;
-            position: relative;
-            /*padding: 20px 38px;*/
-            font-size: 30px;
-            border-radius: 4px;
-            border-bottom: 1px solid rgba( 28, 227, 125, 0.5 );
-            background: grey;
-            color: #fff;
-        }
-
-
         #turing-stim { display: block; width: 1000px; margin: 0 auto; }
 /*        .turing-response-container { display: block; margin: 0 auto; }
 */      #submit, #play {float: none; margin: 0 auto;}
 
         .buttons{
-            height:30px;
+            height:40px;
+            display: inline;
         }
         .feedback{
             height:40px;
@@ -144,9 +125,9 @@
         <div class='container col-xs-8 col-xs-offset-2'>
             <input type='range' min=0 max=99 id='slider'></input>
             <div class='slidertext'>
-                <p class='humans' style="text-align:left; display:inline-block; width:33%" id='humans'>Certainly Humans</p>
-                <p class='noClue' style="text-align:center; display:inline-block; width:33%" id='noClue'>No Clue At All</p>
-                <p class='comps' style="text-align:right; display:inline-block; width:33%" id='comps'>Certainly Computers</p> 
+                <p class='humans' style="text-align:left; display:inline-block; width:33%" id='humans'>Certainly computers</p>
+                <p class='noClue' style="text-align:center; display:inline-block; width:33%" id='noClue'>No clue</p>
+                <p class='comps' style="text-align:right; display:inline-block; width:33%" id='comps'>Certainly humans</p> 
             </div>
             <div class='feedback'>
                 <div class='container text-center col-xs-6 col-xs-offset-3 turing-feedback'>
@@ -159,8 +140,8 @@
     <div class='row _blank_'></div>
     <div class='buttons'>
         <div class='container text-center col-xs-2 col-xs-offset-5'>
-            <button class='btn btn-lrg submit-btn' id='submit' disabled>Submit</button>
-            <button class='btn btn-lrg play-btn' id='play' disabled>Play</button>
+            <input class='btn btn-lrg play-btn' type="button" value="play" id='play' disabled>          
+            <input class='btn btn-lrg submit-btn' type="button" value="submit" id='play' disabled>
         </div>
     </div>
 
