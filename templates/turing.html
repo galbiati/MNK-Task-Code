@@ -4,19 +4,17 @@
 {% block extra_styles %}
 
     <style>
-    /* slider stylizing */
+        /* slider stylizing */
         input[type='range'] {
             position: absolute;
             top: 50%;
             left: 50%;
-            border: solid 0 transparent;
             border-width: 0 1em;
             padding: 1em 0 0;
-            width: 65em;
+            width: 66em;
             height: 2em;
             border-radius: .25em;
             transform: translate(-50%, -50%);
-            background: transparent;
             font-size: 1em;
             cursor: pointer;
         }
@@ -97,74 +95,35 @@
         }
 
         /* http://codepen.io/search/pens?q=button+style&limit=all&type=type-pens */
-        html, body {
-            text-align: center;
-            padding-top: 40px;
-            -webkit-perspective: 700px;
-            -moz-perspective: 700px;
-            -ms-perspective: 700px;
-            perspective: 700px;
-        }
+
         /* Reset */
         button {
-            background: transparent;
-            border: 0;
-            padding: 0;
             cursor: pointer;
-            outline: 0;
-            -webkit-appearance: none;
         }
 
         /* Custom */
         button {
             display: inline-block;
             position: relative;
-            padding: 20px 38px;
-            top: 0;
-            font-family: "Open Sans", Helvetica;
+            /*padding: 20px 38px;*/
             font-size: 30px;
             border-radius: 4px;
             border-bottom: 1px solid rgba( 28, 227, 125, 0.5 );
             background: grey;
             color: #fff;
-            box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.1 );
-            -webkit-transform: translateZ(0);
-            -moz-transform: translateZ(0);
-            -ms-transform: translateZ(0);
-            transform: translateZ(0);
-
-            -webkit-transition: all 0.2s ease;
-            -moz-transition: all 0.2s ease;
-            -ms-transition: all 0.2s ease;
-            transition: all 0.2s ease;
         }
 
-        button:active {
-            top: 0px;
-            box-shadow: 0px 0px 0px rgba( 0,0,0,0 );
-            background: rgba( 20, 224, 133, 1 );
-        }
-
-        .hidden>div {
-            display:none;
-        }
-
-        .visible>div {
-            display:block;
-        }
 
         #turing-stim { display: block; width: 1000px; margin: 0 auto; }
 /*        .turing-response-container { display: block; margin: 0 auto; }
 */      #submit, #play {float: none; margin: 0 auto;}
 
         .buttons{
-            height:20px;
+            height:30px;
         }
-
         .feedback{
             height:40px;
         }
-
 
     </style>
 
@@ -181,6 +140,23 @@
     </div>
 
     <div class='row _blank_'></div>
+    <div class='row'>
+        <div class='container col-xs-8 col-xs-offset-2'>
+            <input type='range' min=0 max=99 id='slider'></input>
+            <div class='slidertext'>
+                <p class='humans' style="text-align:left; display:inline-block; width:33%" id='humans'>Certainly Humans</p>
+                <p class='noClue' style="text-align:center; display:inline-block; width:33%" id='noClue'>No Clue At All</p>
+                <p class='comps' style="text-align:right; display:inline-block; width:33%" id='comps'>Certainly Computers</p> 
+            </div>
+            <div class='feedback'>
+                <div class='container text-center col-xs-6 col-xs-offset-3 turing-feedback'>
+                <p style="font-size:25px; color:black" id='feedbacktext'></p>
+                </div>       
+            </div>
+        </div>
+    </div>
+
+    <div class='row _blank_'></div>
     <div class='buttons'>
         <div class='container text-center col-xs-2 col-xs-offset-5'>
             <button class='btn btn-lrg submit-btn' id='submit' disabled>Submit</button>
@@ -188,27 +164,6 @@
         </div>
     </div>
 
-    <div class='row _blank_'></div>
-    <div class='row'>
-        <div class='container col-xs-8 col-xs-offset-2'>
-            <input type='range' min=0 max=99 id='slider'></input>
-        </div>
-    </div>
-
-    <div class='row _blank_'></div>
-    <div class='slidertext'>
-        <div style="float: left; margin-left: 18.5em">Certainly Humans</div>
-        <div style="float: right; margin-right: 18.5em">Certainly Computers</div>
-        <div style="text-align:center">No Clue At All</div>
-    </div>
-    </div>
-
-    <div class='row _blank_'></div>
-    <div class='feedback'>
-        <div class='container text-center col-xs-6 col-xs-offset-3 turing-feedback'>
-            <p style="font-size:30px; color:black" id='feedbacktext'></p>
-        </div>
-    </div>
 {% end %}
 
 {% block scripts %}
