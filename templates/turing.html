@@ -11,11 +11,11 @@
             left: 50%;
             border-width: 0 1em;
             padding: 1em 0 0;
-            width: 66em;
-            height: 5em;
+            width: 48em;
+            height: 0.25em;
             border-radius: .25em;
             transform: translate(-50%, -50%);
-            font-size: 1em;
+            font-size: 1.5em;
             cursor: pointer;
         }
         input[type='range'], input[type='range']::-webkit-slider-runnable-track, input[type='range']::-webkit-slider-thumb {
@@ -99,11 +99,11 @@
 */      #submit, #play {float: none; margin: 0 auto;}
 
         .buttons{
-            height:40px;
+            height:30px;
             display: inline;
         }
         .feedback{
-            height:40px;
+            height:30px;
         }
 
     </style>
@@ -114,7 +114,7 @@
     <div class='row _blank_'></div>
     <div class="row">
         <div class="container-fluid col-xs-10 col-xs-offset-1 turing-container">
-            <video id='turing-stim' poster='../static/media/image/turing_placeholder.png'>
+            <video id='turing-stim' poster=''>
                 <source id='stim-source' src='' type='video/mp4'>
             </video>
         </div>
@@ -140,8 +140,8 @@
     <div class='row _blank_'></div>
     <div class='buttons'>
         <div class='container text-center col-xs-2 col-xs-offset-5'>
-            <input class='btn btn-lrg play-btn' type="button" value="play" id='play' disabled>          
-            <input class='btn btn-lrg submit-btn' type="button" value="submit" id='play' disabled>
+            <input class='btn btn-lrg play-btn' type="button" value="play" id='play' disabled>
+            <input class='btn btn-lrg submit-btn' type="button" value="submit" id='submit' disabled>
         </div>
     </div>
 
