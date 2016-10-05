@@ -1,31 +1,20 @@
-// Todos
-// Get correct answers: waiting
-
-// newest version for the game
-// poster: can we get rid of the flash problem?
-// poster: try to get first frame and last frame? possible for each video?
-// align the slider texts to the board?
-
-// change the movie to be 1.8 seconds or sth to make sure do not go over time
-// movement number spacing: keep it as it is (96 separated by 3 moves etc.) for now, unil pilot data
-
 var clip, trial_start
 var clip_files = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95]
-//initiate an array for storing played videos - just for safety?
 var clip_played = []
 //humans: 1; computers: 0
-var clip_answers = [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1]
+var clip_answers = [0,1,1,1,1,0,0,1,0,0,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,0,1,1,0,1,0,1,1,1,1,0,0,1,1,0,1,0,1,0,1,1,1,1,1,1,0,0,0,1,0,1,0,0,0,1,1,1,0,1,0,1,1,0,0,1,1,1,0,0,1,0,0,0,0,1,1,0,0,1,1,1,1,0,0]
 
 var stim_source = $('#stim-source') //document.getElementById('stim-source');
 var player = document.getElementById('turing-stim');
 
-player.defaultPlaybackRate = 1.1
+player.defaultPlaybackRate = 10
+
+$(window).load(function(){
+    $('#welcome-modal').modal('show');
+});
 
 $(document).ready(function() {
-    //assuming all videoclips will be played; if only want to play a subset,
-    //use a counter to keep track
     i = Math.floor(Math.random() * clip_files.length);
-
     clip = clip_files[i]
     $('.slidertext').hide();
     initPlayer();
@@ -34,7 +23,7 @@ $(document).ready(function() {
     $('.submit-btn').on('click', function(e) { submitHandler(e); }).prop('disabled', true).hide();
     $('.play-btn').on('click', function(e) { playHandler(e); });
     player.addEventListener('ended',function(e) { endHandler(e); }); 
-    $('#slider').on('click', function(e) { sliderchangeHandler(e); }).fadeOut('slow');
+    $('#slider').on('click', function(e) { sliderchangeHandler(e); }).hide();
     
 })
 
@@ -46,7 +35,7 @@ function loadVideo(clipno) {
     // add optional callback
     stim_source.attr('src', getClip(clipno));
     player.load();
-    $('#slider').prop('disabled', true).fadeOut('slow');
+    $('#slider').prop('disabled', true).hide();
     $('.play-btn').prop('disabled', false);
 
 }
@@ -60,7 +49,7 @@ function playHandler(e){
 
 function endHandler(e){
     $('#slider').prop('disabled', false).fadeIn('slow');
-    $('.slidertext').fadeIn('slow');
+    $('.slidertext').fadeIn();
 }
 
 function sliderchangeHandler(e){
@@ -81,30 +70,35 @@ function submit_response(val) {
 
 function submitHandler(e) {
     var val = $('#slider').val();
+    $('#slider').val(49)
     feedback = ((val<50) == clip_answers[i]);
     //$('#feedbacktext').text(String(feedback));
     if (feedback == 1){
-        $('#slider').fadeOut('slow').promise().done(function(){
+        $('#slider').hide().promise().done(function(){
             $('#feedbacktext').text("Yes, that was correct!").fadeIn('slow');})
     }
     else{
-        $('#slider').fadeOut('slow').promise().done(function(){
+        $('#slider').hide().promise().done(function(){
             $('#feedbacktext').text("Sorry, that was not correct.").fadeIn('slow');})
     }
     res = submit_response(val);
     res.done(console.log('Data sent!'));
 
     clip_played.push(clip_files.splice(i,1)[0]);
-    
-    i = Math.floor(Math.random() * clip_files.length);
-
-    $('.submit-btn').prop('disabled', true).hide();
-    $('#slider').fadeOut('slow').promise().done(function(){
-            $('.play-btn').fadeIn('slow');})
-    $('.slidertext').hide();
+    if (clip_files.length!==0){
+        i = Math.floor(Math.random() * clip_files.length);
+    }
+    else{
+        $('#end-modal').modal('show');
+    }
 
     clip = clip_files[i];
-    loadVideo(clip);
+    $('.submit-btn').prop('disabled', true).hide();
+    $('#slider').fadeOut('slow').promise().done(function(){
+            $('.play-btn').fadeIn('slow');
+            loadVideo(clip);})
+    $('.slidertext').hide();
+
 }
 
 function getClip(clipno) {
