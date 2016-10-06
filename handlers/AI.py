@@ -1,7 +1,9 @@
 import tornado.web as tw
 import numpy as np
+import subprocess as sp
 from scipy.signal import convolve
 from .base import BaseHandler
+
 
 class AIHandler(BaseHandler):
     @tw.authenticated
@@ -46,8 +48,7 @@ class GameCache(object):
         return 'playing'
 
     def make_move(self, position, color):
-        print(position)
-        newm = self.choose_move(position)
+        newm = self.choose_move(position, color)
         if color == 0:
             newp = (position[0] + 2**newm, position[1])
         else:
@@ -56,10 +57,15 @@ class GameCache(object):
         self.update(newm, newp)
         self.user_turn = 1
 
-    def choose_move(self, position):
+    def choose_move(self, position, color):
         # replace this or subclass GameCache as necessary
-        lm = self.get_legal_moves(position)
-        return np.random.choice(lm)
+        #lm = self.get_legal_moves(position)
+        #return np.random.choice(lm)
+        bp, wp = position
+        colarg = 'BLACK' if color==0 else 'WHITE';
+        command = ['/Users/maadmin/Documents/MNK-Task-Code/static/scripts/MNK','0',self.int_to_binstring(bp),self.int_to_binstring(wp), colarg, '6328']
+        output=sp.check_output(command)
+        return int(output.decode("utf-8").split()[0])
 
     def get_legal_moves(self, position):
         bp, wp = position
