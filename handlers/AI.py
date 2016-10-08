@@ -3,7 +3,7 @@ import numpy as np
 import subprocess as sp
 from scipy.signal import convolve
 from .base import BaseHandler
-
+from datetime import datetime as dt
 
 class AIHandler(BaseHandler):
     @tw.authenticated
@@ -27,8 +27,9 @@ class GameCache(object):
             position = self.strings_to_int(position)
         self.move_history.append(move)
         self.position_history.append(position)
-        self.game_status = self.check_for_win()
-    
+        if self.game_status == 'playing':
+            self.game_status = self.check_for_win()
+
     def check_for_win(self):
         p = self.ints_to_tensor(self.position_history[-1])
         f1 = np.array([[[1, 1, 1, 1]]])
@@ -48,13 +49,15 @@ class GameCache(object):
         return 'playing'
 
     def make_move(self, position, color):
-        newm = self.choose_move(position, color)
-        if color == 0:
-            newp = (position[0] + 2**newm, position[1])
-        else:
-            newp = (position[0], position[1] + 2**newm)
+        if self.game_status == 'playing':
+            newm = self.choose_move(position, color)
+            if color == 0:
+                newp = (position[0] + 2**newm, position[1])
+            else:
+                newp = (position[0], position[1] + 2**newm)
 
-        self.update(newm, newp)
+            self.update(newm, newp)
+
         self.user_turn = 1
 
     def choose_move(self, position, color):
@@ -63,10 +66,11 @@ class GameCache(object):
         #return np.random.choice(lm)
         bp, wp = position
         colarg = 'BLACK' if color==0 else 'WHITE';
-        command = ['static/scripts/MNK', '0', self.int_to_binstring(bp), self.int_to_binstring(wp), colarg, '6328']
+        seed = str(int(dt.now().timestamp()))
+        command = ['static/scripts/MNK', 'static/scripts/params_final.txt', '0', self.int_to_binstring(bp), self.int_to_binstring(wp), colarg, seed]
         output = sp.check_output(command)
         o = output.decode('utf-8')
-        print(o) # error: 'could not open input'
+        print('MNK says:', o) # error: 'could not open input'
         return int(o.split()[0])
 
     def get_legal_moves(self, position):
@@ -125,12 +129,12 @@ class GameHandler(BaseHandler):
         db = self.settings['db']
 
         argdict = {key: self.get_argument(key) for key in self.request.arguments}
-        user = self.current_user.decode()  
+        user = self.current_user.decode()
         argdict['user_name'] = user
         argdict['task'] = 'AI'
 
         for k, v in argdict.items():
-            print(k, v) 
+            print(k, v)
 
         # add data to MongoDB
         def insert_cb(result, error):
@@ -139,6 +143,7 @@ class GameHandler(BaseHandler):
             else:
                 print('result: {}'.format(result))
                 return
+
         db.test_collection.insert(argdict, callback=insert_cb)
 
         self.write({'post_success':"OK"})
@@ -150,7 +155,7 @@ class GameHandler(BaseHandler):
         G = game_cache_buffer[user]
         G.user_turn = 0
         G.update(
-            argdict['response'], 
+            argdict['response'],
             (argdict['bp'], argdict['wp'])
         )
 
@@ -158,3 +163,6 @@ class GameHandler(BaseHandler):
         if G.game_status == 'playing':
             color = (int(argdict['color']) + 1) % 2
             G.make_move(G.position_history[-1], color)
+        else:
+            G.game_status = 'playing'
+            G.user_turn = 1;
