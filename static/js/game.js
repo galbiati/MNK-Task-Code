@@ -140,8 +140,10 @@ function Board() {
 			$(".tile").off('click').off('mouseenter').off('mouseleave');
 			if(Date.now() < blocks[current_block].end_time){
 				$('.indicator').html("<h1>Game over!</h1>");
-				setTimeout(function() { $('#feedback-modal').modal('show');
-				$("html").css("cursor","default"); }, 500)
+				setTimeout(function() { 
+					$('#feedback-modal').modal('show');
+					$("html").css("cursor","default"); 
+				}, 500)
 				that.show_win(col, array);
 			} else {
 				$('.indicator').html("<h1>Game over!</h1>");

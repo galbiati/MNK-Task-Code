@@ -3,150 +3,188 @@
 {% block headertext %} Are the players humans or computers?{% end %}
 {% block extra_styles %}
 
-    <style>
-        /* slider stylizing */
-        input[type='range'] {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            border-width: 0 1em;
-            padding: 1em 0 0;
-            width: 48em;
-            height: 0.25em;
-            border-radius: .25em;
-            transform: translate(-50%, -50%);
-            font-size: 1.5em;
-            cursor: pointer;
-        }
-        input[type='range'], input[type='range']::-webkit-slider-runnable-track, input[type='range']::-webkit-slider-thumb {
-            -webkit-appearance: none;
-        }
-        input[type='range']::-webkit-slider-runnable-track {
-            position: relative;
-            width: 32em;
-            height: 0.375em;
-            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
-            background-size: 2em 100%, 100% 100%;
-        }
-        input[type='range']::-moz-range-track {
-            width: 32em;
-            height: 0.375em;
-            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
-            background-size: 2em 100%, 100% 100%;
-        }
-        input[type='range']::-ms-track {
-            border: none;
-            width: 32em;
-            height: 0.375em;
-            background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
-            background-size: 2em 100%, 100% 100%;
-            color: transparent;
-        }
-        input[type='range']::-ms-fill-lower {
-            display: none;
-        }
-        input[type='range']::-webkit-slider-thumb {
-            margin-top: -0.8125em;
-            box-sizing: border-box;
-            border: solid 1px transparent;
-            width: 2em;
-            height: 2em;
-            border-radius: 0;
-            transform: translateY(75%) rotate(30deg) skewY(30deg) scaleX(0.86603);               
-            background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;
-        }
-        input[type='range']::-moz-range-thumb {
-            box-sizing: border-box;
-            border: solid 1px transparent;
-            width: 2em;
-            height: 2em;
-            border-radius: 0;
-            transform: translateY(75%) rotate(30deg) skewY(30deg) scaleX(0.86603);
-            background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;
-        }
-        input[type='range']::-ms-thumb {
-            box-sizing: border-box;
-            border: solid 1px transparent;
-            width: 2em;
-            height: 2em;
-            border-radius: 0;
-            transform: translateY(75%) rotate(30deg) skewY(30deg) scaleX(0.86603);
-            background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;
-        }
-        input[type='range']::-webkit-slider-runnable-track:before, input[type='range']::-webkit-slider-runnable-track:after, input[type='range'] /deep/ #track:before, input[type='range'] /deep/ #track:after {
-            position: absolute;
-            bottom: 100%;
-            color: #2c2c2b;
-            font: 700 0.875em / 2 arial, sans-serif;
-        }
-        input[type='range']::-webkit-slider-runnable-track:before, input[type='range'] /deep/ #track:before {
-            left: 0.8125em;
-            word-spacing: 1.4375em;
-            content: '1 2 3 4 5 6 7 8 9';
-        }
-        input[type='range']::-webkit-slider-runnable-track:after, input[type='range'] /deep/ #track:after {
-            right: 0.625em;
-            word-spacing: 0.875em;
-            content: '10 11 12 13 14 15 16';
-        }
-        input[type='range']:focus {
-            outline: none;
-            box-shadow: 0 0 .25em transparent;
-        }
+<style>
+    /* slider stylizing */
+    input[type='range'] {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        border-width: 0 0em;
+        padding: 0 0 0;
+        width: 28em;
+        height: 1.5em;
+        border-radius: 0em;
+        transform: translate(-50%, -30%);
+        font-size: 2.5em;
+        cursor: pointer;
+    }
+input[type='range'], input[type='range']::-webkit-slider-runnable-track, input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+input[type='range']::-webkit-slider-runnable-track {
+    position: relative;
+    width: 32em;
+    height: 0.375em;
+    background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
+    background-size: 2em 100%, 100% 100%;
+}
+input[type='range']::-moz-range-track {
+    width: 32em;
+    height: 0.375em;
+    background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
+    background-size: 2em 100%, 100% 100%;
+}
+input[type='range']::-ms-track {
+    border: none;
+    width: 32em;
+    height: 0.375em;
+    background: linear-gradient(90deg, #ffffff 0.125em, rgba(0, 0, 0, 0) 0.125em)-0.0625em 50%, linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
+    background-size: 2em 100%, 100% 100%;
+    color: transparent;
+}
+input[type='range']::-ms-fill-lower {
+    display: none;
+}
+input[type='range']::-webkit-slider-thumb {
+    margin-top: -0.8125em;
+    box-sizing: border-box;
+    border: solid 1px transparent;
+    width: 2em;
+    height: 2em;
+    border-radius: 0;
+    transform: translateY(75%) rotate(30deg) skewY(30deg) scaleX(0.86603);
+    background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;
+}
+input[type='range']::-moz-range-thumb {
+    box-sizing: border-box;
+    border: solid 1px transparent;
+    width: 2em;
+    height: 2em;
+    border-radius: 0;
+    transform: translateY(75%) rotate(30deg) skewY(30deg) scaleX(0.86603);
+    background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;
+}
+input[type='range']::-ms-thumb {
+    box-sizing: border-box;
+    border: solid 1px transparent;
+    width: 2em;
+    height: 2em;
+    border-radius: 0;
+    transform: translateY(75%) rotate(30deg) skewY(30deg) scaleX(0.86603);
+    background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;
+}
+input[type='range']::-webkit-slider-runnable-track:before, input[type='range']::-webkit-slider-runnable-track:after, input[type='range'] /deep/ #track:before, input[type='range'] /deep/ #track:after {
+    position: absolute;
+    bottom: 100%;
+    color: #2c2c2b;
+    font: 700 0.875em / 2 arial, sans-serif;
+}
+input[type='range']::-webkit-slider-runnable-track:before, input[type='range'] /deep/ #track:before {
+    left: 0.8125em;
+    word-spacing: 1.4375em;
+    content: '1 2 3 4 5 6 7 8 9';
+}
+input[type='range']::-webkit-slider-runnable-track:after, input[type='range'] /deep/ #track:after {
+    right: 0.625em;
+    word-spacing: 0.875em;
+    content: '10 11 12 13 14 15 16';
+}
+input[type='range']:focus {
+    outline: none;
+    box-shadow: 0 0 .25em transparent;
+}
 
-        #turing-stim { display: block; width: 1000px; margin: 0 auto; }
+#end-modal{
+position: absolute;
+left: 50%;
+margin-left: -50.5%;
+top: 50%;
+margin-top: -10%;
+}
+
+#turing-stim { display: block; width: 1000px; margin: 0 auto; }
 /*        .turing-response-container { display: block; margin: 0 auto; }
-*/      #submit, #play {float: none; margin: 0 auto;}
-
-        .buttons{
-            height:30px;
-            display: inline;
-        }
-        .feedback{
-            height:30px;
-        }
-
-    </style>
+ */      #submit, #play {float; margin: 0 auto;}
+.buttons{
+    height:30px;
+    display: inline;
+}
+.feedback{
+    height:30px;
+}
+</style>
 
 {% end %}
 
 {% block canvas %}
-    <div class='row _blank_'></div>
-    <div class="row">
-        <div class="container-fluid col-xs-10 col-xs-offset-1 turing-container">
-            <video id='turing-stim' poster=''>
-                <source id='stim-source' src='' type='video/mp4'>
-            </video>
-        </div>
+<div class='row _blank_'></div>
+<div class="row">
+    <div class="container-fluid col-xs-10 col-xs-offset-1 turing-container">
+        <video id='turing-stim' poster=''>
+            <source id='stim-source' src='' type='video/mp4'>
+                </video>
     </div>
+</div>
 
-    <div class='row _blank_'></div>
-    <div class='row'>
-        <div class='container col-xs-8 col-xs-offset-2'>
-            <input type='range' min=0 max=99 id='slider'></input>
-            <div class='slidertext'>
-                <p class='humans' style="text-align:left; display:inline-block; width:33%" id='humans'>Certainly computers</p>
-                <p class='noClue' style="text-align:center; display:inline-block; width:33%" id='noClue'>No clue</p>
-                <p class='comps' style="text-align:right; display:inline-block; width:33%" id='comps'>Certainly humans</p> 
-            </div>
-            <div class='feedback'>
-                <div class='container text-center col-xs-6 col-xs-offset-3 turing-feedback'>
+<div class='row _blank_'></div>
+<div class='row'>
+    <div class='container col-xs-10 col-xs-offset-1'>
+        <input type='range' min=0 max=99 id='slider'>
+        <div class='slidertext'>
+            <p class='humans' style="text-align:left; display:inline-block; width:33%; font-size:20px" id='humans'>Certainly computers</p>
+            <p class='noClue' style="text-align:center; display:inline-block; width:33%; font-size:20px" id='noClue'>No clue</p>
+            <p class='comps' style="text-align:right; display:inline-block; width:33%; font-size:20px" id='comps'>Certainly humans</p>
+        </div>
+        <div class='feedback'>
+            <div class='container text-center col-xs-6 col-xs-offset-3 turing-feedback'>
                 <p style="font-size:25px; color:black" id='feedbacktext'></p>
-                </div>       
             </div>
         </div>
     </div>
+</div>
 
-    <div class='row _blank_'></div>
-    <div class='buttons'>
-        <div class='container text-center col-xs-2 col-xs-offset-5'>
-            <input class='btn btn-lrg play-btn' type="button" value="play" id='play' disabled>
+<div class='row _blank_'></div>
+<div class='buttons'>
+    <div class='container text-center col-xs-2 col-xs-offset-5'>
+        <input class='btn btn-lrg play-btn' type="button" value="play" id='play' disabled>
             <input class='btn btn-lrg submit-btn' type="button" value="submit" id='submit' disabled>
+                </div>
+</div>
+
+<div class='row _blank_'></div>
+<div class="container">
+  <div class="modal fade" id="welcome-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+        <div class="modal-body">
+          <p style="font-size:120%">Today, you will be shown short videoclips, either from games between two human players, or between two computers. The videos may start from any point in a game, meaning the starting position is not necessarily an empty board.</p>
+          <p style="font-size:120%"> Your task is to identify if the video is from a <b>human vs human</b> game or a <b>computer vs computer</b> game. You will also be asked to report <b>how confident you are</b> about your choice. There is no time limit to this task. (Should we let them know that half of the games are between two human players and half are between computers?) </p>
         </div>
+        <div class="modal-footer"> 
+          <div class="btn-group fr">
+            <button class="btn btn-lrg" data-dismiss="modal">Continue</button>  
+          </div>                  
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
+<div class='row _blank_'></div>
+<div class="container">
+  <div class="modal fade" id="end-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+        <div class="modal-body">
+          <p style="text-align:center; font-size:120%">Your experiment has finished. Thank you for participating! Please find the experimenter.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% end %}
 
 {% block scripts %}
- <script src="../static/js/conditions/turing.js"></script>
+<script src="../static/js/conditions/turing.js"></script>
 {% end %}

@@ -48,7 +48,10 @@ class GameCache(object):
         return 'playing'
 
     def make_move(self, position, color):
+        print(position)
         newm = self.choose_move(position, color)
+        print(newm)
+        print(color)
         if color == 0:
             newp = (position[0] + 2**newm, position[1])
         else:
@@ -63,11 +66,9 @@ class GameCache(object):
         #return np.random.choice(lm)
         bp, wp = position
         colarg = 'BLACK' if color==0 else 'WHITE';
-        command = ['static/scripts/MNK', '0', self.int_to_binstring(bp), self.int_to_binstring(wp), colarg, '6328']
-        output = sp.check_output(command)
-        o = output.decode('utf-8')
-        print(o) # error: 'could not open input'
-        return int(o.split()[0])
+        command = ['/Users/maadmin/Documents/MNK-Task-Code/static/scripts/MNK','0',self.int_to_binstring(bp),self.int_to_binstring(wp), colarg, '6328']
+        output=sp.check_output(command)
+        return int(output.decode("utf-8").split()[0])
 
     def get_legal_moves(self, position):
         bp, wp = position
