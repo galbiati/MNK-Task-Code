@@ -1,6 +1,12 @@
 {% extends "gamebase.html" %}
 {% block title %}AI{% end %}
 {% block headertext %}Welcome!{% end %}
+
+{% block modals %}
+    {% include "block-modal.html" %}
+    {% include "feedback-modal.html" %}
+{% end %}
+
 {% block canvas %}
 
     <div class='row _blank_'></div>
@@ -11,6 +17,8 @@
     </div>
 
 {% end %}
+
+
 
 {% block scripts %}
 
