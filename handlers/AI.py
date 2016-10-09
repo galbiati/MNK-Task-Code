@@ -105,7 +105,7 @@ class GameCache(object):
 
 game_cache_buffer = {}
 
-class GameHandler(BaseHandler):
+class GameDataHandler(BaseHandler):
 
     @tw.authenticated
     def get(self):
@@ -125,14 +125,14 @@ class GameHandler(BaseHandler):
 
     @tw.authenticated
     def post(self):
-        # TODO: remove last move from incoming position
-        # TODO: force correct move index by couting pieces
+        # TODO: force correct move index by counting pieces
         # TODO: add more to cache, eg GI
         # TODO: edit JS to modify turn monitoring
         # TODO: fix long polling
 
         # convert data to dictionary
         db = self.settings['db']
+        collection = db.test_collection # change this when deploying!
 
         argdict = {key: self.get_argument(key) for key in self.request.arguments}
         user = self.current_user.decode()
@@ -144,14 +144,8 @@ class GameHandler(BaseHandler):
                 print(k, v)
 
         # add data to MongoDB
-        def insert_cb(result, error):
-            if error:
-                raise error
-            else:
-                print('result: {}'.format(result))
-                return
 
-        db.test_collection.insert(argdict, callback=insert_cb)
+        collection.insert(argdict, callback=self.insert_cb)
 
         self.write({'post_success':"OK"})
 
@@ -173,3 +167,10 @@ class GameHandler(BaseHandler):
         else:
             G.game_status = 'playing'
             G.user_turn = 1;
+
+    def insert_cb(self, result, error):
+        if error:
+            raise error
+        else:
+            print('result: {}'.format(result))
+            return
