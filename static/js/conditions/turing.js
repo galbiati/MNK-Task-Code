@@ -7,7 +7,7 @@ var clip_answers = [0,1,1,1,1,0,0,1,0,0,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,1,0,0,1,
 var stim_source = $('#stim-source') //document.getElementById('stim-source');
 var player = document.getElementById('turing-stim');
 
-player.defaultPlaybackRate = 10
+player.defaultPlaybackRate = 1.1
 
 $(window).load(function(){
     $('#welcome-modal').modal('show');
@@ -22,16 +22,16 @@ $(document).ready(function() {
     trial_start = Date.now();
     $('.submit-btn').on('click', function(e) { submitHandler(e); }).prop('disabled', true).hide();
     $('.play-btn').on('click', function(e) { playHandler(e); });
-    player.addEventListener('ended',function(e) { endHandler(e); }); 
+    player.addEventListener('ended',function(e) { endHandler(e); });
     $('#slider').on('click', function(e) { sliderchangeHandler(e); }).hide();
-    
+
 })
 
 function initPlayer() {
     player.controls = false;
 }
 
-function loadVideo(clipno) { 
+function loadVideo(clipno) {
     // add optional callback
     stim_source.attr('src', getClip(clipno));
     player.load();
@@ -70,8 +70,8 @@ function submit_response(val) {
 
 function submitHandler(e) {
     var val = $('#slider').val();
+    feedback = ((val>=50) == clip_answers[i]);
     $('#slider').val(49)
-    feedback = ((val<50) == clip_answers[i]);
     //$('#feedbacktext').text(String(feedback));
     if (feedback == 1){
         $('#slider').hide().promise().done(function(){
@@ -83,8 +83,9 @@ function submitHandler(e) {
     }
     res = submit_response(val);
     res.done(console.log('Data sent!'));
-
-    clip_played.push(clip_files.splice(i,1)[0]);
+    clip_played.push(clip_files[i]);
+    clip_files.splice(i,1);
+    clip_answers.splice(i,1);
     if (clip_files.length!==0){
         i = Math.floor(Math.random() * clip_files.length);
     }
