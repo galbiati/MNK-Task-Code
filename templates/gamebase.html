@@ -28,8 +28,11 @@
 
     <body>
         {% block body %}
+
             {% block modals %}{% end %}
+
             <div class='container-fluid'>
+
                 {% block header %}
 
                     <div class='row'>
@@ -46,7 +49,6 @@
         {% end %}
 
         {% block scripts %}{% end %}
+        
     </body>
-
-
 </html>

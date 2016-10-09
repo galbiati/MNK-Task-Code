@@ -15,13 +15,13 @@ img {
 }
 
 /* ~ PAGE TOP MESSAGE BOX ~ */
-.indicator {
+.headertext {
 	display:inline;
 	height: 24vh;
 	text-align:center;
 }
 
-.indicator h1 {
+.headertext h1 {
 	top:30%;
 	position:relative;
 	text-align:center;
@@ -133,8 +133,8 @@ img {
 	min-height:500px;
 }
 
-#welcome-modal .modal-dialog .modal-content .modal-body, #block-modal .modal-dialog .modal-content .modal-body { 
-	height: 85%; 
+#welcome-modal .modal-dialog .modal-content .modal-body, #block-modal .modal-dialog .modal-content .modal-body {
+	height: 85%;
 	line-height: 1.5;
 }
 
@@ -193,33 +193,4 @@ img {
 	min-height: 75px;
 }
 
-.fixcross {
-	font-size:3vw;
-	position:relative;
-	display:inline-block;
-	top:50%;
-	left:50%;
-	margin: 0 auto;
-	transform: translateX(-50%);
-}
-
-/* ~ RADIO BUTTONS ~ */
- #scale-label {
-	font-size:3vh;
-	text-align: center;
-	cursor:none;
-}
-
 ._blank_ { min-height:1.6vh;}
-
-input[type=radio] { 
-	background-color: #333333;
-	margin-left: 5%;
-	margin-right:5%;
-	width: 2vw;
-	height: 2vw;
-}
-
-.radio-bar {
-	min-height:5vh;
-} 
