@@ -102,7 +102,7 @@ function Condition_AI(dur) {
         console.log('DEBUG: tile clicked')
         // ideally this will be split up into canvas aesthetics, board aesthetics, and io stuff
         that.p.move_end = Date.now();
-        $('.tile').off('mousenter').off('mouseleave').off('click');
+        $('.tile').off('mouseenter').off('mouseleave').off('click');
         $('.canvas, .canvas div').css('cursor', 'none');
         $('.indicator').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
         that.p.move = parseInt(e.target.id);
@@ -208,7 +208,7 @@ function Condition_AI(dur) {
             that.p.color = (that.p.color + 1)%2;
             that.p.opponent_color = (that.p.color + 1)%2;
             that.b = new Board();
-            board.create_tiles();
+            that.b.create_tiles();
             that.do_trial();
         });
 

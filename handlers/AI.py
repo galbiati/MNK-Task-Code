@@ -16,11 +16,7 @@ class GameCache(object):
 
     def __init__(self, user):
         self.user = user
-        self.position_history = [] # positions are tuples of integers
-        self.move_history = []
-        self.game_status = 'ready'
-        self.user_turn = 0
-        self.game_index = 0
+        self.reset()
 
     def update(self, move, position):
         if type(position[0]) is str:
@@ -29,6 +25,15 @@ class GameCache(object):
         self.position_history.append(position)
         if self.game_status == 'playing':
             self.game_status = self.check_for_win()
+        if self.game_status in ['win', 'draw']:
+            self.reset()
+
+    def reset(self):
+        self.position_history = [] # positions are tuples of integers
+        self.move_history = []
+        self.game_status = 'ready'
+        self.user_turn = 0
+        self.game_index = 0
 
     def check_for_win(self):
         p = self.ints_to_tensor(self.position_history[-1])
@@ -48,33 +53,31 @@ class GameCache(object):
                 return 'win'
         return 'playing'
 
-    def make_move(self, position, color):
+    def make_move(self, position, color, opponent):
         if self.game_status == 'playing':
-            newm = self.choose_move(position, color)
-            if color == 0:
-                newp = (position[0] + 2**newm, position[1])
-            else:
-                newp = (position[0], position[1] + 2**newm)
+            newm = self.choose_move(position, color, opponent)
+            newp = position
 
             self.update(newm, newp)
 
         self.user_turn = 1
 
-    def choose_move(self, position, color):
+    def choose_move(self, position, color, opponent):
         # replace this or subclass GameCache as necessary
         #lm = self.get_legal_moves(position)
         #return np.random.choice(lm)
         bp, wp = position
-        bp = self.int_to_binstring(bp)[::-1]
-        wp = self.int_to_binstring(wp)[::-1]
+        bp = self.int_to_binstring(bp)
+        wp = self.int_to_binstring(wp)
+        opponent = str(opponent)
         print('MNK hears: \n', bp, '\n', wp)
         colarg = 'BLACK' if color==0 else 'WHITE';
         seed = str(int(dt.now().timestamp()))
-        command = ['static/scripts/MNK', 'static/scripts/params_final.txt', '0', bp, wp, colarg, seed]
+        command = ['static/scripts/MNK', 'static/scripts/params_final.txt', opponent, bp, wp, colarg, seed]
         output = sp.check_output(command)
         o = output.decode('utf-8')
         print('MNK says:', o)
-        return 35 - int(o.split()[0])
+        return int(o.split()[0])
 
     def get_legal_moves(self, position):
         bp, wp = position
@@ -166,7 +169,7 @@ class GameHandler(BaseHandler):
         print(G.position_history[-1])
         if G.game_status == 'playing':
             color = (int(argdict['color']) + 1) % 2
-            G.make_move(G.position_history[-1], color)
+            G.make_move(G.position_history[-1], color, opponent)
         else:
             G.game_status = 'playing'
             G.user_turn = 1;
