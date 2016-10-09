@@ -65,13 +65,16 @@ class GameCache(object):
         #lm = self.get_legal_moves(position)
         #return np.random.choice(lm)
         bp, wp = position
+        bp = self.int_to_binstring(bp)[::-1]
+        wp = self.int_to_binstring(wp)[::-1]
+        print('MNK hears: \n', bp, '\n', wp)
         colarg = 'BLACK' if color==0 else 'WHITE';
         seed = str(int(dt.now().timestamp()))
-        command = ['static/scripts/MNK', 'static/scripts/params_final.txt', '0', self.int_to_binstring(bp), self.int_to_binstring(wp), colarg, seed]
+        command = ['static/scripts/MNK', 'static/scripts/params_final.txt', '0', bp, wp, colarg, seed]
         output = sp.check_output(command)
         o = output.decode('utf-8')
-        print('MNK says:', o) # error: 'could not open input'
-        return int(o.split()[0])
+        print('MNK says:', o)
+        return 35 - int(o.split()[0])
 
     def get_legal_moves(self, position):
         bp, wp = position
@@ -134,7 +137,8 @@ class GameHandler(BaseHandler):
         argdict['task'] = 'AI'
 
         for k, v in argdict.items():
-            print(k, v)
+            if not k in ['mt', 'mxy']:
+                print(k, v)
 
         # add data to MongoDB
         def insert_cb(result, error):

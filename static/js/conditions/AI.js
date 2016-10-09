@@ -54,8 +54,8 @@ function Condition_AI(dur) {
 
     this.ajax_poll = function(promise, callback) {
         console.log('DEBUG: polling loop continuing')
-        promise.then(function(data) { 
-            that.unpack_response(data); 
+        promise.then(function(data) {
+            that.unpack_response(data);
         }).done(function(data) {
             if(that.p.initials != that.p.last_initials) {
                 callback();
@@ -71,7 +71,7 @@ function Condition_AI(dur) {
     this.change_opponent = function(p) {
         var ol = that.opp_list.length;
         var first = Math.floor(ol/2);
-        var tier = p.opponent_score - p.score + first_opp;
+        var tier = p.opponent_score - p.score + first;
         if (tier > ol - 1) {
             var new_opp = that.opp_list[ol - 1]
         } else if (tier < 0) {
@@ -114,7 +114,7 @@ function Condition_AI(dur) {
         if(that.b.game_status=='win' || that.b.game_status=='draw'){ that.p.score ++ }
         that.p.duration = that.p.move_end - that.p.move_start;
 
-        // the below will need to be modified for websocket version 
+        // the below will need to be modified for websocket version
         var send_promise = that.submit_response(that.b, that.p);
         send_promise.done(that.afterPromise);
 
@@ -142,8 +142,8 @@ function Condition_AI(dur) {
         console.log("DEBUG: get request promise")
         var get_promise = that.get_response();
         that.ajax_poll(get_promise, function() {
-            if (that.p.color==0) { 
-                that.action(); 
+            if (that.p.color==0) {
+                that.action();
             } else {
                 $('.indicator').html('<h1>Wating for opponent</h1>').css('color', '#333333');
                 that.opponent_action();
@@ -157,7 +157,7 @@ function Condition_AI(dur) {
         that.start_time = Date.now();
         that.end_time = that.start_time + 60000*that.duration;
         var send_promise = that.submit_response();
-        send_promise.done(function(data) { 
+        send_promise.done(function(data) {
             console.log(data);
             that.trial_start_promise();
         });
@@ -165,7 +165,7 @@ function Condition_AI(dur) {
 
     this.further_trial = function() {
         $('.tile').css('cursor', 'none');
-        if (that.p.color==1) { 
+        if (that.p.color==1) {
             $('.indicator').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
         }
         var send_promise = that.submit_response(that.b, that.p);
