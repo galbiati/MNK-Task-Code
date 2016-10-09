@@ -86,7 +86,7 @@ function Condition_AI(dur) {
     this.init_turn = function() {
         that.p.move_start = Date.now();
         that.b.highlight_tiles() // probably better way to write this
-        $('.indicator').html('<h1>Your turn</h1>').css('color', '#000000');
+        $('.headertext').html('<h1>Your turn</h1>').css('color', '#000000');
         $('.canvas, .tile').css('cursor', 'pointer');
         $('.usedTile, .usedTile div').css('cursor', 'default');
     }
@@ -104,7 +104,7 @@ function Condition_AI(dur) {
         that.p.move_end = Date.now();
         $('.tile').off('mouseenter').off('mouseleave').off('click');
         $('.canvas, .canvas div').css('cursor', 'none');
-        $('.indicator').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
+        $('.headertext').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
         that.p.move = parseInt(e.target.id);
         that.b.move_index ++;
         that.b.add_piece(that.p.move, that.p.color);
@@ -145,7 +145,7 @@ function Condition_AI(dur) {
             if (that.p.color==0) {
                 that.action();
             } else {
-                $('.indicator').html('<h1>Wating for opponent</h1>').css('color', '#333333');
+                $('.headertext').html('<h1>Wating for opponent</h1>').css('color', '#333333');
                 that.opponent_action();
             }
         })
@@ -166,7 +166,7 @@ function Condition_AI(dur) {
     this.further_trial = function() {
         $('.tile').css('cursor', 'none');
         if (that.p.color==1) {
-            $('.indicator').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
+            $('.headertext').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
         }
         var send_promise = that.submit_response(that.b, that.p);
         send_promise.done(that.trial_start_promise);

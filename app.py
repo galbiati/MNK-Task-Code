@@ -26,7 +26,7 @@ handlebars = [
 
 def make_app():
     return Application(
-        handlebars, 
+        handlebars,
         static_path=os.path.join(os.path.dirname(__file__), 'static'),
         template_path=os.path.join(os.path.dirname(__file__), 'templates'),
         debug=True,

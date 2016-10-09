@@ -29,7 +29,7 @@ class GameCache(object):
             self.reset()
 
     def reset(self):
-        self.position_history = [] # positions are tuples of integers
+        self.position_history = [(0, 0)] # positions are tuples of integers
         self.move_history = []
         self.game_status = 'ready'
         self.user_turn = 0
@@ -169,7 +169,7 @@ class GameHandler(BaseHandler):
         print(G.position_history[-1])
         if G.game_status == 'playing':
             color = (int(argdict['color']) + 1) % 2
-            G.make_move(G.position_history[-1], color, opponent)
+            G.make_move(G.position_history[-1], color, argdict['opponent'])
         else:
             G.game_status = 'playing'
             G.user_turn = 1;
