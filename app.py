@@ -21,7 +21,8 @@ handlebars = [
     (r'/demo', DemoHandler),
     (r'/turing', TuringHandler),
     (r'/AI', AIHandler),
-    (r'/AIData', GameDataHandler)
+    (r'/AIData', GameDataHandler),
+    (r'/logout', LogoutHandler)
 ]
 
 def make_app():
