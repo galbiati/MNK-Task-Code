@@ -1,4 +1,4 @@
-{% extends "../templates/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Welcome!{% end %}
 
@@ -7,7 +7,7 @@
 {% block content %}
     <div class='row'>
         <div class='col-xs-4 col-xs-offset-4'>
-            <p>Welcome, {{name}}!</p>
+            <p>Hello, {{name}}!</p>
             <p>You can play a <a href='/demo'>demo</a></p>
             <p>You can play against a <a href='/AI'>computer opponent</a></p>
             <p>You can take the <a href='/turing'>Turing challenge</a></p>

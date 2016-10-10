@@ -3,7 +3,7 @@ import motor
 import tornado.ioloop as ti
 from tornado.web import Application
 from handlers.base import BaseHandler
-from handlers.login import LoginHandler
+from handlers.login import *
 from handlers.register import RegisterHandler
 from handlers.demo import DemoHandler
 from handlers.turing import TuringHandler

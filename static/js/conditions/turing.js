@@ -6,6 +6,7 @@ var clip_answers = [0,1,1,1,1,0,0,1,0,0,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,0,1,0,0,1,
 
 var stim_source = $('#stim-source') //document.getElementById('stim-source');
 var player = document.getElementById('turing-stim');
+var trial_no = 0;
 
 player.defaultPlaybackRate = 1.1
 
@@ -88,6 +89,8 @@ function submitHandler(e) {
     clip_answers.splice(i,1);
     if (clip_files.length!==0){
         i = Math.floor(Math.random() * clip_files.length);
+        trial_no ++;
+        // calculate whether to display progress modal
     }
     else{
         $('#end-modal').modal('show');
