@@ -132,7 +132,7 @@ class GameDataHandler(BaseHandler):
 
         # convert data to dictionary
         db = self.settings['db']
-        collection = db.test_collection # change this when deploying!
+        collection = db.turing # change this when deploying!
 
         argdict = {key: self.get_argument(key) for key in self.request.arguments}
         user = self.current_user.decode()

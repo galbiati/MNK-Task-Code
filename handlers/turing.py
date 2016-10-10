@@ -13,6 +13,7 @@ class TuringHandler(BaseHandler):
 
         argdict = {key: self.get_argument(key) for key in self.request.arguments}
         argdict['user_name'] = self.current_user.decode()
+        argdict['task'] = 'turing'
 
         def insert_cb(result, error):
             if error:

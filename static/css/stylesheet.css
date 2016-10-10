@@ -166,8 +166,8 @@ img {
 	white-space:normal;
 	line-height:1.2em;
 	position:absolute;
-	width: 25%;
-	height: 30%;
+	width: 35%;
+	/*height: 30%;*/
 	top:33%;
 	left:37.5%;
 	min-height: 225px;
@@ -188,9 +188,9 @@ img {
 }
 
 #feedback-modal .modal-dialog .modal-content .modal-footer {
-	height:30%;
+	/*height:30%;*/
 	text-align:center;
-	min-height: 75px;
+	/*min-height: 75px;*/
 }
 
 ._blank_ { min-height:1.6vh;}
