@@ -12,7 +12,7 @@ var completion = 0;
 var feedback, answer;
 var progress_notification_interval = Math.floor(n_trials / 6)
 
-player.defaultPlaybackRate = 10.1
+player.defaultPlaybackRate = 1
 
 $(window).load(function(){
     $('#welcome-modal').modal('show');
@@ -83,7 +83,7 @@ function submitHandler(e) {
     feedback_message = (feedback==1) ? "Correct!" : "Incorrect."
 
     $('#slider').fadeOut('slow').promise().done(function() { $('#feedback-text').text(feedback_message).fadeIn('slow'); });
-    
+
     res = submit_response(val);
     res.done(console.log('Data sent!'));
     clip_played.push(clip_files[i]);
