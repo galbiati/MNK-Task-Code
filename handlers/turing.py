@@ -15,10 +15,11 @@ class TuringHandler(BaseHandler):
         argdict['user_name'] = self.current_user.decode()
         argdict['task'] = 'turing'
 
-        def insert_cb(result, error):
-            if error:
-                raise error
-            else:
-                print('result: {}'.format(result))
-                return
-        db.test_collection.insert(argdict, callback=insert_cb)
+        db.test_collection.insert(argdict, callback=self.insert_cb)
+
+    def insert_cb(self, result, error):
+        if error:
+            raise error
+        else:
+            print('result: {}'.format(result))
+            return

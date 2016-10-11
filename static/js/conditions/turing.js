@@ -6,7 +6,11 @@ var clip_answers = [1,0,0,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1,1,0,1,1,0,0,0,1,1,0,0,0,
 
 var stim_source = $('#stim-source') //document.getElementById('stim-source');
 var player = document.getElementById('turing-stim');
+var n_trials = clip_files.length;
 var trial_no = 0;
+var completion = 0;
+var feedback, answer;
+var progress_notification_interval = Math.floor(n_trials / 6)
 
 player.defaultPlaybackRate = 1.1
 
@@ -25,7 +29,7 @@ $(document).ready(function() {
     $('.play-btn').on('click', function(e) { playHandler(e); });
     player.addEventListener('ended',function(e) { endHandler(e); });
     $('#slider').on('click', function(e) { sliderchangeHandler(e); }).hide();
-
+    $('#next-trial').on('click', function() { $('#feedback-modal').modal('hide'); });
 })
 
 function initPlayer() {
@@ -63,7 +67,8 @@ function submit_response(val) {
         choice: val,
         start: trial_start,
         timestamp: Date.now(),
-        clip_id: clip
+        clip_id: clip,
+        feedback: feedback
     }
 
     return $.ajax({type: 'POST', url: '/turing', dataType:'JSON', data:response})
@@ -71,16 +76,17 @@ function submit_response(val) {
 
 function submitHandler(e) {
     var val = $('#slider').val();
-    feedback = ((val>=50) == clip_answers[i]);
+    answer = clip_answers[i]
+    feedback = ((val>=50) == answer);
     $('#slider').val(49)
     //$('#feedbacktext').text(String(feedback));
     if (feedback == 1){
         $('#slider').hide().promise().done(function(){
-            $('#feedbacktext').text("Yes, that was correct!").fadeIn('slow');})
+            $('#feedbacktext').text("Correct!").fadeIn('slow');})
     }
     else{
         $('#slider').hide().promise().done(function(){
-            $('#feedbacktext').text("Sorry, that was not correct.").fadeIn('slow');})
+            $('#feedbacktext').text("Incorrect.").fadeIn('slow');})
     }
     res = submit_response(val);
     res.done(console.log('Data sent!'));
@@ -90,6 +96,12 @@ function submitHandler(e) {
     if (clip_files.length!==0){
         i = Math.floor(Math.random() * clip_files.length);
         trial_no ++;
+        completion = Math.floor(100 * trial_no / n_trials)
+        $('#remaining-trials').text(String(completion) + '%');
+
+        if ((trial_no % progress_notification_interval) == 0) {
+            $('#feedback-modal').modal('show')
+        }
         // calculate whether to display progress modal
     }
     else{
