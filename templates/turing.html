@@ -15,7 +15,7 @@
   <div class='row _blank_'></div>
   <div class="row">
       <div class="container-fluid col-xs-10 col-xs-offset-1 turing-container">
-          <video id='turing-stim' poster='' preload='auto'>
+          <video id='turing-stim' poster='' preload='metadata'>
               <source id='stim-source' src='' type='video/mp4'>
           </video>
       </div>
@@ -23,28 +23,36 @@
 
   <div class='row _blank_'></div>
   <div class='row'>
-      <div class='container col-xs-8 col-xs-offset-2'>
-          <input type='range' min=0 max=99 id='slider'>
-          <div class='slidertext'>
-              <p class='humans' style="text-align:left; display:inline-block; width:33%; font-size:20px" id='humans'>Certainly computers</p>
-              <p class='noClue' style="text-align:center; display:inline-block; width:33%; font-size:20px" id='noClue'>No clue</p>
-              <p class='comps' style="text-align:right; display:inline-block; width:33%; font-size:20px" id='comps'>Certainly humans</p>
+
+      <div class='container col-xs-10 col-xs-offset-1' id='slider-input-div'>
+
+        <div class='row' id='slider-row'>
+          <input class='col-xs-12' type='range' min=0 max=100 id='slider'>
+
+          <div id='slider-labels' class='col-xs-12'>
+            <div class='col-xs-4'><p style="text-align:left;" id='humans'>Certainly computers</p></div>
+            <div class='col-xs-4'><p style="text-align:center;" id='noClue'>No clue</p></div>
+            <div class='col-xs-4'><p style="text-align:right;" id='comps'>Certainly humans</p></div>
           </div>
-          <div class='feedback'>
-              <div class='container text-center col-xs-6 col-xs-offset-3 turing-feedback'>
-                  <p style="font-size:25px; color:black" id='feedbacktext'></p>
-              </div>
+
+          <div class='text-center col-xs-6 col-xs-offset-3' id='turing-feedback'>
+            <p id='feedback-text'></p>
           </div>
+        </div>
+
+        <div class='row' id='button-row'>
+          <div class='text-center col-xs-6 col-xs-offset-3'>
+            <input class='btn btn-lrg play-btn' type="button" value="Play" id='play' disabled>
+            <input class='btn btn-lrg submit-btn' type="button" value="Submit" id='submit' disabled>
+          </div>
+        </div>
+
       </div>
+
   </div>
 
   <div class='row _blank_'></div>
-  <div class='buttons'>
-      <div class='container text-center col-xs-2 col-xs-offset-5'>
-          <input class='btn btn-lrg play-btn' type="button" value="Play" id='play' disabled>
-              <input class='btn btn-lrg submit-btn' type="button" value="Submit" id='submit' disabled>
-                  </div>
-  </div>
+  
 
   <div class='row _blank_'></div>
   <div class="container">

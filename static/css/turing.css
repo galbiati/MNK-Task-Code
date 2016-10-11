@@ -1,5 +1,5 @@
 /* slider stylizing */
-input[type='range'] {
+/*input[type='range'] {
         position: absolute;
         top: 60%;
         left: 50%;
@@ -73,37 +73,52 @@ input[type='range']::-webkit-slider-runnable-track:before, input[type='range']::
     color: #2c2c2b;
     font: 700 0.875em / 2 arial, sans-serif;
 }
-input[type='range']::-webkit-slider-runnable-track:before, input[type='range'] /deep/ #track:before {
-    left: 0.8125em;
-    word-spacing: 1.4375em;
-    content: '1 2 3 4 5 6 7 8 9';
+*/
+
+#slider, #slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
 }
-input[type='range']::-webkit-slider-runnable-track:after, input[type='range'] /deep/ #track:after {
-    right: 0.625em;
-    word-spacing: 0.875em;
-    content: '10 11 12 13 14 15 16';
+
+#slider::-webkit-slider-runnable-track {
+    position: relative;
+    /*width: 100%;*/
+    height: 30px;
+    background: linear-gradient(90deg, #000000, #170000, #2e0000, #450000, #5c0000, #730000, #8a0000, #a10000, #b80000, #cf0000, #e60000);
+    /*background-size: 2em 100%, 100% 100%;*/
 }
-input[type='range']:focus {
-    outline: none;
-    box-shadow: 0 0 .25em transparent;
+
+#slider::-webkit-slider-thumb {
+    /*margin-top: -0.8125em;*/
+    /*box-sizing: border-box;*/
+    /*border: solid 1px transparent;*/
+    width: 10px;
+    height: 30px;
+    background-color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    /*transform: translateY(-25%);*/
+    /*transform: translateY(50%) rotate(30deg) skewY(30deg) scaleX(0.86603); */
+    /*background: linear-gradient(135deg, #a7a6a2 25%, rgba(0, 0, 0, 0) 25%) content-box, linear-gradient(135deg, #ffffff 25%, rgba(0, 0, 0, 0) 25%) border-box;*/
 }
+
+#slider { height: 60px; cursor: pointer; }
+#slider:focus {outline: none;}
+/*#slider-input-div { border-style: dashed; border-color: black; }*/
+#slider-labels p { font-size: 20px; }
+#slider-labels { height: 25px; }
+/*#turing-feedback { height: 80px; }*/
+#feedback-text { font-size: 25px; }
+#slider-row { height: 90px; }
 
 #end-modal{
-position: absolute;
-left: 50%;
-margin-left: -50.5%;
-top: 50%;
-margin-top: -10%;
+    position: absolute;
+    left: 50%;
+    margin-left: -50.5%;
+    top: 50%;
+    margin-top: -10%;
 }
 
-#turing-stim { display: block; width: 1000px; margin: 0 auto; }
-/*        .turing-response-container { display: block; margin: 0 auto; }
- */      #submit, #play {float; margin: 0 auto;}
+#turing-stim { display: block; width: 900px; height: 400px; margin: 0 auto; }
 
-.buttons{
-    height:30px;
-    display: inline;
-}
-.feedback{
-    height:30px;
-}
+#submit, #play { margin: 0 auto;}
