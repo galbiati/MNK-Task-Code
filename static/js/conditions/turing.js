@@ -68,8 +68,7 @@ function submit_response(val) {
         start: trial_start,
         timestamp: Date.now(),
         clip_id: clip,
-        feedback: feedback,
-        correct_ans: answer
+        feedback: feedback
     }
 
     return $.ajax({type: 'POST', url: '/turing', dataType:'JSON', data:response})
