@@ -9,6 +9,7 @@ var player = document.getElementById('turing-stim');
 var n_trials = clip_files.length;
 var trial_no = 0;
 var completion = 0;
+var feedback, answer;
 var progress_notification_interval = Math.floor(n_trials / 6)
 
 player.defaultPlaybackRate = 1.1
@@ -66,7 +67,9 @@ function submit_response(val) {
         choice: val,
         start: trial_start,
         timestamp: Date.now(),
-        clip_id: clip
+        clip_id: clip,
+        feedback: feedback,
+        correct_ans: answer
     }
 
     return $.ajax({type: 'POST', url: '/turing', dataType:'JSON', data:response})
@@ -74,7 +77,8 @@ function submit_response(val) {
 
 function submitHandler(e) {
     var val = $('#slider').val();
-    feedback = ((val>=50) == clip_answers[i]);
+    answer = clip_answers[i])
+    feedback = ((val>=50) == answer);
     $('#slider').val(49)
     //$('#feedbacktext').text(String(feedback));
     if (feedback == 1){
@@ -95,6 +99,7 @@ function submitHandler(e) {
         trial_no ++;
         completion = Math.floor(100 * trial_no / n_trials)
         $('#remaining-trials').text(String(completion) + '%');
+
         if ((trial_no % progress_notification_interval) == 0) {
             $('#feedback-modal').modal('show')
         }
