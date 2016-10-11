@@ -76,17 +76,17 @@ function submit_response(val) {
 
 function submitHandler(e) {
     var val = $('#slider').val();
-    answer = clip_answers[i])
+    answer = clip_answers[i]
     feedback = ((val>=50) == answer);
     $('#slider').val(49)
     //$('#feedbacktext').text(String(feedback));
     if (feedback == 1){
         $('#slider').hide().promise().done(function(){
-            $('#feedbacktext').text("Yes, that was correct!").fadeIn('slow');})
+            $('#feedbacktext').text("Correct!").fadeIn('slow');})
     }
     else{
         $('#slider').hide().promise().done(function(){
-            $('#feedbacktext').text("Sorry, that was not correct.").fadeIn('slow');})
+            $('#feedbacktext').text("Incorrect.").fadeIn('slow');})
     }
     res = submit_response(val);
     res.done(console.log('Data sent!'));
