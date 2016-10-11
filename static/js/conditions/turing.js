@@ -48,7 +48,7 @@ function loadVideo(clipno) {
 function playHandler(e){
     player.play();
     document.getElementById('play').value = "Play next";
-    $('.play-btn').prop('disabled', true).hide();
+    $('.play-btn').prop('disabled', true).fadeOut('slow');
     $('#feedback-text').text("");
 }
 
@@ -79,15 +79,11 @@ function submitHandler(e) {
     answer = clip_answers[i]
     feedback = ((val>=50) == answer);
     $('#slider').val(50)
+
+    feedback_message = (feedback==1) ? "Correct!" : "Incorrect."
+
+    $('#slider').fadeOut('slow').promise().done(function() { $('#feedback-text').text(feedback_message).fadeIn('slow'); });
     
-    if (feedback == 1){
-        $('#slider').hide().promise().done(function(){
-            $('#feedback-text').text("Correct!").fadeIn('slow');})
-    }
-    else{
-        $('#slider').hide().promise().done(function(){
-            $('#feedback-text').text("Incorrect.").fadeIn('slow');})
-    }
     res = submit_response(val);
     res.done(console.log('Data sent!'));
     clip_played.push(clip_files[i]);
@@ -109,10 +105,11 @@ function submitHandler(e) {
     }
 
     clip = clip_files[i];
-    $('.submit-btn').prop('disabled', true).hide();
+    $('.submit-btn').prop('disabled', true).fadeOut('slow');
+    loadVideo(clip);
     $('#slider').fadeOut('slow').promise().done(function(){
-            $('.play-btn').fadeIn('slow');
-            loadVideo(clip);})
+        $('.play-btn').fadeIn('slow');
+    });
     $('#slider-labels p').hide();
 
 }
