@@ -23,7 +23,7 @@
 
   <div class='row'>
 
-      <div class='container col-xs-8 col-xs-offset-2' id='slider-input-div'>
+      <div class='container col-xs-10 col-xs-offset-1' id='slider-input-div'>
 
         <div class='row' id='slider-row'>
           <input class='col-xs-12' type='range' min=0 max=100 id='slider'>
@@ -49,45 +49,18 @@
         </div>
 
       </div>
-
   </div>
 
-  <div class='row _blank_'></div>
+  {% include 'modals/block-modal.html' %}
+  {% include 'modals/end-modal.html' %}
 
+{% end %}
 
-  <div class='row _blank_'></div>
-  <div class="container">
-    <div class="modal fade" id="welcome-modal" role="dialog">
-      <div class="modal-dialog modal-lg">
-       <div class="modal-content">
-          <div class="modal-body">
-            <p style="font-size:120%">Today, you will be shown 96 short videos, either from games between two human players or between two computers. Half of the videos are from games between humans, the other half between computers. The videos may start from any point in a game, so the starting position is not necessarily an empty board.
-            </p>
-            <p style="font-size:120%"> Your task is to identify if the video is from a <b>human-vs-human</b> game or a <b>computer-vs-computer</b> game. You will also be asked to report <b>how confident you are</b> about your choice. There is no time limit to this task. </p>
-          </div>
-          <div class="modal-footer">
-            <div class="btn-group fr">
-              <button class="btn btn-lrg" data-dismiss="modal">Continue</button>
-            </div>
-          </div>
-        </div>
-      </div>
+{% block block_modal_body %}{% include '../static/media/instructions/turing_instructions.html' %}{% end %}
+{% block block_modal_footer %}
+    <div class="modal-footer">
+        <div class="btn-group fr"><button class="btn btn-lrg" data-dismiss="modal">Continue</button></div>
     </div>
-  </div>
-
-  <div class='row _blank_'></div>
-  <div class="container">
-    <div class="modal fade" id="end-modal" role="dialog">
-      <div class="modal-dialog modal-lg">
-       <div class="modal-content">
-          <div class="modal-body">
-            <p style="text-align:center; font-size:120%">Your experiment has finished. Thank you for participating! Please find the experimenter.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 {% end %}
 
 {% block scripts %}

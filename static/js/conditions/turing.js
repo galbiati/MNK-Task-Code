@@ -15,7 +15,7 @@ var progress_notification_interval = Math.floor(n_trials / 6)
 player.defaultPlaybackRate = 10
 
 $(window).load(function(){
-    $('#welcome-modal').modal('show');
+    $('#block-modal').modal('show');
 });
 
 $(document).ready(function() {

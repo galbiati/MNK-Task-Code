@@ -22,13 +22,13 @@
     border-color: white;
 }
 
-#slider { height: 60px; cursor: pointer; }
+#slider { height: 60px; cursor: pointer; text-align: center; }
 #slider:focus {outline: none;}
 /*#slider-input-div { border-style: dashed; border-color: black; }*/ /*DEBUGGING UI*/
 #slider-labels p { font-size: 20px; }
 #slider-labels { height: 25px; }
 #feedback-text { font-size: 25px; }
-#slider-row { height: 90px; }
+#slider-row { height: 90px; max-width: 890px; margin: 0 auto}
 
 #end-modal{
     position: absolute;
