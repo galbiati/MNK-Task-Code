@@ -123,6 +123,7 @@ function submitHandler(e) {
 
     clip = clip_files[i];
     $('.submit-btn').prop('disabled', true).fadeOut('slow');
+
     loadVideo(clip);
     $('#slider').fadeOut('slow').promise().done(function(){
         $('.play-btn').fadeIn('slow');
