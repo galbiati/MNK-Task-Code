@@ -111,7 +111,9 @@ function Condition_AI(dur) {
         that.b.show_last_move(that.p.move, that.p.color);
         MoveSound.play();
         that.b.evaluate_win(that.p.color); // move this to server!
-        if(that.b.game_status=='win' || that.b.game_status=='draw'){ that.p.score ++ }
+        // if(that.b.game_status=='win' || that.b.game_status=='draw'){ that.p.score ++; $('p0-score h2').text(that.p.score); }
+        if(that.b.game_status=='win'){ that.p.score ++; $('#p0-score h2').text(that.p.score); }
+
         that.p.duration = that.p.move_end - that.p.move_start;
 
         // the below will need to be modified for websocket version
@@ -133,6 +135,7 @@ function Condition_AI(dur) {
         that.b.evaluate_win(that.p.opponent_color); // move to server!
         if (that.b.game_status == 'win') {
             that.p.opponent_score ++;
+            $('#p1-score h2').text(that.p.opponent_score);
         } else if (that.b.game_status == 'playing') {
             that.action();
         }

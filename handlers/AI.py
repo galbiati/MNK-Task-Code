@@ -16,6 +16,7 @@ class GameCache(object):
 
     def __init__(self, user):
         self.user = user
+        self.game_index = 0
         self.reset()
 
     def update(self, move, position):
@@ -30,10 +31,10 @@ class GameCache(object):
 
     def reset(self):
         self.position_history = [(0, 0)] # positions are tuples of integers
-        self.move_history = []
+        self.move_history = [99]
         self.game_status = 'ready'
         self.user_turn = 0
-        self.game_index = 0
+        self.game_index = self.game_index + 1
 
     def check_for_win(self):
         p = self.ints_to_tensor(self.position_history[-1])
