@@ -12,7 +12,7 @@ var completion = 0;
 var feedback, answer;
 var progress_notification_interval = Math.floor(n_trials / 6)
 
-player.defaultPlaybackRate = 1
+player.defaultPlaybackRate = 10
 
 $(window).load(function(){
     $('#welcome-modal').modal('show');
@@ -38,8 +38,25 @@ function initPlayer() {
 
 function loadVideo(clipno) {
     // add optional callback
-    stim_source.attr('src', getClip(clipno));
-    player.load();
+    // stim_source.attr('src', getClip(clipno));
+    // player.load();
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        console.log("State: ", this.readyState, "Status: ", this.status);
+        if (this.readyState == 4 && this.status == 200) {
+            var url = window.URL || window.webkitURL;
+            stim_source.attr('src', url.createObjectURL(this.response));
+            player.load();
+        } else if (this.readyState == 4) {
+            console.log(this.status);
+        } else {
+            //not ready yet
+        }
+    }
+    xhr.open('GET', getClip(clipno));
+    xhr.responseType = 'blob';
+    xhr.send();
+
     $('#slider').prop('disabled', true).hide();
     $('.play-btn').prop('disabled', false);
 
@@ -115,6 +132,6 @@ function submitHandler(e) {
 }
 
 function getClip(clipno) {
-    var clip_prefix = '../static/media/video/turing_videos/'
+    var clip_prefix = 'static/media/video/turing_videos/'
     return clip_prefix + String(clipno) + '.mp4'
 }
