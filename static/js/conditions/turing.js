@@ -12,7 +12,7 @@ var completion = 0;
 var feedback, answer;
 var progress_notification_interval = Math.floor(n_trials / 6)
 
-player.defaultPlaybackRate = 10
+player.defaultPlaybackRate = 1
 
 $(window).load(function(){
     $('#block-modal').modal('show');

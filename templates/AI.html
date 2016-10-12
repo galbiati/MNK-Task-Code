@@ -7,6 +7,8 @@
     {% include "modals/feedback-modal.html" %}
 {% end %}
 
+{% block block_modal_body %}{% include 'instructions/AI_instructions.html' %}{% end %}
+
 {% block canvas %}
 
     <div class='row _blank_'></div>

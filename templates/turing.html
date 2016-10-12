@@ -9,6 +9,8 @@
 
 {% block modals %}
     {% include "modals/progress-modal.html" %}
+    {% include 'modals/block-modal.html' %}
+    {% include 'modals/end-modal.html' %}
 {% end %}
 
 {% block canvas %}
@@ -51,12 +53,9 @@
       </div>
   </div>
 
-  {% include 'modals/block-modal.html' %}
-  {% include 'modals/end-modal.html' %}
-
 {% end %}
 
-{% block block_modal_body %}{% include '../static/media/instructions/turing_instructions.html' %}{% end %}
+{% block block_modal_body %}{% include 'instructions/turing_instructions.html' %}{% end %}
 {% block block_modal_footer %}
     <div class="modal-footer">
         <div class="btn-group fr"><button class="btn btn-lrg" data-dismiss="modal">Continue</button></div>

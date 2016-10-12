@@ -188,7 +188,7 @@ function Condition_AI(dur) {
         that.b.highlight_tiles();
         that.p.color = 0;
         that.p.opponent_color = 1;
-        $('#block-modal .modal-body').empty().append(instAI);
+        // $('#block-modal .modal-body').empty().append(instAI);
         $('#block-modal').modal('show');
         $(document).on('keydown', function(e) {
             if (e.keyCode == 192) {
