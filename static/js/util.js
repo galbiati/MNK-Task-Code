@@ -1,8 +1,9 @@
 var win_color = "#22ddaa",
-	MoveSound = new buzz.sound(window.location.host+"/static/audio/stone3.ogg"),
+	move_sound = document.getElementById('move-sound');
 	square_bkgcolor = "#999999",
 	square_highlight = "#bbbbbb";
-
+	
+move_sound.load();
 /* utility funcs */
 
 function build_array(mDim,nDim,fillVal) {

@@ -111,7 +111,7 @@ function Condition_AI(dur) {
         that.b.move_index ++;
         that.b.add_piece(that.p.move, that.p.color);
         that.b.show_last_move(that.p.move, that.p.color);
-        MoveSound.play();
+        move_sound.play();
         that.b.evaluate_win(that.p.color); // move this to server!
         // if(that.b.game_status=='win' || that.b.game_status=='draw'){ that.p.score ++; $('p0-score h2').text(that.p.score); }
         if(that.b.game_status=='win'){ that.p.score ++; $('#p0-score h2').text(that.p.score); }
@@ -131,10 +131,12 @@ function Condition_AI(dur) {
     }
 
     this.opponent_action = function() {
-        that.b.add_piece(that.b.last_move, that.p.opponent_color);
-        that.b.show_last_move(that.b.last_move, that.p.opponent_color);
-        MoveSound.play()
-        that.b.evaluate_win(that.p.opponent_color); // move to server!
+        if (that.b.game_status != 'ready') {
+            that.b.add_piece(that.b.last_move, that.p.opponent_color);
+            that.b.show_last_move(that.b.last_move, that.p.opponent_color);
+            that.b.evaluate_win(that.p.opponent_color); // move to server!
+            move_sound.play();
+        }
         if (that.b.game_status == 'win') {
             that.p.opponent_score ++;
             $('#p1-score h2').text(that.p.opponent_score);

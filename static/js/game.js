@@ -22,7 +22,7 @@ function Board() {
 			}
 			that.canvas.append("<br>");
 		}
-		that.tiles = _.map(that.tile_ids, function(el){ return $("#" + String(el))});
+		that.tiles = _.map(that.tile_ids, function(el){ return $("#" + String(el))}); // write custom function to eliminate underscore
 	}
 
 	this.highlight_tiles = function() {
