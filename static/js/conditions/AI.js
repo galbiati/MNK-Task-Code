@@ -1,4 +1,6 @@
 function Condition_AI(dur) {
+
+    // in general, these and the board/player objects are not sufficiently disentangled...
     var that = this;
     this.task_id = 'AI'
     this.duration = dur
@@ -86,7 +88,7 @@ function Condition_AI(dur) {
     this.init_turn = function() {
         that.p.move_start = Date.now();
         that.b.highlight_tiles() // probably better way to write this
-        $('.headertext').html('<h1>Your turn</h1>').css('color', '#000000');
+        $('.headertext').text('Your turn').css('color', '#000000');
         $('.canvas, .tile').css('cursor', 'pointer');
         $('.usedTile, .usedTile div').css('cursor', 'default');
     }
@@ -104,7 +106,7 @@ function Condition_AI(dur) {
         that.p.move_end = Date.now();
         $('.tile').off('mouseenter').off('mouseleave').off('click');
         $('.canvas, .canvas div').css('cursor', 'none');
-        $('.headertext').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
+        $('.headertext').text('Waiting for opponent').css('color', '#333333');
         that.p.move = parseInt(e.target.id);
         that.b.move_index ++;
         that.b.add_piece(that.p.move, that.p.color);
@@ -148,7 +150,7 @@ function Condition_AI(dur) {
             if (that.p.color==0) {
                 that.action();
             } else {
-                $('.headertext').html('<h1>Wating for opponent</h1>').css('color', '#333333');
+                $('.headertext').text('Waiting for opponent').css('color', '#333333');
                 that.opponent_action();
             }
         })
@@ -159,6 +161,7 @@ function Condition_AI(dur) {
         console.log('DEBUG: First trial function');
         that.start_time = Date.now();
         that.end_time = that.start_time + 60000*that.duration;
+        $('.headertext').text('Waiting for opponent').css('color', '#333333');
         var send_promise = that.submit_response();
         send_promise.done(function(data) {
             console.log(data);
@@ -169,7 +172,7 @@ function Condition_AI(dur) {
     this.further_trial = function() {
         $('.tile').css('cursor', 'none');
         if (that.p.color==1) {
-            $('.headertext').html('<h1>Waiting for opponent</h1>').css('color', '#333333');
+            $('.headertext').text('Waiting for opponent').css('color', '#333333');
         }
         var send_promise = that.submit_response(that.b, that.p);
         send_promise.done(that.trial_start_promise);
@@ -196,9 +199,9 @@ function Condition_AI(dur) {
         $(document).on('keydown', function(e) {
             if (e.keyCode == 192) {
                 e.preventDefault();
-                $('html').css('cursor', 'none');
-                $('#block-modal').modal('hide');
+                // $('html').css('cursor', 'none');
                 that.do_trial();
+                $('#block-modal').modal('hide');
                 $(document).off('keydown');
             }
         });

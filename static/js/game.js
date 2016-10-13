@@ -140,9 +140,9 @@ function Board() {
 			$(".tile").off('click').off('mouseenter').off('mouseleave');
 			if(Date.now() < blocks[current_block].end_time){
 				$('.indicator').html("<h1>Game over!</h1>");
-				setTimeout(function() { 
+				setTimeout(function() {
 					$('#feedback-modal').modal('show');
-					$("html").css("cursor","default"); 
+					$("html").css("cursor","default");
 				}, 500)
 				that.show_win(col, array);
 			} else {
@@ -150,8 +150,11 @@ function Board() {
 				that.show_win(col, array);
 				current_block += 1;
 				player.game_index ++;
-				$("html, #scale-label, input[type=radio]").css("cursor", "default");
-				setTimeout(blocks[current_block].run_block, 1000);
+				if (current_block < blocks.length){
+					setTimeout(blocks[current_block].run_block, 1000);
+				} else {
+					$('#end-modal').modal('show');
+				}
 			}
 		}
 	}
