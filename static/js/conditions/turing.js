@@ -45,14 +45,29 @@ function loadVideo(clipno) {
         console.log("State: ", this.readyState, "Status: ", this.status);
         if (this.readyState == 4 && this.status == 200) {
             var url = window.URL || window.webkitURL;
+            
+            // fade out - not working
+            /*
+            $('#turing-stim video').bind('ended', function(){
+                $(this).parent().fadeOut(slow)
+            })
+            */
+
             stim_source.attr('src', url.createObjectURL(this.response));
             player.load();
+            // fading in after loading but there is still a flash
+            player.style.opacity = 0.5;
+            player.oncanplaythrough = function() {
+                fade(player, 25);
+            }
+
         } else if (this.readyState == 4) {
             console.log(this.status);
         } else {
             //not ready yet
         }
     }
+
     xhr.open('GET', getClip(clipno));
     xhr.responseType = 'blob';
     xhr.send();
@@ -135,4 +150,15 @@ function submitHandler(e) {
 function getClip(clipno) {
     var clip_prefix = 'static/media/video/turing_videos/'
     return clip_prefix + String(clipno) + '.mp4'
+}
+
+// for video to fade in
+function fade(element, time) {
+    var op = 0;
+    var timer = setInterval(function() {
+    if (op >= 1) clearInterval(timer);
+    element.style.opacity = op;
+    element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+    op += op * 0.1 || 0.1;
+    }, time);
 }
