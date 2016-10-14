@@ -38,14 +38,12 @@ function initPlayer() {
 
 function loadVideo(clipno) {
     // add optional callback
-    // stim_source.attr('src', getClip(clipno));
-    // player.load();
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         console.log("State: ", this.readyState, "Status: ", this.status);
         if (this.readyState == 4 && this.status == 200) {
             var url = window.URL || window.webkitURL;
-            
+
             // fade out - not working
             /*
             $('#turing-stim video').bind('ended', function(){
@@ -56,10 +54,10 @@ function loadVideo(clipno) {
             stim_source.attr('src', url.createObjectURL(this.response));
             player.load();
             // fading in after loading but there is still a flash
-            player.style.opacity = 0.5;
-            player.oncanplaythrough = function() {
-                fade(player, 25);
-            }
+            // player.style.opacity = 0.5;
+            // player.oncanplaythrough = function() {
+            //     fade(player, 25);
+            // }
 
         } else if (this.readyState == 4) {
             console.log(this.status);
@@ -153,12 +151,12 @@ function getClip(clipno) {
 }
 
 // for video to fade in
-function fade(element, time) {
-    var op = 0;
-    var timer = setInterval(function() {
-    if (op >= 1) clearInterval(timer);
-    element.style.opacity = op;
-    element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-    op += op * 0.1 || 0.1;
-    }, time);
-}
+// function fade(element, time) {
+//     var op = 0;
+//     var timer = setInterval(function() {
+//     if (op >= 1) clearInterval(timer);
+//     element.style.opacity = op;
+//     element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+//     op += op * 0.1 || 0.1;
+//     }, time);
+// }
