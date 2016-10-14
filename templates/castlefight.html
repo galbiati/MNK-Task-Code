@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+        <script src='static/js/castlefight.js'></script>
+    </head>
+    <body>
+        <div id='p0' class='game-mat' style='float:left; width:200px'>
+            <h2>Walls</h2>
+            <p class='walls'>10</p>
+            <h3>Ore</h3>
+            <p class='ore'>1</p>
+            <h4>Miners</h4>
+            <p class='miners'>1</p><button class='buy' id='buy-miners'>Buy a miner</button>
+            <h4>Builders</h4>
+            <p class='builders'>0</p><button class='buy' id='buy-builders'>Buy a builder</button>
+            <h4>Armies</h4>
+            <p class='armies'>0</p><button class='buy' id='buy-armies'>Buy an army</button><br>
+            <button class='endturn'>Finish</button>
+        </div>
+
+        <div id='p1' class='game-mat' style='float:left; width:200px'>
+            <h2>Walls</h2>
+            <p class='walls'>10</p>
+            <h3>Ore</h3>
+            <p class='ore'>1</p>
+            <h4>Miners</h4>
+            <p class='miners'>1</p><button class='buy' id='buy-miners'>Buy a miner</button>
+            <h4>Builders</h4>
+            <p class='builders'>0</p><button class='buy' id='buy-builders'>Buy a builder</button>
+            <h4>Armies</h4>
+            <p class='armies'>0</p><button class='buy' id='buy-armies'>Buy an army</button><br>
+            <button class='endturn'>Finish</button>
+        </div>
+
+        <div id='rules' style='float: left; width:400px;'>
+            <h1>Rules</h1>
+            <p>1. You can use ore to buy miners, builders, or armies. Each costs 1 ore.</p>
+            <p>2. Each turn, you get an amount of ore equal to the number of miners.</p>
+            <p>3. At the end of your turn, your walls grow by the number of your builders, and your opponent's walls shrink by the number of your armies.</p>
+            <p>4. Additionally, half the size of your army (rounded down) is subtracted from the opponent's number of builders and miners. You then lose half your army (rounded down).</p>
+            <p>5. You win when either your opponent's walls are reduced to 0 or when your own walls are increased to 20.</p>
+        </div>
+
+    </body>
+</html>
