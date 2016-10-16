@@ -9,6 +9,7 @@ from handlers.demo import DemoHandler
 from handlers.turing import TuringHandler
 from handlers.AI import *
 from handlers.castlefight import *
+from handlers.turingQ import *
 
 import numpy as np
 
@@ -24,6 +25,7 @@ handlebars = [
     (r'/AI', AIHandler),
     (r'/AIData', GameDataHandler),
     (r'/Castlefight', CastlefightHandler),
+    (r'/turingQ', TuringQHandler),
     (r'/logout', LogoutHandler)
 ]
 

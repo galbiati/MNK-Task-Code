@@ -1,0 +1,18 @@
+{% extends 'login.html' %}
+
+{% block title %}Discharge Survey{% end %}
+{% block headertext %}Thanks you!{% end %}
+
+{% block form %}
+    <div class='row'>
+        <div class='col-xs-6 col-xs-offset-3 text-center'>
+            <p>
+                Please take a moment to answer
+                the following questions.
+            </p>
+        </div>
+    </div>
+
+    {% include 'forms/turingform.html' %}
+
+{% end %}

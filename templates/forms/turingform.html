@@ -1,0 +1,45 @@
+<div class='row'>
+    <div class='registration-fields col-xs-8 col-xs-offset-2 text-center'>
+
+        <form id='turing-form' method='post'>
+
+            <div class='row'>
+                <div class='col-xs-12'>
+                    <h3>How did you distinguish between humans and computers?</h3>
+                    <textarea style='width: 300px; height: 200px;' id='free-response' name='free-response'></textarea>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='col-xs-12'>
+                    <h3>For each of the following events, please indicate how how much and in what direction it mattered:</h5>
+                </div>
+            </div>
+            {%
+            for i, q in enumerate(
+                ['A player made an unexplainable move',
+                'A player missed an obvious threat',
+                'A player was very defensive',
+                'A player was making geometric patterns',
+                "A player's moves were very spread out",
+                'A player could have won but did not']
+                )
+             %}
+                 <div class='row'>
+                     <div class='col-xs-4'><h4>{{ q }}</h4></div>
+                     <div class='col-xs-8'><input type='range' class='form-slider'
+                         step='5' name={{ 'q' + str(i) }} /></div>
+                 </div>
+
+             {% end %}
+
+        </form>
+
+        <div class='row'>
+            <div class='col-xs-12'>
+                <button class='btn btn-default' id='login-btn' type='submit' form='turing-form' formaction='/turingQ'>Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
