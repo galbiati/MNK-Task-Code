@@ -1,5 +1,13 @@
+<style>
+    .vert-align {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+</style>
+
 <div class='row'>
-    <div class='registration-fields col-xs-8 col-xs-offset-2 text-center'>
+    <div class='registration-fields col-xs-10 col-xs-offset-1 text-center'>
 
         <form id='turing-form' method='post'>
 
@@ -12,7 +20,7 @@
 
             <div class='row'>
                 <div class='col-xs-12'>
-                    <h3>For each of the following events, please indicate how how much and in what direction it mattered:</h5>
+                    <h3>For each of the following events, please indicate how much and in what direction it mattered in your decisions:</h5>
                 </div>
             </div>
             {%
@@ -22,13 +30,15 @@
                 'A player was very defensive',
                 'A player was making geometric patterns',
                 "A player's moves were very spread out",
-                'A player could have won but did not']
+                'A player could have won but did not',
+                "A player's moves did not seem coherent"]
                 )
              %}
-                 <div class='row'>
-                     <div class='col-xs-4'><h4>{{ q }}</h4></div>
-                     <div class='col-xs-8'><input type='range' class='form-slider'
-                         step='5' name={{ 'q' + str(i) }} /></div>
+                 <div class='row' style='height: 50px;'>
+                    <p class='col-xs-4 vert-align'><b>{{ q }}</b></p>
+                    <p class='col-xs-2 vert-align'>Computers</p>
+                    <div class='col-xs-4 vert-align'><input type='range' class='form-slider' step='5' name={{ 'q' + str(i) }} /></div>
+                    <p class='col-xs-2 vert-align'>Humans</p>
                  </div>
 
              {% end %}

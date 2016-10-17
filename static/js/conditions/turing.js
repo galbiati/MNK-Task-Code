@@ -44,20 +44,8 @@ function loadVideo(clipno) {
         if (this.readyState == 4 && this.status == 200) {
             var url = window.URL || window.webkitURL;
 
-            // fade out - not working
-            /*
-            $('#turing-stim video').bind('ended', function(){
-                $(this).parent().fadeOut(slow)
-            })
-            */
-
             stim_source.attr('src', url.createObjectURL(this.response));
             player.load();
-            // fading in after loading but there is still a flash
-            // player.style.opacity = 0.5;
-            // player.oncanplaythrough = function() {
-            //     fade(player, 25);
-            // }
 
         } else if (this.readyState == 4) {
             console.log(this.status);
