@@ -2,8 +2,10 @@
   <div class="modal-dialog modal-lg">
    <div class="modal-content">
       <div class="modal-body">
-        <p style="text-align:center; font-size:120%">Your experiment has finished. Thank you for participating! Please find the experimenter.</p>
-        <p style='text-align:center'><a href='/logout'>Log out</a></p>
+        <p style="text-align:center; font-size:120%">
+            {% block end-message %}Your experiment has finished. Thank you for participating! Please find the experimenter.{% end %}
+        </p>
+        {% block logout-link %}<p style='text-align:center'><a href='/logout'>Log out</a></p>{% end %}
       </div>
     </div>
   </div>
