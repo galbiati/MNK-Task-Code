@@ -12,7 +12,7 @@ var completion = 0;
 var feedback, answer;
 var progress_notification_interval = Math.floor(n_trials / 6)
 
-player.defaultPlaybackRate = 1
+player.defaultPlaybackRate = 1;
 
 $(window).load(function(){
     $('#block-modal').modal('show');
@@ -108,11 +108,7 @@ function submitHandler(e) {
     var val = $('#slider').val();
     answer = clip_answers[i]
     feedback = ((val>=50) == answer);
-    $('#slider').val(50)
-
     feedback_message = (feedback==1) ? "Correct!" : "Incorrect."
-
-    $('#slider').fadeOut('slow').promise().done(function() { $('#feedback-text').text(feedback_message).fadeIn('slow'); });
 
     res = submit_response(val);
     res.done(console.log('Data sent!'));
@@ -128,35 +124,30 @@ function submitHandler(e) {
         if ((trial_no % progress_notification_interval) == 0) {
             $('#feedback-modal').modal('show')
         }
-        // calculate whether to display progress modal
-    }
-    else{
+    } else{
         $('#end-modal').modal('show');
     }
 
     clip = clip_files[i];
     $('.submit-btn').prop('disabled', true).fadeOut('slow');
-
-    loadVideo(clip);
-    $('#slider').fadeOut('slow').promise().done(function(){
-        $('.play-btn').fadeIn('slow');
+    $('#slider-labels p').fadeOut('slow');
+    $('#slider').fadeOut('slow', function() {
+        $('#slider').val(50)
+        $('#feedback-text').text(feedback_message).fadeIn('slow', function() {
+            setTimeout(function() {
+                $('#turing-stim').fadeOut('slow', function() {
+                    loadVideo(clip);
+                    player.onloadeddata = function() {
+                        $('#turing-stim').fadeIn('slow');
+                        $('.play-btn').fadeIn('slow');
+                    }
+                });
+            }, 1000);
+        });
     });
-    $('#slider-labels p').hide();
-
 }
 
 function getClip(clipno) {
     var clip_prefix = 'static/media/video/turing_videos/'
     return clip_prefix + String(clipno) + '.mp4'
 }
-
-// for video to fade in
-// function fade(element, time) {
-//     var op = 0;
-//     var timer = setInterval(function() {
-//     if (op >= 1) clearInterval(timer);
-//     element.style.opacity = op;
-//     element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-//     op += op * 0.1 || 0.1;
-//     }, time);
-// }
