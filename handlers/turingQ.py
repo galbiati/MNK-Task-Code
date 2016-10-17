@@ -18,3 +18,4 @@ class TuringQHandler(BaseHandler):
         collection = db.turing
 
         collection.insert(argdict)
+        self.redirect('/logout');

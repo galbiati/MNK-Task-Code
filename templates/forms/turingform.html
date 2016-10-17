@@ -11,43 +11,48 @@
 
         <form id='turing-form' method='post'>
 
-            <div class='row'>
+            <div class='row' id='free-response'>
                 <div class='col-xs-12'>
                     <h3>How did you distinguish between humans and computers?</h3>
-                    <textarea style='width: 300px; height: 200px;' id='free-response' name='free-response'></textarea>
+                    <textarea style='width: 60%; height: 100px;' id='free-response-input' name='free-response'></textarea>
                 </div>
             </div>
-
-            <div class='row'>
-                <div class='col-xs-12'>
-                    <h3>For each of the following events, please indicate how much and in what direction it mattered in your decisions:</h5>
+            <div class='container col-xs-12' id='slider-items' hidden>
+                <div class='row'>
+                    <div class='col-xs-12'>
+                        <h3>For each of the following events, please indicate how much and in what direction it mattered in your decisions:</h5>
+                    </div>
                 </div>
-            </div>
-            {%
-            for i, q in enumerate(
-                ['A player made an unexplainable move',
-                'A player missed an obvious threat',
-                'A player was very defensive',
-                'A player was making geometric patterns',
-                "A player's moves were very spread out",
-                'A player could have won but did not',
-                "A player's moves did not seem coherent"]
-                )
-             %}
-                 <div class='row' style='height: 50px;'>
-                    <p class='col-xs-4 vert-align'><b>{{ q }}</b></p>
-                    <p class='col-xs-2 vert-align'>Computers</p>
-                    <div class='col-xs-4 vert-align'><input type='range' class='form-slider' step='5' name={{ 'q' + str(i) }} /></div>
-                    <p class='col-xs-2 vert-align'>Humans</p>
-                 </div>
+                {%
+                for i, q in enumerate(
+                    ['A player made an irrational move',
+                    'A player missed an obvious threat',
+                    'A player won very quickly',
+                    'A player was very defensive',
+                    'A game began in an odd position',
+                    'A player was making geometric patterns',
+                    "A player's moves were very spread out",
+                    'A player could have won but did not',
+                    'A player made poor moves',
+                    "A player's moves did not seem coherent"]
+                    )
+                 %}
+                     <div class='row' style='height: 50px;'>
+                        <p class='col-xs-4 vert-align'><b>{{ q }}</b></p>
+                        <p class='col-xs-2 vert-align'>Computers</p>
+                        <div class='col-xs-4 vert-align'><input type='range' class='form-slider' step='5' name={{ 'q' + str(i) }} /></div>
+                        <p class='col-xs-2 vert-align'>Humans</p>
+                     </div>
 
-             {% end %}
+                 {% end %}
+             </div>
 
         </form>
 
         <div class='row'>
             <div class='col-xs-12'>
-                <button class='btn btn-default' id='login-btn' type='submit' form='turing-form' formaction='/turingQ'>Submit</button>
+                <button class='btn btn-default' id='next-btn' type='button'>Next</button>
+                <button class='btn btn-default' id='submit-btn' type='submit' form='turing-form' formaction='/turingQ' disabled>Submit</button>
             </div>
         </div>
 

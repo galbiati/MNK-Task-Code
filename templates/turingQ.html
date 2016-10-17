@@ -16,3 +16,18 @@
     {% include 'forms/turingform.html' %}
 
 {% end %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $('#submit-btn').hide();
+            $('#next-btn').on('click', function() {
+                $('#next-btn').prop('disabled', true).fadeOut('slow');
+                $('#free-response').fadeOut('slow', function() {
+                    $('#slider-items').fadeIn('slow');
+                    $('#submit-btn').prop('disabled', false).fadeIn('slow');
+                });
+            });
+        });
+    </script>
+{% end %}
