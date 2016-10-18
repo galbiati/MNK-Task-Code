@@ -24,7 +24,7 @@ $(document).ready(function() {
     $('#slider-labels p').hide();
     initPlayer();
     loadVideo(clip);
-    trial_start = Date.now();
+    experiment_start = Date.now();
     $('.submit-btn').on('click', function(e) { submitHandler(e); }).prop('disabled', true).hide();
     $('.play-btn').on('click', function(e) { playHandler(e); });
     player.addEventListener('ended',function(e) { endHandler(e); });
@@ -63,7 +63,8 @@ function loadVideo(clipno) {
 
 }
 
-function playHandler(e){
+function playHandler(e) {
+    trial_start = Date.now();
     player.play();
     document.getElementById('play').value = "Play next";
     $('.play-btn').prop('disabled', true).fadeOut('slow');
@@ -83,7 +84,8 @@ function sliderchangeHandler(e){
 function submit_response(val) {
     var response = {
         choice: val,
-        start: trial_start,
+        experiment_start: experiment_start,
+        trial_start: trial_start,
         timestamp: Date.now(),
         clip_id: clip,
         feedback: feedback
