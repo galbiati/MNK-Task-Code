@@ -71,7 +71,7 @@ function playHandler(e) {
     player.play();
     document.getElementById('play').value = "Play next";
     $('.play-btn').prop('disabled', true).fadeOut('slow');
-    $('#feedback-text').text("");
+    //$('#feedback-text').text("");
 }
 
 function endHandler(e){
@@ -131,6 +131,7 @@ function submitHandler(e) {
                 $('#turing-stim').fadeOut('slow', function() {
                     loadVideo(clip);
                     player.onloadeddata = function() {
+                        $('#feedback-text').text("");
                         $('#turing-stim').fadeIn('slow');
                         $('.play-btn').fadeIn('slow');
                     }
