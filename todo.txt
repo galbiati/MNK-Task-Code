@@ -1,4 +1,7 @@
-- consent text in txt file, load through python/server as variable
-    (yay super fancy tornado stuff)
-
-- fix form boxes to be aligned
+1. New experiment selection page
+2. Proper registration/sign-in
+3. 2-player experiment
+4. Better modularity in UI (inheritance, not copy-paste)
+5. Neural network AIs
+6. Experimenter dashboard
+7.
