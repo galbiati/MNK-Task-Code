@@ -1,4 +1,39 @@
+function GameState(black_position, white_position, game_params) {
+	/*
+	GameState is going to take over abstract functions from Board to separate
+	model and view a little better
+	*/
+	this.game_params = game_params
+	this.black_position = restore_array(black_position);
+	this.white_position = restore_array(white_position);
+	this.current_player = this.whose_turn()
+
+	this.whose_turn = function() {
+		// compute current player
+	};
+
+	this.is_terminal = function() {
+		// compute whether game is won, drawn, or in progress
+	}
+
+	this.outcome = function(move) {
+		if (this.current_player == 0) {
+			new_black_position = this.black_position.slice()
+			new_black_position[move] = 1
+			return GameState(new_black_position, this.white_position, this.game_params)
+		}
+		else {
+			new_white_position = this.white_position.slice()
+			new_white_position[move] = 1
+			return GameState(this.black_position, new_white_position, this.game_params)
+			}
+		}
+	}
+}
+
 function Board() {
+	/* Board defines functions related to task state and stimulus display */
+
 	this.canvas = $(".canvas");
 	this.tile_ids = [];
 	for (var i = 0; i <= M*N; i++) {this.tile_ids.push(i);};
@@ -166,26 +201,4 @@ function Board() {
 			}
 		}
 	}
-}
-
-function Player() {
-	this.initials = $("#nameInputField").val();
-	this.last_initials = this.initials;
-	this.color = 0
-	this.score = 0
-	this.opponent_score = 0
-	this.game_index = 0
-	this.scorebox = $('#leftScorebox')
-	this.scoretext = $('#leftScorebox p')
-	this.opponent_scorebox = $('#rightScorebox')
-	this.opponent_scoretext = $('#rightScorebox p')
-	this.opponent_color = 1
-	this.opponent_initials = "QQ"
-	this.show_name = $("#leftScorebox h2").text(this.initials);
-	this.move = 99
-	this.move_start = 0
-	this.move_end = 0
-	this.duration = 0
-	this.mouse_t = [];
-	this.mouse_x = [];
 }
