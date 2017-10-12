@@ -1,4 +1,5 @@
 function Condition_AI(dur) {
+    // encapsulation for AI task behavior and data
 
     // in general, these and the board/player objects are not sufficiently disentangled...
     var that = this;
@@ -16,7 +17,11 @@ function Condition_AI(dur) {
     this.b = new Board();
 
     this.submit_response = function() {
+        // sends game data to the server
+
         console.log('DEBUG: response submitted')
+
+        // is there a more concise way to send this all as JSON?
         data = {
             'initials':String(that.p.initials),
             'color':String(that.p.color),
@@ -32,6 +37,8 @@ function Condition_AI(dur) {
             'opponent':String(that.current_opponent),
             'task':String(that.task_id)
         };
+
+        // reset the mouse tracking data
         that.p.mouse_x = [];
         that.p.mouse_t = [];
 
@@ -39,11 +46,16 @@ function Condition_AI(dur) {
     }
 
     this.get_response = function() {
+        // sends a single request to the server for an update
+
         console.log("DEBUG: data requested")
         return $.ajax({type:'GET', url:'/AIData', dataType:'JSON', data:{}})
     }
 
     this.unpack_response = function(data) {
+        // unpacks the server response
+        // MAYBE: make a this.pack_response for submit_response
+
         that.p.game_index = parseInt(data.gi);
         that.b.game_status = parseInt(data.status)
         that.b.black_position = restore_array(data.bp)
@@ -55,10 +67,24 @@ function Condition_AI(dur) {
     }
 
     this.ajax_poll = function(promise, callback) {
+        // ugly, pseudo-promise based long-polling
+        // MAYBE: someday consider websockets?
+        // MAYBE: ajax_freq should be an argument?
+        // MAYBE: write so that promise can be 'none' and an initial promise generated
+
         console.log('DEBUG: polling loop continuing')
+
+
         promise.then(function(data) {
+            // this could probably be done in a single .done()
+            // by not updating variables with unpack_response immediately
+            // and first checking response contents for correct change
+
             that.unpack_response(data);
         }).done(function(data) {
+            // if the opponent has responded, call callback()
+            // otherwise, wait a bit and try again
+
             if(that.p.initials != that.p.last_initials) {
                 callback();
             } else {
@@ -71,6 +97,9 @@ function Condition_AI(dur) {
     }
 
     this.change_opponent = function(p) {
+        // changes opponent tier index (and therefore playing strength)
+        // with a one-up-one-down ladder
+
         var ol = that.opp_list.length;
         var first = Math.floor(ol/2);
         var tier = p.opponent_score - p.score + first;
@@ -86,6 +115,8 @@ function Condition_AI(dur) {
     }
 
     this.init_turn = function() {
+        // turn initialization boilerplate
+
         that.p.move_start = Date.now();
         that.b.highlight_tiles() // probably better way to write this
         $('.headertext').text('Your turn').css('color', '#000000');
@@ -94,6 +125,9 @@ function Condition_AI(dur) {
     }
 
     this.afterPromise = function() {
+        // MAYBE: modify this.ajax_poll to eliminate this function
+        //        and be conceptually clearer
+
         get_promise = that.get_response();
         if(that.b.game_status == 'ready' || that.b.game_status == 'playing') {
             that.ajax_poll(get_promise, function() { that.opponent_action(); });
@@ -101,6 +135,8 @@ function Condition_AI(dur) {
     }
 
     this.tileClickHandler = function(e) {
+        // What happens when a user clicks a tile
+
         console.log('DEBUG: tile clicked')
         // ideally this will be split up into canvas aesthetics, board aesthetics, and io stuff
         that.p.move_end = Date.now();
@@ -113,7 +149,6 @@ function Condition_AI(dur) {
         that.b.show_last_move(that.p.move, that.p.color);
         move_sound.play();
         that.b.evaluate_win(that.p.color); // move this to server!
-        // if(that.b.game_status=='win' || that.b.game_status=='draw'){ that.p.score ++; $('p0-score h2').text(that.p.score); }
         if(that.b.game_status=='win'){ that.p.score ++; $('#p0-score h2').text(that.p.score); }
 
         that.p.duration = that.p.move_end - that.p.move_start;
@@ -125,12 +160,16 @@ function Condition_AI(dur) {
     }
 
     this.action = function() {
+        // activate click handler
+        // MAYBE: move everything into the better-named this.init_turn()
         console.log('DEBUG: action assigned')
         that.init_turn(); // aesthetics
         $('.tile').off('click').on('click', function(e) { that.tileClickHandler(e); });
     }
 
     this.opponent_action = function() {
+        // when opponent responds, do some stuff
+
         if (that.b.game_status != 'ready') {
             that.b.add_piece(that.b.last_move, that.p.opponent_color);
             that.b.show_last_move(that.b.last_move, that.p.opponent_color);
@@ -146,6 +185,8 @@ function Condition_AI(dur) {
     }
 
     this.trial_start_promise = function() {
+        // first communication of a game
+
         console.log("DEBUG: get request promise")
         var get_promise = that.get_response();
         that.ajax_poll(get_promise, function() {
@@ -159,7 +200,9 @@ function Condition_AI(dur) {
     }
 
     this.first_trial = function() {
+        // first communication on first game
         // expand to allow for color setting?
+
         console.log('DEBUG: First trial function');
         that.start_time = Date.now();
         that.end_time = that.start_time + 60000*that.duration;
@@ -172,6 +215,9 @@ function Condition_AI(dur) {
     }
 
     this.further_trial = function() {
+        // communcation on further games
+        // (starting color alternates)
+
         $('.tile').css('cursor', 'none');
         if (that.p.color==1) {
             $('.headertext').text('Waiting for opponent').css('color', '#333333');
@@ -181,6 +227,8 @@ function Condition_AI(dur) {
     }
 
     this.do_trial = function() {
+        // play the game
+
         if (that.current_trial == 0) {
             that.first_trial();
         } else if (Date.now() < that.end_time) {
@@ -189,7 +237,8 @@ function Condition_AI(dur) {
     }
 
     this.run_block = function() {
-        // abstract handlers below as above
+        // runs the entire condition
+        // could possibly be written more abstractly
 
         that.b = new Board();
         that.b.create_tiles();

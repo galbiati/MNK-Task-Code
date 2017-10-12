@@ -5,4 +5,4 @@ This is a behavioral experiment suite that runs in a web browser (currently only
 There are now several tasks functioning: playing against a computer, a turing test, and a demo task.
 
 ## Further
-We will be further cleaning up the UI, subject registration/login, and data handling. We will also be reimplementing previous tasks in the new framework.
+I will be further cleaning up the UI, subject registration/login, and data handling. I will also be reimplementing previous tasks in the new framework.

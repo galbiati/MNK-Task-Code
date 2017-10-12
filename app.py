@@ -16,7 +16,7 @@ import numpy as np
 client = motor.motor_tornado.MotorClient('localhost', 27017)
 db = client.gamesdb
 
-handlebars = [
+handles = [
     (r'/', BaseHandler),
     (r'/login', LoginHandler),
     (r'/register', RegisterHandler),
@@ -31,7 +31,7 @@ handlebars = [
 
 def make_app():
     return Application(
-        handlebars,
+        handle,
         static_path=os.path.join(os.path.dirname(__file__), 'static'),
         template_path=os.path.join(os.path.dirname(__file__), 'templates'),
         debug=True,
